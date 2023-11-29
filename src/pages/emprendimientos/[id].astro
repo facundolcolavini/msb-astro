@@ -6,16 +6,19 @@ import { getEntrepreneurshipById } from "../api/get-all-entrepreneurship";
 import BreadCrumb from "../../components/BreadCrumb.astro";
 
 // Hybrid para que se renderice en el servidor y en el cliente
-export const prerender = true;
+export const prerender = false;
 
 const { id } = Astro.params
 
 let entrepreneurship;
 entrepreneurship = await getEntrepreneurshipById(id as string) as Results;
 let response = entrepreneurship?.emprendimiento[0] as EntrePreneurShip;
+
 if (!id){
   return Astro.redirect("/404")
 }
+// use getStaticsPaths 
+
 ---
 
 <Layout title={`Emprendimiento - ${response.ed_nom}`}>

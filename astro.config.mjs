@@ -8,6 +8,6 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   prefetch: true,
   integrations: [tailwind(), preact()],
-  output: 'server',
+  output: 'hybrid',
   adapter: netlify()
 });
