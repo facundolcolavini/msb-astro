@@ -13,10 +13,10 @@ const { id } = Astro.params
 let entrepreneurship;
 let response;
 
-if (id){
+
   entrepreneurship = await getEntrepreneurshipById(id as string) as Results;
   response = entrepreneurship?.emprendimiento[0] as EntrePreneurShip;
-}
+
 
 ---
 
