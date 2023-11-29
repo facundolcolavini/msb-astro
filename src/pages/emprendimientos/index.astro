@@ -20,7 +20,7 @@ const  { emprendimiento: entrepreneurship } = await getAllEntrepreneurships() as
   <!-- Map of entrepreneurship -->
   <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
   {entrepreneurship.map(({ ed_nom , ed_est,ed_pos, img_princ , ed_idl}) => (
-    <CardEntrepreneurship  ed_nom={ed_nom} ed_est={ed_est} ed_pos={ed_pos} img_princ={img_princ} ed_idl={ed_idl} client:load />
+    <CardEntrepreneurship  ed_nom={ed_nom} ed_est={ed_est} ed_pos={ed_pos} img_princ={img_princ} ed_idl={ed_idl} />
   ))}
   </div>
 
