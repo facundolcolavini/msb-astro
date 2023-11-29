@@ -11,13 +11,16 @@ export const prerender = false;
 const { id } = Astro.params
 
 let entrepreneurship;
-entrepreneurship = await getEntrepreneurshipById(id as string) as Results;
-let response = entrepreneurship?.emprendimiento[0] as EntrePreneurShip;
+let response;
 
 if (!id){
   return Astro.redirect("/404")
+}else{
+  entrepreneurship = await getEntrepreneurshipById(id as string) as Results;
+  response = entrepreneurship?.emprendimiento[0] as EntrePreneurShip;
 }
 // use getStaticsPaths 
+
 
 ---
 
