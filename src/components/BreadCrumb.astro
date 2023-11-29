@@ -1,0 +1,82 @@
+---
+import HomeIcon from "../components/preact/Icons/HomeIcon.tsx";
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+//Utilizar Astro url para poder sacar las urls
+const urlsObjtAstro = Astro.url;
+const currentURL = urlsObjtAstro; // Este objeto contiene la información de la URL actual
+
+// Obtenemos las partes de la URL que deseamos mostrar en el breadcrumb
+const { pathname, origin } = currentURL;
+
+// Dividir la ruta en partes separadas
+const pathParts = pathname.split("/").filter((part) => part !== ""); // Eliminar partes vacías
+
+// Crear un array de objetos para cada elemento del breadcrumb
+const breadcrumbItems = pathParts.map((part, index) => {
+  // Construir la URL acumulativa para cada elemento del breadcrumb
+  const breadcrumbURL = `${origin}/${pathParts.slice(0, index + 1).join("/")}`;
+
+  // Retornar el objeto para cada elemento del breadcrumb
+  return {
+    name: part, // Nombre del elemento del breadcrumb
+    url: breadcrumbURL, // URL del elemento del breadcrumb
+  };
+});
+
+// Agregar el enlace "Home" al principio de breadcrumbItems
+const breadcrumbWithHome = [
+  {
+    name: "Home", // Nombre del enlace "Home"
+    url: `${origin}`, // URL de la página principal
+  },
+  ...breadcrumbItems, // Resto de las migas de pan generadas dinámicamente
+];
+
+
+---
+<nav class="flex p-2" aria-label="Breadcrumb">
+  <ol
+    class="inline-flex items-center  "
+  >
+    {
+      breadcrumbWithHome.map((item: BreadcrumbItem, index: number) => {
+        
+        return (
+          <li class="inline-flex items-center">
+            <div class="flex items-center">
+              <a
+                href={item.url}
+                class="ms-1 text-sm font-medium text-gray-300 capitalize hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+              >
+                {item.name}
+              </a>
+              {index !== breadcrumbWithHome.length - 1 && (
+             
+                <svg
+                  class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+              )}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

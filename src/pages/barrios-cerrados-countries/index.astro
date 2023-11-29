@@ -1,0 +1,24 @@
+---
+import BreadCrumb from '../../components/BreadCrumb.astro';
+import FilterMenu from '../../components/FilterMenu.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const titlePage='Barrios cerrados y countries'
+---
+
+<Layout title={titlePage}>
+  <section class="w-full max-w-screen-xl mx-auto h-screen">
+    <BreadCrumb/>
+    <h1 class="tracking-tighter text-6xl text-gray-400  dark:text-gray-400 ">Barrios cerrados y countries</h1>
+    <div class="flex">
+      <!-- ASIDE OF FILTERS of entrepreneurship -->
+      <FilterMenu />
+      <!-- LIST HOUSE -->
+      <main class="w-3/4 ">
+        <!-- Contenido de la lista de casas -->
+        <h1 class="text-4xl font-bold">List of houses</h1>
+      </main>
+    </div>
+  </section>
+
+  </Layout>

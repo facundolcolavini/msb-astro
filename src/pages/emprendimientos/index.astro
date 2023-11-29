@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllEntrepreneurships } from '../../pages/api/get-all-entrepreneurship';
+import CardEntrepreneurship from '../../components/CardEntrepreneuShip.astro';
+import type { Results } from '../../types/entrepreneurship.types';
+import BreadCrumb from '../../components/BreadCrumb.astro';
+export const prerender = false;
+const titlePage = 'Emprendimientos';
+
+const  { emprendimiento: entrepreneurship } = await getAllEntrepreneurships() as Results 
+
+---
+<Layout title={titlePage}>
+  <section class="w-full max-w-screen-xl mx-auto">
+  <BreadCrumb />
+  <!--  skeleton  List -->
+
+
+  <!-- Map of entrepreneurship -->
+  <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
+  {entrepreneurship.map(({ ed_nom , ed_est,ed_pos, img_princ , ed_idl}) => (
+    <CardEntrepreneurship  ed_nom={ed_nom} ed_est={ed_est} ed_pos={ed_pos} img_princ={img_princ} ed_idl={ed_idl} />
+  ))}
+  </div>
+
+</section>
+
+</Layout>
