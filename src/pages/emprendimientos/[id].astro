@@ -6,7 +6,7 @@ import { getEntrepreneurshipById } from "../api/get-all-entrepreneurship";
 import BreadCrumb from "../../components/BreadCrumb.astro";
 
 // Hybrid para que se renderice en el servidor y en el cliente
-export const prerender = false;
+export const prerender = true;
 
 const { id } = Astro.params
 

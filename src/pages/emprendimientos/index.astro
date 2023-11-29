@@ -4,7 +4,8 @@ import { getAllEntrepreneurships } from '../../pages/api/get-all-entrepreneurshi
 import CardEntrepreneurship from '../../components/CardEntrepreneuShip.astro';
 import type { Results } from '../../types/entrepreneurship.types';
 import BreadCrumb from '../../components/BreadCrumb.astro';
-export const prerender = false;
+
+export const prerender = true;
 const titlePage = 'Emprendimientos';
 
 const  { emprendimiento: entrepreneurship } = await getAllEntrepreneurships() as Results 
