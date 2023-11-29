@@ -2,6 +2,7 @@
 import { ViewTransitions } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../layouts/Footer.astro";
+import MainLayout from "./MainLayout.astro";
 interface Props {
   title: string;
 }
@@ -23,33 +24,31 @@ const { title } = Astro.props;
   </head>
   <body>
     <div id="app" class="relative h-screen">
-      <header
-        class="[grid-area:header]"
-      >
+      <header class="[grid-area:header]">
         <Navbar />
-      </aside>
-      <main class="[grid-area:main] bg-gray-800" >
-		  <slot/>
-	  </main>
+      </header>
+      <main class="[grid-area:main] bg-gray-800">
+        <MainLayout  >
+          <slot />
+        </MainLayout>
+      </main>
       <footer class="[grid-area:footer]">
-		<Footer />
-	  </footer>
+        <Footer />
+      </footer>
     </div>
     <script>
       import "../scripts/menu.js";
-      import "../scripts/navigation.js";
     </script>
   </body>
 </html>
 
 <style>
-	#app{
-		display:grid;
-		grid-template-areas:
-		"header"
-		"main"
-		"footer";
-		grid-template-rows: auto 1fr auto;
-	}
-
+  #app {
+    display: grid;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+  }
 </style>

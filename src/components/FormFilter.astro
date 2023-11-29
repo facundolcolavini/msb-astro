@@ -1,0 +1,54 @@
+---
+import Dropdown from "./preact/Dropdown";
+
+const menuItems1 = [
+  { label: "Dashboard", link: "#" },
+  { label: "Settings", link: "#" },
+  { label: "Earnings", link: "#" },
+  { label: "Sign out", link: "#" },
+];
+
+const menuItems2 = [
+  { label: "Menu", link: "#" },
+  { label: "Test", link: "#" },
+  { label: "Id", link: "#" },
+  { label: "Sign out", link: "#" },
+];
+
+const menuItems3 = [
+  { label: "A", link: "#" },
+  { label: "B", link: "#" },
+  { label: "Testing Completado", link: "#" },
+  { label: "Alquileres", link: "#" },
+];
+
+
+---
+
+<form >
+  <fieldset>
+    <legend class="text-md font-semibold text-gray-300">Filtros</legend>
+    <Dropdown
+      id="Localidad"
+      buttonContent="Localidad"
+      menuItems={menuItems2}
+      defaultOption="Localidad"
+      client:visible
+    />
+    <Dropdown
+      id="Barrio"
+      buttonContent="Barrio"
+      menuItems={menuItems1}
+      defaultOption="Barrio"
+      client:visible
+    />
+
+    <Dropdown
+      id="Calle"
+      buttonContent="Calle"
+      menuItems={menuItems3}
+      defaultOption="Calle"
+      client:visible
+    />
+  </fieldset>
+</form>
