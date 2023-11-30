@@ -30,8 +30,8 @@ const selectStreets = streets.filter(
     <h1 class="tracking-tighter text-5xl mb-10 text-gray-100 dark:text-gray-100">
       Barrios cerrados y countries
     </h1>
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 container mx-auto p-4 max-w-screen-xl">
-      <!-- ASIDE OF FILTERS of entrepreneurship -->
+    <!-- <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 container mx-auto p-4 max-w-screen-xl">
+ 
       <aside class="lg:col-span-1 lg:sticky lg:block md:block top-10 h-fit transition-all">
         <div class="flex flex-col h-full">  
             <div class="flex flex-col h-full">
@@ -39,13 +39,13 @@ const selectStreets = streets.filter(
             </div>
         </div>
       </aside>
-      <!-- LIST HOUSE -->
+       
       <section class="lg:col-span-4">
 
-         <!-- Main content goes here -->
+    
       <h1 class="text-2xl font-bold mb-4">List of Items</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-hidden">
-        <!-- Individual items go here -->
+        
         <div class="p-2">
           <div class="bg-gray-200 p-4 rounded-md">
             <h3 class="text-lg font-semibold mb-2">Item 1</h3>
@@ -288,8 +288,362 @@ const selectStreets = streets.filter(
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
         </div>
-        <!-- Add more items as needed -->
+ 
       </section>
+    </div> -->
+
+    <!-- A  -->
+    <!-- <div class="container mx-auto">
+      <div class="flex">
+        <aside class="w-64 p-5 bg-gray-200">
+          <h2 class="text-lg font-bold mb-5">FILTROS</h2>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" html-for="price">
+              Precio
+            </label>
+            <div class="mt-1 flex rounded-md shadow-sm">
+              <select
+                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                id="currency"
+                name="currency"
+              >
+                <option>Pesos</option>
+                <option>USD</option>
+              </select>
+              <input
+                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                id="price_min"
+                name="price_min"
+                placeholder="Desde"
+                type="text"
+              />
+              <input
+                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                id="price_max"
+                name="price_max"
+                placeholder="Hasta"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" >
+              Cantidad de ambientes
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="rooms"
+              name="rooms"
+            >
+              <option>1 ambiente</option>
+              <option>2 ambientes</option>
+              <option>3 ambientes</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" html-for="property-type">
+              Tipo de propiedad
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="property-type"
+              name="property-type"
+            >
+              <option>Casa</option>
+              <option>Departamento</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" html-for="subtype">
+              Subtipo
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="subtype"
+              name="subtype"
+            >
+              <option>Subtipo 1</option>
+              <option>Subtipo 2</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-lg font-bold mb-2">UBICACIÓN</h3>
+            <label class="block text-sm font-medium text-gray-700" html-for="locality">
+              Localidad
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="locality"
+              name="locality"
+            >
+              <option>Localidad 1</option>
+              <option>Localidad 2</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" html-for="neighborhood">
+              Barrio
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="neighborhood"
+              name="neighborhood"
+            >
+              <option>Barrio 1</option>
+              <option>Barrio 2</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700" html-for="street">
+              Calle
+            </label>
+            <select
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              id="street"
+              name="street"
+            >
+              <option>Calle 1</option>
+              <option>Calle 2</option>
+            </select>
+          </div>
+          <button class="py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75">
+            Limpiar filtros
+          </button>
+        </aside>
+        <main class="flex-grow">
+          <div class="flex justify-between items-center p-5">
+            <p class="text-sm">Tenemos 3,257 resultados con tu búsqueda</p>
+            <div class="flex space-x-2">
+              <select
+                class="block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                id="sort"
+                name="sort"
+              >
+                <option>Ordenar por</option>
+              </select>
+              <button class="py-2 px-4 bg-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75">
+                Ver en mapa
+              </button>
+              <button class="py-2 px-4 bg-gray-300 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75">
+                Ver en listado
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-5">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+              <img
+                alt="property image"
+                class="w-full h-48 object-cover object-center"
+                height="192"
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "384/192",
+                  objectFit: "cover",
+                }}
+                width="384"
+              />
+              <div class="p-4">
+                <h3 class="text-lg font-semibold">AV BELGRANO AL 1400 - MONSERRAT</h3>
+                <p class="text-sm">Oficina en venta - U$S 3,000,000</p>
+                <p class="text-sm">1980 M2 | 18 Baños</p>
+                <div class="flex justify-between items-center mt-3">
+                  <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">VENTA</span>
+                  <button class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div> -->
+    <!-- B -->
+  <!--   <div class="flex">
+      <aside class="w-1/4 pr-4">
+        <div class="bg-[#374151] p-4 rounded-lg">
+          <h2 class="font-semibold mb-4">FILTROS</h2>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="price">
+              Precio
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="price">
+              <option>D</option>
+              <option>H</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="rooms">
+              Cantidad de ambientes
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="rooms">
+              <option>1 ambiente</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="propertyType">
+              Tipo de propiedad
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="propertyType">
+              <option>Casa</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="subtype">
+              Subtipo
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="subtype">
+              <option>Subtipo 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <h3 class="font-semibold mb-2">UBICACIÓN</h3>
+            <label class="block mb-2" html-for="locality">
+              Localidad
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="locality">
+              <option>Localidad 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="neighborhood">
+              Barrio
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="neighborhood">
+              <option>Barrio 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" html-for="street">
+              Calle
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="street">
+              <option>Calle 1</option>
+            </select>
+          </div>
+          <button class="w-full p-2 rounded bg-blue-600 hover:bg-blue-700">Limpiar filtros</button>
+        </div>
+      </aside>
+      <main class="w-3/4">
+        <div class="grid grid-cols-3 gap-4 p-5">
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img
+              alt="property image"
+              class="w-full h-48 object-cover object-center"
+              height="192"
+              src="/placeholder.svg"
+              style={{
+                aspectRatio: "384/192",
+                objectFit: "cover",
+              }}
+              width="384"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">AV BELGRANO AL 1400 - MONSERRAT</h3>
+              <p class="text-sm">Oficina en venta - U$S 3,000,000</p>
+              <p class="text-sm">1980 M2 | 18 Baños</p>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">VENTA</span>
+                <button class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+                  Ver más
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div> -->
+    <div class="flex flex-col lg:flex-row">
+      <aside class="w-full lg:w-1/4 lg:pr-4">
+        <div class="bg-[#374151] p-4 rounded-lg">
+          <h2 class="font-semibold mb-4">FILTROS</h2>
+<!--           <form class="mb-4">
+            <label class="block mb-2" for="price">
+              Precio
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="price">
+              <option>D</option>
+              <option>H</option>
+            </select>
+          </form> -->
+          <FormFilter selects={selects} client:visible />
+          <div class="mb-4">
+            <label class="block mb-2" for="rooms">
+              Cantidad de ambientes
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="rooms">
+              <option>1 ambiente</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" for="propertyType">
+              Tipo de propiedad
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="propertyType">
+              <option>Casa</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" for="subtype">
+              Subtipo
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="subtype">
+              <option>Subtipo 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <h3 class="font-semibold mb-2">UBICACIÓN</h3>
+            <label class="block mb-2" for="locality">
+              Localidad
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="locality">
+              <option>Localidad 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" for="neighborhood">
+              Barrio
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="neighborhood">
+              <option>Barrio 1</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block mb-2" for="street">
+              Calle
+            </label>
+            <select class="w-full p-2 rounded bg-[#1F2937] text-white" id="street">
+              <option>Calle 1</option>
+            </select>
+          </div>
+          <button class="w-full p-2 rounded bg-blue-600 hover:bg-blue-700">Limpiar filtros</button>
+        </div>
+      </aside>
+      <main class="w-full lg:w-3/4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img
+              alt="property image"
+              class="w-full h-48 object-cover object-center"
+              height="192"
+              src="/placeholder.svg"
+              style="aspect-ratio: 384/192; object-fit: cover;"
+              width="384"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">AV BELGRANO AL 1400 - MONSERRAT</h3>
+              <p class="text-sm">Oficina en venta - U$S 3,000,000</p>
+              <p class="text-sm">1980 M2 | 18 Baños</p>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">VENTA</span>
+                <button class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+                  Ver más
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-  </article>
+    </article>
 </Layout>

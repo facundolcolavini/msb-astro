@@ -28,13 +28,12 @@ const FormFilters = ({selects}:Props) => {
     };
 
   return (
-    <form class="max-w-md mx-auto mb-4">
-    <fieldset>
-      <legend class="text-md font-semibold text-gray-300 max-w-md mb-5 ">Filtros</legend>
-       {/* Use FilterSelect Component */}
-            <FilterSelect id="ed_bar" opts={barrios} onChange={handleSelect} />
-    </fieldset>
+    <>
+        <form class="mb-4 w-100">
+      <FilterSelect id="ed_bar" opts={barrios} onChange={handleSelect} />
   </form>
+    </>
+
   )
 }
 
