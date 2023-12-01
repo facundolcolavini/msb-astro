@@ -3,16 +3,17 @@ import {useState} from "preact/hooks"
 import type { Option, Results } from "../../types/selects.form.types"
 import FilterSelect from "./FilterSelect";
 import { navigate } from "astro:transitions/client";
+import { fetchData } from "../../utils/fetch-data.ts";
 
 interface Props {
   selects: Results
-  onFilter : (e:Record<string, string>) => void
+  onFilter? : (e:Record<string, string>) => void
 }
 
 const FormFilters = ({selects,onFilter}:Props) => {
     const {localidades:sellocalidad } = selects
   // Obtener los valores de los filtros de la URL 
-  const [urlSearchParams, serUrlSearchParams] = useState<Record<string, string>>({});
+  const [urlSearchParams, serUrlSearchParams] = useState({});
 
     const locs = sellocalidad.filter(
   
@@ -26,16 +27,16 @@ const FormFilters = ({selects,onFilter}:Props) => {
       const url = new URL(window.location.href);
       const searchParams = url.searchParams.set(id, value);
       window.history.pushState({}, "", url.toString());
-      serUrlSearchParams(  { ...urlSearchParams, [id]: value } )
+      serUrlSearchParams( url.search ? url.search : {})
     };
     
     // Actualizar los filtros de la URL para que se reflejen en la tabla
-    const hanldeSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+    const hanldeSubmit = async (e: JSX.TargetedEvent<HTMLFormElement>) => {
       e.preventDefault();
-      onFilter(urlSearchParams)
-      console.log(urlSearchParams, 'Desde form filters')
-      // ?urlSearchParams=value
 
+      // fetch data with params
+       const newData = await fetchData('resultados.fichas'); // Problemas con cors
+       console.log(newData)
     } 
 
   return (

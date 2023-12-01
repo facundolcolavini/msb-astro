@@ -1,5 +1,5 @@
-import type { APIResponseSelects, Results } from "../../types/selects.form.types";
-import { fetchData } from "../../utils/fetch-data";
+import type { APIResponseSelects, Results } from "../types/selects.form.types";
+import { fetchData } from "../utils/fetch-data";
 
 const endpoint = 'datos.select.buscador';
 

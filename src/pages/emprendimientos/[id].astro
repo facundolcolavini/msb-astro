@@ -2,7 +2,7 @@
 import type { Results,EntrePreneurShip } from "../../types/entrepreneurship.types";
 import Layout from "../../layouts/Layout.astro";
 
-import { getEntrepreneurshipById } from "../api/get-all-entrepreneurship";
+import { getEntrepreneurshipById } from "../../services/get-all-entrepreneurship";
 import BreadCrumb from "../../components/BreadCrumb.astro";
 
 // Hybrid para que se renderice en el servidor y en el cliente
@@ -43,3 +43,4 @@ let response;
     </article>
   </Layout>
 
+../services/get-all-entrepreneurship
