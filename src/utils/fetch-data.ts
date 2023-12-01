@@ -1,7 +1,3 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 export interface AdditionalParams {
   [key: string]: string | number;
 }
@@ -17,11 +13,12 @@ export async function fetchData<T>(
   endpoint: string,
   queryParams?: AdditionalParams
 ): Promise<T> {
-  const { INM, APIK } = process.env;
 
-  if (!INM || !APIK) {
+  const { INM, APIK } = import.meta.env;
+
+/*   if (!INM || !APIK) {
     throw new Error('Se requieren las claves INM y APIK en el archivo .env');
-  }
+  } */
 
   const cacheKey = `${endpoint}-${JSON.stringify(queryParams || {})}`;
   if (cache[cacheKey]) {

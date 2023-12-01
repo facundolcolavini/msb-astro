@@ -2,7 +2,7 @@ import type { APIResponseResultsRecords, Result } from "../../types/results.reco
 import { fetchData } from "../../utils/fetch-data";
 const endpoint = 'resultados.fichas';
 
-export const getResultsRecords = async (queryParams :any):Promise<Result> => {
+export const getResultsRecords = async (queryParams?:Record<string, string>):Promise<Result> => {
     try {
         const res = await fetchData(endpoint, queryParams) as APIResponseResultsRecords;
         return res.resultado;

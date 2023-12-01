@@ -1,19 +1,20 @@
 ---
-const cardData = Astro.params
-console.log(cardData)
----
+import type { File } from "../types/results.records.types";
+const {cardData} = Astro.props 
+
+--- 
 
 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
     <img
       alt="property image"
       class="w-full h-48 object-cover object-center"
       height="192"
-      src="/placeholder.svg"
+      src={cardData?.img_princ}
       style="aspect-ratio: 384/192; object-fit: cover;"
       width="384"
     />
     <div class="p-4">
-      <h3 class="text-lg font-semibold">AV BELGRANO AL 1400 - MONSERRAT</h3>
+      <h3 class="text-lg font-semibold">{cardData.direccion_completa} - MONSERRAT</h3>
       <p class="text-sm">Oficina en venta - U$S 3,000,000</p>
       <p class="text-sm">1980 M2 | 18 Baños</p>
       <div class="flex justify-between items-center mt-3">

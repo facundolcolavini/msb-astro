@@ -1,16 +1,20 @@
 import type { JSX } from "preact/jsx-runtime";
+import {useState} from "preact/hooks"
 import type { Option, Results } from "../../types/selects.form.types"
 import FilterSelect from "./FilterSelect";
+import { navigate } from "astro:transitions/client";
 
 interface Props {
   selects: Results
-
+  onFilter : (e:Record<string, string>) => void
 }
 
-const FormFilters = ({selects}:Props) => {
-    const {barrio:ed_bar } = selects
+const FormFilters = ({selects,onFilter}:Props) => {
+    const {localidades:sellocalidad } = selects
+  // Obtener los valores de los filtros de la URL 
+  const [urlSearchParams, serUrlSearchParams] = useState<Record<string, string>>({});
 
-    const barrios = ed_bar.filter(
+    const locs = sellocalidad.filter(
   
       ({descripcion}:Option) => descripcion !== "INDISTINTO"
     ).map(({descripcion,value}:Option) => (
@@ -20,19 +24,27 @@ const FormFilters = ({selects}:Props) => {
     const handleSelect: JSX.GenericEventHandler<HTMLElement> = (e) => {
       const { id, value } = e.target as HTMLSelectElement;
       const url = new URL(window.location.href);
-      url.searchParams.set(id, value);
+      const searchParams = url.searchParams.set(id, value);
       window.history.pushState({}, "", url.toString());
-  
-      // Después de actualizar la URL, realizar el fetch con los nuevos parámetros
-     /*  fetchData(); */
+      serUrlSearchParams(  { ...urlSearchParams, [id]: value } )
     };
+    
+    // Actualizar los filtros de la URL para que se reflejen en la tabla
+    const hanldeSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onFilter(urlSearchParams)
+      console.log(urlSearchParams, 'Desde form filters')
+      // ?urlSearchParams=value
+
+    } 
 
   return (
-    <>
-        <form class="mb-4 w-100">
-      <FilterSelect id="ed_bar" opts={barrios} onChange={handleSelect} />
+
+        <form class="mb-4 w-100" onSubmit={hanldeSubmit}>
+      <FilterSelect id="sellocalidad" opts={locs} onChange={handleSelect} />
+      <button type="submit" class="w-full p-2 rounded bg-blue-600 hover:bg-blue-700">Buscar</button>
   </form>
-    </>
+
 
   )
 }
