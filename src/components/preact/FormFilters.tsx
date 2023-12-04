@@ -48,8 +48,8 @@ const FormFilters = ({ selects, onFilter }: Props) => {
   }
 
   // Boton para resetear los filtros de la URL y del formulario
-  const handleReset = (e:Event) => {
-    
+  const handleReset = (e: Event) => {
+
     e.preventDefault();
     setSelect({});
     // Update URL filters 
@@ -58,20 +58,20 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     // Reset form 
     const form = document.getElementById("form-filters") as HTMLFormElement;
     form.reset();
-    
+
     navigate(`/search`);
-    setTimeout(() => {    window.location.reload();},100)
-     
+    setTimeout(() => { window.location.reload(); }, 100)
+
   }
   return (
 
-    <form  id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>
+    <form id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>
       <label class="text-white px-1" >Localidad :</label>
-      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select }
+      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select}
         id="sellocalidades" opts={locs} onChange={handleSelect} />
+      <label class="text-white px-1" >Barrio :</label>
+      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select}
 
-      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select }
-        
         id="barrios1" opts={bar} onChange={handleSelect} />
       {/* Boton de buscar y uno de limpar filtros */}
       <div class="flex justify-between items-center px-1 mt-5 gap-1">
