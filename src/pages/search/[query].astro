@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import MainLayoutSearch from "../../layouts/MainLayoutSearch.astro";
+import { getResultsRecords } from "../../services/get-results-records";
+import { getAllSelects } from "../../services/get-selects-form";
+import type { Results } from "../../types/selects.form.types";
+import { parseQueryToObjt } from "../../utils/querys-format";
+export const prerender = false;
+
+const {query} = Astro.params;
+let searchData; 
+
+const selects = (await getAllSelects()) as Results;
+const queryObj = parseQueryToObjt(query)
+
+if(query){
+    const {fichas} = await getResultsRecords(queryObj)
+    searchData = fichas;
+}
+---
+
+<Layout title="Busqueda">
+    <MainLayoutSearch  selects={selects} list={searchData} />
+</Layout>

@@ -1,0 +1,34 @@
+---
+import ListHomes from "../components/ListHomes.astro";
+import FormFilters from "../components/preact/FormFilters";
+import type { Results } from "../types/selects.form.types";
+interface Props<T> {
+  selects: Results;
+  list: T;
+}
+const { selects, list } = Astro.props as Props<any>;
+let notFound = false;
+if (list.hasOwnProperty("error")) {
+  notFound = true;
+}else{
+    notFound = false;
+}
+---
+
+<div class="flex flex-col lg:flex-row">
+  <aside class="w-full lg:w-1/4 lg:pr-4">
+    <div class="bg-[#374151] p-4 rounded-lg">
+      <h2 class="font-semibold mb-4">FILTROS</h2>
+
+      <FormFilters selects={selects} transition:persist client:load />
+    </div>
+  </aside>
+  <main class="w-full lg:w-3/4">
+    {notFound ? (
+      <div class="bg-[#374151] p-4 rounded-lg">
+        <h2 class="font-semibold mb-4 text-white">No se encontraron resultados...</h2>
+      </div>
+    ): <ListHomes listItems={list} />}
+    
+  </main>
+</div>

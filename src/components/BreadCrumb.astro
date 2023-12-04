@@ -1,5 +1,6 @@
 ---
 import HomeIcon from "../components/preact/Icons/HomeIcon.tsx";
+import {parseQueryString} from "../utils/querys-format";
 
 interface BreadcrumbItem {
   name: string;
@@ -34,10 +35,19 @@ const breadcrumbWithHome = [
     name: "Home", // Nombre del enlace "Home"
     url: `${origin}`, // URL de la página principal
   },
-  ...breadcrumbItems, // Resto de las migas de pan generadas dinámicamente
+ 
+  ...breadcrumbItems.map((item)=>{
+     // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
+    const name = item.name.includes("=") ? parseQueryString(item.name) : item.name;
+    return {
+      ...item,
+      name,
+    }
+  })
+ 
 ];
 
-
+console.log(breadcrumbWithHome)
 ---
 <nav class="flex p-2" aria-label="Breadcrumb">
   <ol

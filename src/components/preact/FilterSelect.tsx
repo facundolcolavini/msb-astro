@@ -10,10 +10,11 @@ interface FilterSelectProps {
   opts: Option[];
   id: string;
   onChange: JSX.GenericEventHandler<HTMLElement>;
+  defaultOption?: Option; // Added prop for default option
 }
 
-const FilterSelect = ({ opts, id, onChange }: FilterSelectProps): JSX.Element => {
-  const [selectedOption, setSelectedOption] = useState('');
+const FilterSelect = ({ opts, id, onChange, defaultOption }: FilterSelectProps): JSX.Element => {
+  const [selectedOption, setSelectedOption] = useState(defaultOption ? defaultOption.label : ''); // Set initial state to default label
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

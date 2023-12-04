@@ -4,49 +4,26 @@ import FormFilter from "../../components/preact/FormFilters";
 import Layout from "../../layouts/Layout.astro";
 import type { Option, Results } from "../../types/selects.form.types";
 import { getAllSelects } from "../../services/get-selects-form";
+import { fetchData } from "../../utils/fetch-data";
+import { getResultsRecords } from "../../services/get-results-records";
+import MainLayoutSearch from "../../layouts/MainLayoutSearch.astro";
 
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
-
-
-/* const selectLocalities = localities.filter(
-  //Sacar opcion ALL  y transformarlo a label y value para el dropdown
-  ({descripcion}:Option) => descripcion !== "INDISTINTO"
-).map(({descripcion,value}:Option) => (
-  { label: descripcion, value }
-));
+const params = Astro.params
+const {fichas} = await getResultsRecords()
 
 
 
-const selectStreets = streets.filter(
-
-  ({descripcion}:Option) => descripcion !== "INDISTINTO"
-).map(({descripcion,value}:Option) => (
-  { label: descripcion, value }
-)); */
 ---
 
 <Layout title={titlePage}>
-  <article>
+  <article  transition:persist>
     <h1 class="tracking-tighter text-5xl mb-10 text-gray-100 dark:text-gray-100">
       Barrios cerrados y countries
     </h1>
 
-    <div class="flex flex-col lg:flex-row">
-      <aside class="w-full lg:w-1/4 lg:pr-4">
-        <div class="bg-[#374151] p-4 rounded-lg">
-          <h2 class="font-semibold mb-4">FILTROS</h2>
+    <MainLayoutSearch slot="results-search" selects={selects} list={fichas} />
 
-          <FormFilters selects={selects} client:only="preact" />
-        </div>
-      </aside>
-      <main class="w-full lg:w-3/4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
-          
-          
-        </div>
-      </main>
-    </div>
     </article>
 </Layout>
-../services/get-selects-form
