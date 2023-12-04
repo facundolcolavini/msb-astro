@@ -13,9 +13,9 @@ interface Props {
 const FormFilters = ({ selects, onFilter }: Props) => {
   const { localidades: sellocalidades, barrio: barrios1 } = selects
   // Obtener los valores de los filtros de la URL 
-  const [urlSearchParams, serUrlSearchParams] = useState({});
+  const [urlSearchParams, setUrlSearchParams] = useState({});
   const [select, setSelect] = useState({});
-  
+
   const bar = barrios1.filter(
     ({ descripcion }: Option) => descripcion !== "INDISTINTO"
   ).map(({ descripcion, value }: Option) => (
@@ -47,17 +47,37 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     navigate(`/search/${params.toString()}`);
   }
 
+  // Boton para resetear los filtros de la URL y del formulario
+  const handleReset = (e:Event) => {
+    
+    e.preventDefault();
+    setSelect({});
+    // Update URL filters 
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    // Reset form 
+    const form = document.getElementById("form-filters") as HTMLFormElement;
+    form.reset();
+    
+    navigate(`/search`);
+    setTimeout(() => {    window.location.reload();},100)
+     
+  }
   return (
 
-    <form class="mb-4 w-100" onSubmit={hanldeSubmit}>
-      <FilterSelect defaultOption={
-        { label: "Localidad", value: "All" }
-      } id="sellocalidades" opts={locs} onChange={handleSelect} />
+    <form  id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>
+      <label class="text-white px-1" >Localidad :</label>
+      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select }
+        id="sellocalidades" opts={locs} onChange={handleSelect} />
 
-      <FilterSelect defaultOption={
-        { label: "Barrio", value: "All" }}
+      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select }
+        
         id="barrios1" opts={bar} onChange={handleSelect} />
-      <button type="submit" class="w-full p-2 rounded bg-blue-600 hover:bg-blue-700">Buscar</button>
+      {/* Boton de buscar y uno de limpar filtros */}
+      <div class="flex justify-between items-center px-1 mt-5 gap-1">
+        <button class="bg-[#768294] text-white px-4 py-2 rounded" type="button" onClick={handleReset}>Limpiar</button>
+        <button type="submit" class="w-full p-2 text-white  rounded bg-blue-600 hover:bg-blue-700">Buscar</button>
+      </div>
     </form>
 
 
