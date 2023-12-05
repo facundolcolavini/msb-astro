@@ -16,9 +16,9 @@ export async function fetchData<T>(
 
   const { INM, APIK } = import.meta.env;
 
-/*   if (!INM || !APIK) {
+  if (!INM || !APIK) {
     throw new Error('Se requieren las claves INM y APIK en el archivo .env');
-  } */
+  }
 
   const cacheKey = `${endpoint}-${JSON.stringify(queryParams || {})}`;
   if (cache[cacheKey]) {

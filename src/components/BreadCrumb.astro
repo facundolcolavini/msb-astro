@@ -1,6 +1,5 @@
 ---
-import HomeIcon from "../components/preact/Icons/HomeIcon.tsx";
-import {parseQueryString} from "../utils/querys-format";
+import { parseQueryString } from "../utils/querys-format";
 
 interface BreadcrumbItem {
   name: string;
@@ -12,7 +11,7 @@ const urlsObjtAstro = Astro.url;
 const currentURL = urlsObjtAstro; // Este objeto contiene la información de la URL actual
 
 // Obtenemos las partes de la URL que deseamos mostrar en el breadcrumb
-const { pathname, origin } = currentURL;
+const { pathname, origin, searchParams } = currentURL;
 
 // Dividir la ruta en partes separadas
 const pathParts = pathname.split("/").filter((part) => part !== ""); // Eliminar partes vacías
@@ -28,14 +27,13 @@ const breadcrumbItems = pathParts.map((part, index) => {
     url: breadcrumbURL, // URL del elemento del breadcrumb
   };
 });
-
 // Agregar el enlace "Home" al principio de breadcrumbItems
 const breadcrumbWithHome = [
   {
     name: "Home", // Nombre del enlace "Home"
     url: `${origin}`, // URL de la página principal
   },
- 
+  /* /SEARCH/PARAMS */
   ...breadcrumbItems.map((item)=>{
      // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
     const name = item.name.includes("=") ? parseQueryString(item.name) : item.name;
@@ -44,6 +42,16 @@ const breadcrumbWithHome = [
       name,
     }
   })
+
+  /* ...breadcrumbItems, */
+
+  /* Agregar los search params recorriendo el objeto searchParams al breadCrumb */
+/*   ...Array.from(searchParams).map(([key, value]) => {
+        return {
+      name: `${value}`,
+      url: `${origin}/search/${parseQueryString(value)}`,
+    };
+  }), */
  
 ];
 

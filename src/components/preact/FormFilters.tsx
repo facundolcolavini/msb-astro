@@ -36,6 +36,7 @@ const FormFilters = ({ selects, onFilter }: Props) => {
   // Actualizar los filtros de la URL para que se reflejen en la tabla
   const hanldeSubmit = async (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     const newParams = { ...urlSearchParams, ...select };
@@ -44,6 +45,9 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     });
 
     url.search = params.toString();
+    if(url.search === "") {
+      return
+    }
     navigate(`/search/${params.toString()}`);
   }
 
@@ -59,8 +63,8 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     const form = document.getElementById("form-filters") as HTMLFormElement;
     form.reset();
 
+    setTimeout(() => { window.location.reload(); }, 200)
     navigate(`/search`);
-    setTimeout(() => { window.location.reload(); }, 100)
 
   }
   return (

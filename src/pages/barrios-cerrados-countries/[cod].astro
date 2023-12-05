@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+export const prerender = false;
+const {cod} = Astro.params;
+console.log(cod);
+---
+
+<Layout title='Detalle'>
+    <h1>Article Title</h1>
+    <p>Article content</p>
+</Layout>

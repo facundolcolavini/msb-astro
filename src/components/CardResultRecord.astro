@@ -3,32 +3,32 @@ import type { File } from "../types/results.records.types";
 interface Props {
   cardData: File;
 }
-const {cardData} = Astro.props  
+const {pathname } = Astro.url;
 
---- 
+const { cardData } = Astro.props;
 
-<div class="bg-white shadow-lg rounded-lg overflow-hidden h-100">
-    <img
-      alt="property image"
-      class="w-full h-48 object-cover object-center"
-      height="192"
-      src={cardData?.img_princ}
-      style="aspect-ratio: 384/192; object-fit: cover;"
-      width="384"
-    />
-    <div class="p-4">
-      <div class=" flex flex-col justify-between items-start">
-        <h3 class="text-lg font-semibold text-ellipsis">{cardData.direccion_completa} - {cardData.in_bar}</h3>
-        <p class="text-sm">{cardData.titulo}</p>
-        <p class="text-sm">{cardData?.ambientes_num} Ambientes  |  {cardData?.dormitorios} Dormitorios</p>
-        <span class="text-xs bg-red-500 text-white px-2 py-1 rounded my-2">{cardData.precio}</span>
-      </div>
-   
-      <div class="relative bottom-0 h-100 flex justify-between items-center mt-3">
-        <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">VENTA</span>
-        <button class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
-          Ver más
-        </button>
-      </div>
+---
+
+<div class="shadow-lg rounded-lg overflow-hidden relative bottom-0">
+  <img
+    alt="property image"
+    class="w-full h-48 object-cover"
+    src={cardData?.img_princ}
+    style="aspect-ratio: 16/9; object-fit: cover;"
+  />
+  <div class="p-4 bg-gray-500 text-white">
+    <div class="h-[170px] flex flex-col space-y-2">
+      <h3 class="h-100 text-lg font-semibold">{cardData.direccion_completa} - {cardData.in_bar}</h3>
+      <p class="h-100 text-sm">{cardData.titulo}</p>
+      <p class="h-100 text-sm">{cardData?.ambientes_num} Ambientes | {cardData?.dormitorios} Dormitorios</p>
+      <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded">{cardData.precio}</span>
+    </div>
+    <div class="flex justify-between items-end mt-3">
+      <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">{cardData.operacion}</span>
+      <a href={`${pathname}/${cardData.in_num}`} class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+        Ver más
+      </a>
     </div>
   </div>
+</div>
+
