@@ -1,20 +1,34 @@
 ---
+import { openDB,db,initializeDB } from "../db/setup.db";
+import Layout from "../layouts/Layout.astro";
 
-import Layout from '../layouts/Layout.astro';
-import MainLayout from '../layouts/MainLayout.astro';
+// Init DB 
+const initDB = async () => {
+  try {
+    const db = await initializeDB();
+    // Aquí puedes realizar operaciones adicionales con la base de datos si es necesario
+    console.log('Database initialized successfully!');
+  } catch (error) {
+    console.error('Error initializing the database:', error);
+    // Manejar el error de inicialización de la base de datos
+  }
+};
+
+initDB();
 
 ---
 
 <Layout title="Home">
-	<arcticle>
-		<h1 class="text-white text-4xl">Home</h1>
-		<p>Home page</p>
-	</arcticle>
+  <arcticle>
+    <h1 class="text-white text-4xl">Home</h1>
+    <p>Home page</p>
+  </arcticle>
 </Layout>
 
 <style is:global>
-
-	@keyframes fade-in {
-		from { opacity: 0; }
-	}
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
 </style>
