@@ -21,7 +21,8 @@ export async function initializeDB(): Promise<SqliteDatabase> {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       email TEXT UNIQUE,
-      password TEXT
+      password TEXT,
+      salt TEXT
     )`
   );
 
@@ -35,5 +36,4 @@ export async function initializeDB(): Promise<SqliteDatabase> {
   );
   return db;
 }
-
 export { instance as db };

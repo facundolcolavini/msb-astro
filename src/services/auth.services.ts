@@ -1,4 +1,3 @@
-import { getOriginalNode } from "typescript";
 
 export const register =async (username: string, email: string, password: string) => {
 
@@ -24,13 +23,13 @@ export const login = async (email: string, password: string) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+          
         },
         body: JSON.stringify({ email: email, password: password }),
     });
 
     const data = await res.json();
-
+    
     return data;
     
 }
