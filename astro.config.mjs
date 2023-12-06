@@ -11,5 +11,11 @@ export default defineConfig({
   adapter: netlify({
     edgeMiddleware: true
   }),
-  
+    vite: {
+      
+      optimizeDeps: {
+        /* crypto */
+        include: ["bcrypt", "mock-aws-s3", "aws-sdk", "nock"	]
+      }
+    }
 });
