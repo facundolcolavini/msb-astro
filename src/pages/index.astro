@@ -14,7 +14,9 @@ const initDB = async () => {
   }
 };
 
-initDB();
+(async () => {
+  await initDB();
+})();
 
 ---
 
