@@ -14,6 +14,7 @@ export const POST: APIRoute = async ({ request }) => {
         success : true,
         status : 200,
         message: 'Usuario logeado correctamente',
+        data: user,
       }), {
         headers: {
           'Content-Type': 'application/json',
