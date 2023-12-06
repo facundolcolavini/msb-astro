@@ -6,9 +6,8 @@ import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
-  prefetch: true,
-  defaultStrategy: 'viewport',
   integrations: [tailwind(), preact()],
   output: 'server',
-  adapter: netlify()
+  adapter: netlify(),
+ 
 });

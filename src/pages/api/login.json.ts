@@ -10,9 +10,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (user) {
       return new Response(JSON.stringify({
-        id: user.id,
-        name: user.name,
-        email: user.email,
+        success : true,
+        status : 200,
         message: 'Usuario logeado correctamente',
       }), {
         headers: {
@@ -23,6 +22,8 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     return new Response(JSON.stringify({
+      success : false,
+      status : 401,
       message: 'Usuario o contraseña incorrectos',
     }), {
       headers: {
@@ -34,6 +35,8 @@ export const POST: APIRoute = async ({ request }) => {
     console.error('Error during login:', error);
 
     return new Response(JSON.stringify({
+      success : false,
+      status : 500,
       message: 'Error durante el inicio de sesión',
     }), {
       headers: {

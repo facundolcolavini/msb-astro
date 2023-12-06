@@ -11,6 +11,8 @@ export const POST: APIRoute = async ({ request }) => {
     if (!name || !email || !password) {
       return new Response(JSON.stringify({
         message: 'Nombre, correo electrónico y contraseña son requeridos',
+        success : false,
+        status : 400
       }), {
         headers: {
           'Content-Type': 'application/json',
@@ -23,10 +25,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (newUser) {
       return new Response(JSON.stringify({
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
         message: 'Usuario registrado correctamente',
+        success : true,
+        status : 201
       }), {
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +38,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({
       message: 'El correo electrónico ya está en uso',
+      success : false,
+      status : 409
     }), {
       headers: {
         'Content-Type': 'application/json',
@@ -48,6 +51,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({
       message: 'Error durante el registro',
+      success : false,
+      status : 500
     }), {
       headers: {
         'Content-Type': 'application/json',
