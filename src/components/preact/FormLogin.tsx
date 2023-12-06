@@ -63,7 +63,7 @@ const FormLogin: preact.FunctionalComponent = () => {
             <form class="flex flex-col items-center justify-center min-h-screen bg-gray-800 p-4" onSubmit={handleSubmit}>
                 <div class="rounded-lg border shadow-sm w-full max-w-md mx-auto bg-gray-700 text-white" data-v0-t="card">
                     <div class="flex flex-col  p-6">
-                        <h3 class="font-semibold tracking-tight text-2xl">Ingresar</h3>
+                        <h3 class="font-semibold tracking-tight text-2xl">Iniciar sesión</h3>
                     </div>
                     <div class="p-6 space-y-4">
                         <div class="space-y-2">
@@ -101,7 +101,7 @@ const FormLogin: preact.FunctionalComponent = () => {
                             class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-1/2 bg-blue-500 text-white hover:bg-blue-700"
                             type="submit"
                         >
-                            Registrarse
+                            Ingresar
                         </button>
                         <a class="underline text-blue-500 hover:text-blue-700" href="#">
                             ¿Ya tienes una cuenta?
