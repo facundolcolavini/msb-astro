@@ -1,7 +1,8 @@
 // Server endpoint for the login page using Astro
 
 import type { APIRoute } from 'astro';
-import { loginUser } from '../../db/auth/auth';
+import { loginUser } from '../../../db/auth/auth';
+
 
 export const POST: APIRoute = async ({ request }) => {
   try {
