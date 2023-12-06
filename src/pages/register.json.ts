@@ -1,7 +1,7 @@
 // Server endpoint for the register page using Astro
 
 import type { APIRoute } from 'astro';
-import { registerUser } from '../../db/auth/auth';
+import { registerUser } from '../db/auth/auth';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
