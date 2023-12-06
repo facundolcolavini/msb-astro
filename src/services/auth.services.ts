@@ -2,7 +2,7 @@
 export const register =async (username: string, email: string, password: string) => {
 
     /* Post a user on PAGES/API json astro register http://localhost:4321/api/register.json */
-   const res = await fetch('/api/register.json', {
+   const res = await fetch('/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
