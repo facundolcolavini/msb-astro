@@ -6,7 +6,7 @@ import type { Option, Results } from "../../types/selects.form.types";
 import { getAllSelects } from "../../services/get-selects-form";
 import { fetchData } from "../../utils/fetch-data";
 import { getResultsRecords } from "../../services/get-results-records";
-import MainLayoutSearch from "../../layouts/SearchLayout.astro";
+import SearchLayout from "../../layouts/SearchLayout.astro";
 
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
@@ -22,6 +22,6 @@ const {fichas} = await getResultsRecords({in_tpr: 'COUNTRY'})
     <h1 class="tracking-tighter text-5xl mb-10 text-gray-100 dark:text-gray-100">
       Barrios cerrados y countries
     </h1>
-    <MainLayoutSearch  selects={selects} list={fichas} />
+    <SearchLayout  selects={selects} list={fichas} />
     </article>
 </Layout>
