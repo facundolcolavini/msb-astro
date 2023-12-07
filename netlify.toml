@@ -5,7 +5,7 @@
 [build]
   command = "yarn run dev"
   port = 8888
-  publish = "out"
+  publish = "dist"
   targetPort = 4321
 
 [[redirects]]
