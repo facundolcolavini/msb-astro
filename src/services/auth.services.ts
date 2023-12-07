@@ -2,7 +2,7 @@
 export const register =async (username: string, email: string, password: string) => {
 
     /* Post a user on PAGES/API json astro register http://localhost:4321/api/register.json */
-   const res = await fetch('https://sh-msb-dev.netlify.app/functions/register', {
+   const res = await fetch('http://localhost:4321/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const register =async (username: string, email: string, password: string)
 
 export const login = async (email: string, password: string) => {
     /* Post a user on PAGES/API json astro login http://localhost:4321/api/login.json */
-   const res = await fetch('https://sh-msb-dev.netlify.app/functions/login', {
+   const res = await fetch('http://localhost:4321/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
