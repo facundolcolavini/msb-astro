@@ -1,5 +1,5 @@
-const { initDB } = require('./setup.db');
+/* const { initDB } = require('./setup.db');
 
 (async () => {
   await initDB();
-})() 
+})()  */

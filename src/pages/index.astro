@@ -1,6 +1,11 @@
 ---
 
+import { initDB } from "../db/setup.db";
 import Layout from "../layouts/Layout.astro";
+
+(async () => {
+  await initDB();
+})() 
 ---
 
 <Layout title="Home">
