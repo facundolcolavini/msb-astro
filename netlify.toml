@@ -3,10 +3,4 @@
   command = "yarn run build"
   publish = "dist"
 
-[dependencies]
-  bcrypt = "*"
-  sqlite3 = "*"
 
-[functions]
-  directory = "functions"
-  included_files = ["api/**", "db/**"]
