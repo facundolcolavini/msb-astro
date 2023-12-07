@@ -1,4 +1,7 @@
+# netlify.toml
+[dependencies]
+  bcrypt = "*"
+
 [build]
-  command = "yarn run build" # Comando para construir tu sitio
-  publish = "dist" # Directorio que contiene tu sitio construido
-  functions = "netlify/functions" # Directorio que contiene tus funciones
+  command = "yarn run dev"
+  publish = "dist"
