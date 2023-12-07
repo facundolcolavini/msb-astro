@@ -10,10 +10,10 @@
   command = "yarn run dev"
   port = 8888
   publish = "out"
-  targetPort = 3000
+  targetPort = 4321
 
 [[redirects]]
   from = "/api/*"
-  to = "http://localhost:3000/api/:splat"
+  to = "http://localhost:4321/api/:splat"
   status = 200
   force = true
