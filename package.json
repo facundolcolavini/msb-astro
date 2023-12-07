@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -28,7 +28,6 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.10.0",
-    "@types/sqlite3": "^3.1.11",
-    "ncp": "^2.0.0"
+    "@types/sqlite3": "^3.1.11"
   }
 }

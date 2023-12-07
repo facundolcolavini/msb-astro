@@ -6,7 +6,7 @@ let instance: SqliteDatabase | null = null;
 export async function openDB(): Promise<SqliteDatabase> {
   if (!instance) {
     instance = await open({
-      filename: `./src/db/database.db` ,
+      filename: './src/db/database.db',
       driver: sqlite3.Database,
     });
   }
@@ -36,18 +36,4 @@ export async function initializeDB(): Promise<SqliteDatabase> {
   );
   return db;
 }
-
-// Init DB 
-export const initDB = async () => {
-  try {
-    const db = await initializeDB();
-    // Aquí puedes realizar operaciones adicionales con la base de datos si es necesario
-    console.log('Database initialized successfully!');
-  } catch (error) {
-    console.error('Error initializing the database:', error);
-    // Manejar el error de inicialización de la base de datos
-  }
-};
-
-
 export { instance as db };

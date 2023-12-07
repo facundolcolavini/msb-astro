@@ -1,11 +1,23 @@
 ---
-
-import { initDB } from "../db/setup.db";
+import { initializeDB } from "../db/setup.db";
 import Layout from "../layouts/Layout.astro";
+
+// Init DB 
+const initDB = async () => {
+  try {
+    const db = await initializeDB();
+    // Aquí puedes realizar operaciones adicionales con la base de datos si es necesario
+    console.log('Database initialized successfully!');
+  } catch (error) {
+    console.error('Error initializing the database:', error);
+    // Manejar el error de inicialización de la base de datos
+  }
+};
 
 (async () => {
   await initDB();
-})() 
+})();
+
 ---
 
 <Layout title="Home">
