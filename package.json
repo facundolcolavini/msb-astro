@@ -5,8 +5,6 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build:db": "tsc ./src/db/run-setup-db.ts",
-    "build:functions": "tsc -p functions",
     "build": "astro check && astro",
     "preview": "astro preview",
     "astro": "astro"
