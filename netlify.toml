@@ -1,15 +1,4 @@
-# netlify.toml
-[dependencies]
-  bcrypt = "*"
-
 [build]
-  command = "yarn run dev"
-  port = 8888
-  publish = "dist"
-  targetPort = 4321
-
-[[redirects]]
-  from = "/api/*"
-  to = "http://localhost:4321/api/:splat"
-  status = 200
-  force = true
+  command = "yarn run build" # Comando para construir tu sitio
+  publish = "dist" # Directorio que contiene tu sitio construido
+  functions = "netlify/functions" # Directorio que contiene tus funciones

@@ -15,6 +15,7 @@
     "@astrojs/preact": "^3.0.1",
     "@astrojs/tailwind": "^5.0.2",
     "astro": "^3.6.0",
+    "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1513.0",
     "bcrypt": "^5.1.1",
     "mock-aws-s3": "^4.0.2",
@@ -26,8 +27,10 @@
     "typescript": "^5.3.2"
   },
   "devDependencies": {
+    "@netlify/functions": "^2.4.0",
+    "@types/aws-lambda": "^8.10.130",
     "@types/bcrypt": "^5.0.2",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.10.4",
     "@types/sqlite3": "^3.1.11"
   }
 }
