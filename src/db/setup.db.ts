@@ -38,7 +38,7 @@ export async function initializeDB(): Promise<SqliteDatabase> {
 }
 
 // Init DB 
-const initDB = async () => {
+export const initDB = async () => {
   try {
     const db = await initializeDB();
     // Aquí puedes realizar operaciones adicionales con la base de datos si es necesario
@@ -49,8 +49,5 @@ const initDB = async () => {
   }
 };
 
-(async() => {
-  initDB();
-})()
 
 export { instance as db };

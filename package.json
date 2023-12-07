@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build && yarn run src/db/setup.db.ts && ncp db dist/db",
+    "build": "astro check && astro build && node run-setup-db.ts && ncp db dist/db",
     "preview": "astro preview",
     "astro": "astro"
   },
