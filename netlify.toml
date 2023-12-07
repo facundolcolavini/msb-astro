@@ -5,3 +5,8 @@
 
 [dependencies]
   bcrypt = "*"
+  sqlite3 = "*"
+
+  [functions]
+  included_files = ["api/**"]
+  included_files = ["db/**"]
