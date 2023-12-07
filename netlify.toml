@@ -1,7 +1,0 @@
-# netlify.toml
-[dependencies]
-  bcrypt = "*"
-
-[build]
-  command = "yarn run dev"
-  publish = "dist"
