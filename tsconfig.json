@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "outDir": "./dist",
     "module": "esnext",
     "target": "ESNext",
     "baseUrl": "C:/Users/root/astro/msb",

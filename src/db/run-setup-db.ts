@@ -1,6 +1,5 @@
 const { initDB } = require('./setup.db');
 
-initDB().catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+(async () => {
+  await initDB();
+})() 
