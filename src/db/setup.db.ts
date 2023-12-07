@@ -6,7 +6,7 @@ let instance: SqliteDatabase | null = null;
 export async function openDB(): Promise<SqliteDatabase> {
   if (!instance) {
     instance = await open({
-      filename: 'db/database.db',
+      filename: './src/db/database.db',
       driver: sqlite3.Database,
     });
   }
