@@ -49,6 +49,8 @@ const initDB = async () => {
   }
 };
 
-initDB();
+(async() => {
+  initDB();
+})()
 
 export { instance as db };
