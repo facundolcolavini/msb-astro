@@ -5,3 +5,15 @@
 
 [dependencies]
   bcrypt = "*"
+
+[dev]
+  command = "yarn run dev"
+  port = 8888
+  publish = "out"
+  targetPort = 3000
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:3000/api/:splat"
+  status = 200
+  force = true
