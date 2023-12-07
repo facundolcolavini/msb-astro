@@ -3,7 +3,6 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "ESNext",
-    "outDir": "dist",
     "baseUrl": "C:/Users/root/astro/msb",
     "paths": {
       "@/*": [
