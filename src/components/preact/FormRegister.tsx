@@ -31,7 +31,7 @@ const FormRegister: preact.FunctionalComponent = () => {
         e.preventDefault();
         console.log(form);
         try {
-            const ok =  { status: 201, message: 'Usuario creado correctamente' }
+            const ok = { status: 201, message: 'Usuario creado correctamente' }
             console.log(ok)
             if (ok.status === 201) {
                 setToastMessage(ok.message);
