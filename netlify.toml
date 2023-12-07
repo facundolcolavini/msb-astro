@@ -1,12 +1,8 @@
 # netlify.toml
-[build]
-  command = "yarn run build"
-  publish = "dist"
-
 [dependencies]
   bcrypt = "*"
 
-[dev]
+[build]
   command = "yarn run dev"
   port = 8888
   publish = "out"
