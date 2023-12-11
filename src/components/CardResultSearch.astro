@@ -7,6 +7,11 @@ const {pathname } = Astro.url;
 
 const { cardData } = Astro.props;
 /* console.log(Astro.url) */
+
+if(pathname.includes('//')){
+    pathname = pathname.substring( pathname.lastIndexOf('/') + 1);
+}
+
 ---
 
 <div class="shadow-lg rounded-lg overflow-hidden relative bottom-0">
