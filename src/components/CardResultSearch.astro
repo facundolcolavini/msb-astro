@@ -8,10 +8,6 @@ const {pathname } = Astro.url;
 const { cardData } = Astro.props;
 /* console.log(Astro.url) */
 
-if(pathname.includes('//')){
-    pathname = pathname.substring( pathname.lastIndexOf('/') + 1);
-}
-
 ---
 
 <div class="shadow-lg rounded-lg overflow-hidden relative bottom-0">
@@ -30,7 +26,7 @@ if(pathname.includes('//')){
     </div>
     <div class="flex justify-between items-end mt-3">
       <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">{cardData?.operacion}</span>
-      <a href={`${pathname}/${cardData?.in_num}`} data-astro-prefetch="tap" class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+      <a href={`${pathname.substring( pathname.lastIndexOf('/') + 1)}/${cardData?.in_num}`} data-astro-prefetch="tap" class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
         Ver más
       </a>
     </div>

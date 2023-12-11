@@ -11,12 +11,9 @@ const { ed_nom , ed_est,ed_pos, img_princ,ed_idl:id} = Astro.props as CardDetail
 // El problema es que me agrega emprendimineto//id cuando es production 
 // y en local no lo hace 
 
-if(pathname.includes('//')){
-    pathname = pathname.substring( pathname.lastIndexOf('/') + 1);
-}
 ---
 	
-<a href={`${pathname}/${id}`} class="relative block shadow-md rounded-lg overflow-hidden no-underline bg-slate-950">
+<a href={`${ pathname.substring( pathname.lastIndexOf('/') + 1)}/${id}`} class="relative block shadow-md rounded-lg overflow-hidden no-underline bg-slate-950">
     <div class="relative overflow-hidden">
         <img
         style=`view-transition-name: entrepreneurship-${id}`
