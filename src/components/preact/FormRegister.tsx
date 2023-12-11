@@ -1,6 +1,7 @@
 import { navigate } from 'astro:transitions/client';
 import { useState } from 'preact/hooks';
 import type { JSX } from "preact/jsx-runtime";
+import { register } from '../../services/auth.services';
 import Toast from './Toasts/Toast';
 
 
@@ -31,7 +32,7 @@ const FormRegister: preact.FunctionalComponent = () => {
         e.preventDefault();
         console.log(form);
         try {
-            const ok = { status: 201, message: 'Usuario creado correctamente' }
+            const ok = await register(form.username, form.email, form.password)
             console.log(ok)
             if (ok.status === 201) {
                 setToastMessage(ok.message);

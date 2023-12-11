@@ -4,6 +4,7 @@ import SearchLayout from "../../layouts/SearchLayout.astro";
 import { getResultsRecords } from "../../services/get-results-records";
 import { getAllSelects } from "../../services/get-selects-form";
 import type { Results } from "../../types/selects.form.types";
+
 const selects = (await getAllSelects()) as Results;
 const params = Astro.params
 const {fichas} = await getResultsRecords()

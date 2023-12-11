@@ -1,7 +1,9 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
+    "module": "esnext",
+    "target": "ESNext",
+    "baseUrl": "C:/Users/root/astro/msb",
     "paths": {
       "@/*": [
         "src/*"
@@ -26,4 +28,3 @@
     "jsxImportSource": "preact"
   }
 }
-

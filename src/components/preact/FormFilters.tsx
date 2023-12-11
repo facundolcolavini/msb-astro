@@ -36,37 +36,45 @@ const FormFilters = ({ selects, onFilter }: Props) => {
   // Actualizar los filtros de la URL para que se reflejen en la tabla
   const hanldeSubmit = async (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+    e.stopPropagation();
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     const newParams = { ...urlSearchParams, ...select };
     Object.keys(newParams).forEach((key) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
-
+  
     url.search = params.toString();
-    if(url.search === "") {
-      return
+    if (url.search === "") {
+      return;
     }
-    navigate(`/search/${params.toString()}`);
+  
+    // Realiza la navegación de forma controlada sin recargar la página completa
+    navigate(`/search/${params.toString()}` );
+/*     // Limpiar los selects del form a la 
+    setSelect({ value: "", label: "Seleccione una opción" }); */
   }
 
   // Boton para resetear los filtros de la URL y del formulario
   const handleReset = (e: Event) => {
-
     e.preventDefault();
+    e.stopPropagation();
+  
+    // Reset the form fields
     setSelect({});
-    // Update URL filters 
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    // Reset form 
-    const form = document.getElementById("form-filters") as HTMLFormElement;
-    form.reset();
+  
+    // Navigate without adding to the history
+   
 
-    setTimeout(() => { window.location.reload(); }, 200)
+    // Reload form 
+    setTimeout(() => {  
+      window.location.reload();
+  
+    } , 200);
     navigate(`/search`);
-
-  }
+  };
+  
+  
   return (
 
     <form id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>

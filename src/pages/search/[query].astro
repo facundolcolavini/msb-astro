@@ -1,11 +1,12 @@
 ---
+import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import SearchLayout from "../../layouts/SearchLayout.astro";
 import { getResultsRecords } from "../../services/get-results-records";
 import { getAllSelects } from "../../services/get-selects-form";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
-export const prerender = false;
+
 
 const {query} = Astro.params;
 let searchData; 
@@ -17,7 +18,9 @@ if(query){
     const {fichas} = await getResultsRecords(queryObj)
     searchData = fichas;
 }
+
 ---
+
 
 <Layout title="Busqueda">
     <SearchLayout selects={selects} list={searchData} />
