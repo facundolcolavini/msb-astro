@@ -1,7 +1,7 @@
 ---
 import { getResultsRecords } from '../services/get-results-records';
 import type { File, Result } from '../types/results.records.types';
-import CardResultRecord from './CardResultSearch.astro';
+import CardResultSearch from './CardResultSearch.astro';
 interface Props {
   listItems: File[] 
 }
@@ -16,7 +16,7 @@ if (listItems){
 <div transition:animate="slide" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
   {list?.map((record: File) => (
     <div>
-      <CardResultRecord cardData={record} />
+      <CardResultSearch cardData={record} />
     </div>
   ))}
 </div>
