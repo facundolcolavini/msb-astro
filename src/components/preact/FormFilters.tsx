@@ -1,5 +1,5 @@
 import { navigate } from "astro:transitions/client";
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import type { JSX } from "preact/jsx-runtime";
 import type { Option, Results } from "../../types/selects.form.types";
 import FilterSelect from "./FilterSelect";
@@ -54,12 +54,12 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     navigate(`/search/${params.toString()}`);
     // Actualizar los filtros de la URL
     setUrlSearchParams(newParams);
-   // Mantener los filtros del formulario actualizados 
+    // Mantener los filtros del formulario actualizados 
     setSelect({
       ...select,
       ...newParams,
     });
-    console.log(select,"SELECT")
+    console.log(select, "SELECT")
 
   }
 
@@ -67,25 +67,13 @@ const FormFilters = ({ selects, onFilter }: Props) => {
   const handleReset = (e: Event) => {
     e.preventDefault();
     e.stopImmediatePropagation();
-
-    // Navigate without adding to the history
-
-
     // Reload form 
-
- 
     setTimeout(() => {
-      setSelect({}); 
+      setSelect({});
       setUrlSearchParams({});
       window.location.reload();
-
-    
-    },600)
-
-      navigate(`/search` );
-
-
-
+    }, 600)
+    navigate(`/search`);
   };
 
 
@@ -99,7 +87,7 @@ const FormFilters = ({ selects, onFilter }: Props) => {
         id="sellocalidades"
         opts={locs}
         onChange={handleSelect}
-        defaultOption={{ value: "All", label: "Seleccione una opción" } }
+        defaultOption={{ value: "All", label: "Seleccione una opción" }}
       />
       <label class="text-white px-1">Barrio :</label>
       <FilterSelect
