@@ -10,7 +10,7 @@ export interface CardDetails {
 const { ed_nom , ed_est,ed_pos, img_princ,ed_idl:id} = Astro.props as CardDetails;
 ---
 	
-<a href={`/emprendimientos/${id}/`
+<a href={`/emprendimientos/${id}`
 } class="relative block shadow-md rounded-lg overflow-hidden no-underline bg-slate-950">
     <div class="relative overflow-hidden">
         <img

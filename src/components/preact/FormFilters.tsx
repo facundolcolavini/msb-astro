@@ -44,7 +44,8 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     Object.keys(newParams).forEach((key) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
-    if(params.toString() === "") {
+    if(params.toString() === "" ) {
+      navigate(`/search`);
       return;
     }
     // Actualizar la URL
