@@ -8,6 +8,8 @@ export interface CardDetails {
 	img_princ: string
 }
 const { ed_nom , ed_est,ed_pos, img_princ,ed_idl:id} = Astro.props as CardDetails;
+// El problema es que me agrega emprendimineto//id cuando es production 
+// y en local no lo hace 
 ---
 	
 <a href={`${pathname}/${id}`} class="relative block shadow-md rounded-lg overflow-hidden no-underline bg-slate-950">
