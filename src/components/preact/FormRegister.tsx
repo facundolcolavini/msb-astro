@@ -32,7 +32,12 @@ const FormRegister: preact.FunctionalComponent = () => {
         e.preventDefault();
         console.log(form);
         try {
-            const ok = await register(form.username, form.email, form.password)
+            const ok = {
+                status: 201,
+                message: 'Usuario registrado correctamente'
+
+            
+            }/* await register(form.username, form.email, form.password) */
             console.log(ok)
             if (ok.status === 201) {
                 setToastMessage(ok.message);

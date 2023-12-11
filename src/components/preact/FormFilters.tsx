@@ -1,5 +1,5 @@
 import { navigate } from "astro:transitions/client";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import type { JSX } from "preact/jsx-runtime";
 import type { Option, Results } from "../../types/selects.form.types";
 import FilterSelect from "./FilterSelect";
@@ -28,6 +28,7 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     { label: descripcion, value }
   ));
 
+
   const handleSelect: JSX.GenericEventHandler<HTMLElement> = (e) => {
     const { id, value } = e.target as HTMLSelectElement;
     setSelect({ ...select, [id]: value });
@@ -43,55 +44,75 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     Object.keys(newParams).forEach((key) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
-  
+
     url.search = params.toString();
     if (url.search === "") {
       return;
     }
-  
+
     // Realiza la navegación de forma controlada sin recargar la página completa
-    navigate(`/search/${params.toString()}` );
-/*     // Limpiar los selects del form a la 
-    setSelect({ value: "", label: "Seleccione una opción" }); */
+    navigate(`/search/${params.toString()}`);
+    // Actualizar los filtros de la URL
+    setUrlSearchParams(newParams);
+   // Mantener los filtros del formulario actualizados 
+    setSelect({
+      ...select,
+      ...newParams,
+    });
+    console.log(select,"SELECT")
+
   }
 
   // Boton para resetear los filtros de la URL y del formulario
   const handleReset = (e: Event) => {
     e.preventDefault();
-    e.stopPropagation();
-  
-    // Reset the form fields
-    setSelect({});
-  
+    e.stopImmediatePropagation();
+
     // Navigate without adding to the history
-   
+
 
     // Reload form 
-    setTimeout(() => {  
+
+ 
+    setTimeout(() => {
+      setSelect({}); 
+      setUrlSearchParams({});
       window.location.reload();
-  
-    } , 200);
-    navigate(`/search`);
+
+    
+    },600)
+
+      navigate(`/search` );
+
+
+
   };
-  
-  
+
+
+
+
   return (
 
     <form id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>
-      <label class="text-white px-1" >Localidad :</label>
-      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select}
-        id="sellocalidades" opts={locs} onChange={handleSelect} />
-      <label class="text-white px-1" >Barrio :</label>
-      <FilterSelect defaultOption={{ value: "All", label: "Seleccione una opción" } || select}
-
-        id="barrios1" opts={bar} onChange={handleSelect} />
-      {/* Boton de buscar y uno de limpar filtros */}
+      <label class="text-white px-1">Localidad :</label>
+      <FilterSelect
+        id="sellocalidades"
+        opts={locs}
+        onChange={handleSelect}
+        defaultOption={{ value: "All", label: "Seleccione una opción" } }
+      />
+      <label class="text-white px-1">Barrio :</label>
+      <FilterSelect
+        id="barrios1"
+        opts={bar}
+        onChange={handleSelect}
+        defaultOption={{ value: "All", label: "Seleccione una opción" }}
+      />
       <div class="flex justify-between items-center px-1 mt-5 gap-1">
         <button class="bg-[#768294] text-white px-4 py-2 rounded" type="button" onClick={handleReset}>Limpiar</button>
         <button type="submit" class="w-full p-2 text-white  rounded bg-blue-600 hover:bg-blue-700">Buscar</button>
       </div>
     </form>
-
 
   )
 }
