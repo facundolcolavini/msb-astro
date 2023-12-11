@@ -6,7 +6,6 @@ import { getAllSelects } from "../../services/get-selects-form";
 import type { Results } from "../../types/selects.form.types";
 export  const prerender = true;
 const selects = (await getAllSelects()) as Results;
-const params = Astro.params
 const {fichas} = await getResultsRecords()
 ---
 

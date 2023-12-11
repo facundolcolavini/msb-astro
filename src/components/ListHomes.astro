@@ -1,23 +1,20 @@
 ---
 import { getResultsRecords } from '../services/get-results-records';
 import type { File, Result } from '../types/results.records.types';
-import CardResultRecord from './CardResultRecord.astro';
+import CardResultRecord from './CardResultSearch.astro';
 interface Props {
   listItems: File[] 
 }
 let list;
 const { listItems } = Astro.props
-const {fichas: All} = await getResultsRecords()
+
 if (listItems){
-    
   list = listItems
-} else {
-  list = All
 } 
 ---
 
 <div transition:animate="slide" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-  {list.map((record: File) => (
+  {list?.map((record: File) => (
     <div>
       <CardResultRecord cardData={record} />
     </div>

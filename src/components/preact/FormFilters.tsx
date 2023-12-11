@@ -44,14 +44,13 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     Object.keys(newParams).forEach((key) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
-
-    url.search = params.toString();
-    if (url.search === "") {
+    if(params.toString() === "") {
       return;
     }
+    // Actualizar la URL
+    navigate(`/search?${params.toString()}`);
 
-    // Realiza la navegación de forma controlada sin recargar la página completa
-    navigate(`/search/${params.toString()}`);
+
     // Actualizar los filtros de la URL
     setUrlSearchParams(newParams);
     // Mantener los filtros del formulario actualizados 
@@ -59,7 +58,6 @@ const FormFilters = ({ selects, onFilter }: Props) => {
       ...select,
       ...newParams,
     });
-    console.log(select, "SELECT")
 
   }
 

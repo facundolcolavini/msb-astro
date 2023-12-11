@@ -8,13 +8,13 @@ import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
 
 
-
+export const prerender = false;
 const {query} = Astro.params;
 let searchData; 
 
 const selects = (await getAllSelects()) as Results;
 const queryObj = parseQueryToObjt(query)
-
+// Si es /busqueda?query=algo
 if(query){
     const {fichas} = await getResultsRecords(queryObj)
     searchData = fichas;
