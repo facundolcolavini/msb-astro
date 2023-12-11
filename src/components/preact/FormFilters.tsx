@@ -45,7 +45,6 @@ const FormFilters = ({ selects, onFilter }: Props) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
     if(params.toString() === "" ) {
-      navigate(`/search`);
       return;
     }
     // Actualizar la URL

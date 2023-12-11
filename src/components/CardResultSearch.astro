@@ -3,10 +3,8 @@ import type { File } from "../types/results.records.types";
 interface Props {
   cardData: File;
 }
-const {pathname } = Astro.url;
 
 const { cardData } = Astro.props;
-/* console.log(Astro.url) */
 ---
 
 <div class="shadow-lg rounded-lg overflow-hidden relative bottom-0">
@@ -18,24 +16,29 @@ const { cardData } = Astro.props;
   />
   <div class="p-4 bg-gray-500 text-white">
     <div class="h-[170px] flex flex-col space-y-2">
-      <h3 class="h-100 text-lg font-semibold">{cardData.direccion_completa} - {cardData?.in_bar}</h3>
+      <h3 class="h-100 text-lg font-semibold">
+        {cardData.direccion_completa} - {cardData?.in_bar}
+      </h3>
       <p class="h-100 text-sm">{cardData.titulo}</p>
-      <p class="h-100 text-sm">{cardData?.ambientes_num} Ambientes | {cardData?.dormitorios} Dormitorios</p>
-      <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded">{cardData.precio}</span>
+      <p class="h-100 text-sm">
+        {cardData?.ambientes_num} Ambientes | {cardData?.dormitorios}
+         Dormitorios
+      </p>
+      <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded"
+        >{cardData.precio}</span
+      >
     </div>
     <div class="flex justify-between items-end mt-3">
-      <span class="text-xs bg-red-500 text-white px-2 py-1 rounded">{cardData.operacion}</span>
-      <a href={ 
-        pathname === '/barrios-cerrados-countries' 
-        ? `/barrios-cerrados-countries/${cardData.in_num}` 
-        : `/search/${cardData.in_num}`
-      }
-      
-      
-      data-astro-prefetch="tap" class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white">
+      <span class="text-xs bg-red-500 text-white px-2 py-1 rounded"
+        >{cardData.operacion}</span
+      >
+      <a
+        href={`/search/${cardData.in_num}`}
+        data-astro-prefetch="tap"
+        class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white"
+      >
         Ver más
       </a>
     </div>
   </div>
 </div>
-
