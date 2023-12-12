@@ -36,7 +36,7 @@ const breadcrumbWithHome = [
   /* /SEARCH/PARAMS */
   ...breadcrumbItems.map((item,index)=>{
      // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
-    const name = item.name.includes('=') ? parseQueryString(item.name) : item.name;
+    const name = item.name.includes('/?') ? parseQueryString(item.name) : item.name;
     return {
       ...item,
       name,

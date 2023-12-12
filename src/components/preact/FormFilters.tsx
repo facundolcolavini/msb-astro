@@ -45,10 +45,12 @@ const FormFilters = ({ selects, onFilter }: Props) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
 
-    // Actualizar la URL
-    navigate(`/search/${params.toString()}`);
-
-
+    // Asegurar que no pase esto  => ///  debe ser asi http://localhost:4321/barrios-cerrados-countries/?sellocalidades=capital+federal
+    const urlToNavigate = `${url.pathname}/?${params.toString()}`
+    const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/")
+ navigate(urlToNavigateClean, { replace: true, state: { from: 'form-filters' }});
+    setUrlSearchParams({ ...urlSearchParams, ...select
+});
 
   }
 
@@ -62,12 +64,13 @@ const FormFilters = ({ selects, onFilter }: Props) => {
       setUrlSearchParams({});
       window.location.reload();
     }, 600)
-    navigate(`/search`);
-  };
+    const urlToNavigateClean = window.location.pathname.replace(/\/\//g, "/")
+    // Ir a la pathname de la URL actual 
+    navigate(urlToNavigateClean, { replace: true});
 
 
 
-
+  }
   return (
 
     <form id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>

@@ -9,7 +9,7 @@ interface Props<T> {
 const { selects, list } = Astro.props as Props<any>;
 
   let notFound = false;
-if (list.hasOwnProperty("error")) {
+if (list?.fichas?.hasOwnProperty("error")) {
   notFound = true;
 }else{
     notFound = false;
@@ -29,7 +29,7 @@ if (list.hasOwnProperty("error")) {
         <h2 class="font-semibold mb-4 text-white">No se encontraron resultados...</h2>
       </div>
     ) : (
-      <ListHomes listItems={list} />
+      <ListHomes listItems={list?.fichas} />
     )}
   </main>
 </div>

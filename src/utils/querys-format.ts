@@ -1,4 +1,8 @@
-export const parseQueryToObjt = (query : string = '') => {  
+
+// Dame un ejemplo de la entrada y la salida de la función parseQueryToObjt
+// Ejemplo de entrada: 'q=prueba+de+query&limit=10'
+// Ejemplo de salida: {q: 'prueba de query', limit: '10'}
+export const parseQueryToObjt = (query : string = '') => {   
     // Delete + and replace with space
     query = query.replace(/\+/g, ' ')
     const queryObj = query.split('&').reduce((acc, cur) => {
@@ -7,7 +11,12 @@ export const parseQueryToObjt = (query : string = '') => {
     }, {})
     return queryObj
 }
-// Funcion para parsear los valores de los query params
+// Funcion para parsear los valores de los query params 
+// Dame un ejemplo de la entrada y la salida de la función parseQueryString
+// Ejemplo de entrada: 'prueba+de+query'
+// Ejemplo de salida: 'prueba de query'
+
+
 export const parseQueryString = (url: string): string => {
   const queryParams = new URLSearchParams(url);
 
