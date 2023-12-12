@@ -22,6 +22,8 @@ const queryObj = parseQueryToObjt(search.slice(1, search.length))
 if (queryObj) {
     console.log(queryObj,'queryObj')
     searchData = await getResultsRecords( queryObj);
+}else{
+    searchData = await getResultsRecords();
 }
 
 ---
