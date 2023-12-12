@@ -48,9 +48,10 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     // Asegurar que no pase esto  => ///  debe ser asi http://localhost:4321/barrios-cerrados-countries/?sellocalidades=capital+federal
     const urlToNavigate = `${url.pathname}/?${params.toString()}`
     const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/")
- navigate(urlToNavigateClean, { replace: true, state: { from: 'form-filters' }});
-    setUrlSearchParams({ ...urlSearchParams, ...select
-});
+    navigate( urlToNavigateClean);
+    setUrlSearchParams({
+      ...urlSearchParams, ...select
+    });
 
   }
 
@@ -66,7 +67,7 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     }, 600)
     const urlToNavigateClean = window.location.pathname.replace(/\/\//g, "/")
     // Ir a la pathname de la URL actual 
-    navigate(urlToNavigateClean, { replace: true});
+    navigate(urlToNavigateClean);
 
 
 
