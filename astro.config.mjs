@@ -8,14 +8,6 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   integrations: [tailwind(), preact()],
   output: 'server',
-  adapter: netlify({
-    edgeMiddleware: true
-  }),
-    vite: {
-      
-      optimizeDeps: {
-        /* crypto */
-        include: ["bcrypt", "mock-aws-s3", "aws-sdk", "nock"	]
-      }
-    }
+  adapter: netlify()
+   
 });
