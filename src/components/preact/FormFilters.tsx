@@ -44,20 +44,11 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     Object.keys(newParams).forEach((key) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
-    if(params.toString() === "" ) {
-      return;
-    }
+
     // Actualizar la URL
-    navigate(`/search?${params.toString()}`);
+    navigate(`/search/${params.toString()}`);
 
 
-    // Actualizar los filtros de la URL
-    setUrlSearchParams(newParams);
-    // Mantener los filtros del formulario actualizados 
-    setSelect({
-      ...select,
-      ...newParams,
-    });
 
   }
 
