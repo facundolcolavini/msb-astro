@@ -45,9 +45,9 @@ const FormFilters = ({ selects, onFilter }: Props) => {
       params.set(key, newParams[key as keyof typeof newParams]);
     });
 
-    // Asegurar que no pase esto  => ///  debe ser asi http://localhost:4321/barrios-cerrados-countries/?sellocalidades=capital+federal
+    // Asegurar que no pase esto  => ///  debe ser asi https://msb-sh-dev.netlify.app/?sellocalidades=capital+federal
 // Remove trailing slash from pathname if it exists
-const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
+const pathname = window.location.pathname.replace(/\/$/, "");
 
 // Build the URL to navigate to
 const urlToNavigate = `${pathname}/?${params.toString()}`;
