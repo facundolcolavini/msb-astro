@@ -8,6 +8,7 @@ import { fetchData } from "../../utils/fetch-data";
 import { getResultsRecords } from "../../services/get-results-records";
 import SearchLayout from "../../layouts/SearchLayout.astro";
 import { parseQueryToObjt } from "../../utils/querys-format";
+import Pagination from "../../components/Pagination.astro";
 export  const prerender = true;
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
@@ -34,5 +35,6 @@ if (queryObj) {
       Barrios cerrados y countries
     </h1>
     <SearchLayout  selects={selects} list={searchData} />
+    <Pagination datos={searchData.datos} />
     </article>
 </Layout>
