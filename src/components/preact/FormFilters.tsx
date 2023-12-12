@@ -46,9 +46,15 @@ const FormFilters = ({ selects, onFilter }: Props) => {
     });
 
     // Asegurar que no pase esto  => ///  debe ser asi http://localhost:4321/barrios-cerrados-countries/?sellocalidades=capital+federal
-    const urlToNavigate = `${url.pathname}/?${params.toString()}`
-    const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/")
-    navigate( urlToNavigateClean);
+// Remove trailing slash from pathname if it exists
+const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
+
+// Build the URL to navigate to
+const urlToNavigate = `${pathname}/?${params.toString()}`;
+
+// Clean the URL and navigate to it
+const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/");
+navigate(urlToNavigateClean);
     setUrlSearchParams({
       ...urlSearchParams, ...select
     });
