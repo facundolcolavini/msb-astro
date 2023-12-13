@@ -33,7 +33,7 @@ const breadcrumbWithHome = [
     name: "Home", // Nombre del enlace "Home"
     url: `${origin}`, // URL de la página principal
   },
-  /* /SEARCH/PARAMS */
+  /* /pathname/id */
   ...breadcrumbItems.map((item,index)=>{
      // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
     const name = item.name.includes('?') ? parseQueryString(item.name) : item.name;
@@ -43,7 +43,6 @@ const breadcrumbWithHome = [
     }
   })
 ,
-  /* ...breadcrumbItems, */
 
   /* Agregar los search params recorriendo el objeto searchParams al breadCrumb */
   ...Array.from(searchParams).map(([key, value]) => {
@@ -52,7 +51,7 @@ const breadcrumbWithHome = [
 
         return {
       name: `${value}`,
-      url: `${origin}/search/${parseQueryString(value)}`,
+      url: `${origin}/${pathname.replace(/\/?$/, '/')}${parseQueryString(value)}`,
     };
   }),
  
