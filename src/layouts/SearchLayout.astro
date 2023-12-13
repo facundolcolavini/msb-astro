@@ -1,5 +1,6 @@
 ---
 import ListHomes from "../components/ListHomes.astro";
+import Pagination from "../components/Pagination.astro";
 import FormFilters from "../components/preact/FormFilters";
 import type { Results } from "../types/selects.form.types";
 interface Props<T> {
@@ -28,8 +29,13 @@ if (list?.fichas?.hasOwnProperty("error")) {
       <div class="bg-[#374151] p-2 rounded-lg">
         <h2 class="font-semibold mb-4 text-white">No se encontraron resultados...</h2>
       </div>
-    ) : (
+    ) :  (
+      <div>
       <ListHomes listItems={list?.fichas} />
-    )}
+  
+       {!notFound &&  (  <Pagination datos={list.datos} />)}
+      </div>
+      
+      )}
   </main>
 </div>
