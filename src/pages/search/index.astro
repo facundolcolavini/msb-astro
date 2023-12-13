@@ -1,4 +1,5 @@
 ---
+import Pagination from "../../components/Pagination.astro";
 import Layout from "../../layouts/Layout.astro";
 import SearchLayout from "../../layouts/SearchLayout.astro";
 import { getResultsRecords } from "../../services/get-results-records";
@@ -29,4 +30,5 @@ if (queryObj) {
 
 <Layout  title="Busqueda">
     <SearchLayout selects={selects} list={searchData as Result} />
+    <Pagination datos={searchData.datos} />
 </Layout>
