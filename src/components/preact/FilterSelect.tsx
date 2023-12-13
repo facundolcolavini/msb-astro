@@ -1,5 +1,6 @@
 import type { h, JSX } from 'preact';
 import { useState, useRef, useEffect } from 'preact/hooks';
+import { capitalize } from '../../utils/formats';
 
 interface Option {
   label: string;
@@ -68,8 +69,8 @@ const FilterSelect = ({ opts, id, onChange, defaultOption }: FilterSelectProps):
               key={index}
               onClick={() => handleOptionClick(option)}
               class="w-full  text-left p-2 hover:bg-gray-100 animate-fadeIn"
-            >
-              {option.label}
+            > 
+              {option.label }
             </button>
           ))}
         </div>

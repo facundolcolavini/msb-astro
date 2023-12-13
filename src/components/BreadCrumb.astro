@@ -46,9 +46,6 @@ const breadcrumbWithHome = [
 
   /* Agregar los search params recorriendo el objeto searchParams al breadCrumb */
   ...Array.from(searchParams).map(([key, value]) => {
-
-    // No incluir el parámetro de búsqueda en el breadcrumb si es page 
-
         return {
       name: `${value}`,
       url: `${origin}/${pathname.replace(/\/?$/, '/')}${parseQueryString(value)}`,
