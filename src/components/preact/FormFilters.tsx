@@ -196,14 +196,14 @@ const FormFilters = ({ selects }: Props) => {
           id="valor_minimo"
           opts={min}
           onChange={handleSelect}
-          defaultOption={{ value: "All", label: "Minimo" }}
+          defaultOption={{ value: "All", label: "Mínimo" }}
         />
 
         <FilterSelect
           id="valor_maximo"
           opts={max}
           onChange={handleSelect}
-          defaultOption={{ value: "All", label: "Maximo" }}
+        defaultOption={{ value: "All", label: "Máximo" }}
         />
       </div>
 
