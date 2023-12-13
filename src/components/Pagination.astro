@@ -22,10 +22,14 @@ startPage = Math.max(1, Math.min(startPage, datos?.paginas - 9));
 
 // Create a copy of the current search parameters for each page link
 let prevPageParams = new URLSearchParams(params.toString());
+prevPageParams.set('page', (currentPage - 1).toString());
+
 let nextPageParams = new URLSearchParams(params.toString());
+nextPageParams.set('page', (currentPage + 1).toString());
+
 let pageParams = Array.from({ length: endPage - startPage + 1 }, (_, i) => {
   let paramsCopy = new URLSearchParams(params.toString());
-  paramsCopy.set('page', (startPage + i).toString().toString().replace(/\/\//g, "/"));
+  paramsCopy.set('page', (startPage + i).toString());
   return paramsCopy;
 });
 ---
