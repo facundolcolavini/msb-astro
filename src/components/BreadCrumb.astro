@@ -36,22 +36,25 @@ const breadcrumbWithHome = [
   /* /SEARCH/PARAMS */
   ...breadcrumbItems.map((item,index)=>{
      // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
-    const name = item.name.includes('/?') ? parseQueryString(item.name) : item.name;
+    const name = item.name.includes('?') ? parseQueryString(item.name) : item.name;
     return {
       ...item,
       name,
     }
   })
-
+,
   /* ...breadcrumbItems, */
 
   /* Agregar los search params recorriendo el objeto searchParams al breadCrumb */
-/*   ...Array.from(searchParams).map(([key, value]) => {
+  ...Array.from(searchParams).map(([key, value]) => {
+
+    // No incluir el parámetro de búsqueda en el breadcrumb si es page 
+
         return {
       name: `${value}`,
       url: `${origin}/search/${parseQueryString(value)}`,
     };
-  }), */
+  }),
  
 ];
 
