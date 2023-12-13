@@ -53,7 +53,7 @@ const pathname = window.location.pathname.replace(/\/$/, "");
 const urlToNavigate = `${pathname}/?${params.toString()}`;
 
 // Clean the URL and navigate to it
-const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/");
+const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/")
 navigate(urlToNavigateClean);
     setUrlSearchParams({
       ...urlSearchParams, ...select
