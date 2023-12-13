@@ -6,8 +6,6 @@ import { getAllSelects } from "../../services/get-selects-form";
 import type { Result } from "../../types/results.records.types";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
-export  const prerender = true;
-
 
 const selects = (await getAllSelects()) as Results;
 const {search} = Astro.url

@@ -37,14 +37,14 @@ let pageParams = Array.from({ length: endPage - startPage + 1 }, (_, i) => {
       <li>
         {/* Set the 'page' parameter to the previous page number */}
       
-        <a href={`${url.pathname}/?${prevPageParams.toString()}`} class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">Anterior</a>
+        <a href={`${url.pathname}/?${prevPageParams.toString().replace(/\/$/, "")}`} class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">Anterior</a>
       </li>
     )}
 
     <!-- Page Number Links -->
     {pageParams.map((params, i) => (
       <li>
-        <a href={`${url.pathname}/?${params.toString()}`} class={`px-4 py-2 ${currentPage === startPage + i ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'} rounded hover:bg-blue-700 hover:text-white transition-colors`}>{startPage + i}</a>
+        <a href={`${url.pathname}/?${params.toString().replace(/\/$/, "")}`} class={`px-4 py-2 ${currentPage === startPage + i ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'} rounded hover:bg-blue-700 hover:text-white transition-colors`}>{startPage + i}</a>
       </li>
     ))}
 
@@ -53,7 +53,7 @@ let pageParams = Array.from({ length: endPage - startPage + 1 }, (_, i) => {
       <li>
         {/* Set the 'page' parameter to the next page number */}
       
-        <a href={`${url.pathname}/?${nextPageParams.toString()}`} class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">Siguiente</a>
+        <a href={`${url.pathname}/?${nextPageParams.toString().replace(/\/$/, "")}`} class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors">Siguiente</a>
       </li>
     )}
   </ul>
