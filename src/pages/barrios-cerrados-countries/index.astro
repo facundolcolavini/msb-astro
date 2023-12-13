@@ -9,7 +9,7 @@ import { getResultsRecords } from "../../services/get-results-records";
 import SearchLayout from "../../layouts/SearchLayout.astro";
 import { parseQueryToObjt } from "../../utils/querys-format";
 import Pagination from "../../components/Pagination.astro";
-export  const prerender = true;
+
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
 const {fichas} = await getResultsRecords({in_tpr: 'COUNTRY'})
