@@ -1,39 +1,39 @@
 ---
-import FormFilters from "../../components/preact/FormFilters";
-import FormFilter from "../../components/preact/FormFilters";
+import FiltersLayout from "../../layouts/FiltersLayout.astro";
 import Layout from "../../layouts/Layout.astro";
-import type { Option, Results } from "../../types/selects.form.types";
-import { getAllSelects } from "../../services/get-selects-form";
-import { fetchData } from "../../utils/fetch-data";
 import { getResultsRecords } from "../../services/get-results-records";
-import SearchLayout from "../../layouts/SearchLayout.astro";
+import { getAllSelects } from "../../services/get-selects-form";
+import type { Results } from "../../types/selects.form.types";
+import { formatOptions } from "../../utils/formats";
 import { parseQueryToObjt } from "../../utils/querys-format";
-import Pagination from "../../components/Pagination.astro";
 
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
-const {fichas} = await getResultsRecords({in_tpr: 'COUNTRY'})
+const { barrio: barrios1, localidades: sellocalidades } = selects;
+const bar = formatOptions(barrios1);
+const loc = formatOptions(sellocalidades);
+const { search } = Astro.url;
+let searchData;
+// sacar el ? del url.search y convertirlo en un objeto
+const queryObj = parseQueryToObjt(search.slice(1, search.length));
 
-const {search} = Astro.url
-let searchData; 
-// sacar el ? del url.search y convertirlo en un objeto 
-const queryObj = parseQueryToObjt(search.slice(1, search.length))
-
-// Fetch search data load in_tpr filter by default  
+// Fetch search data load in_tpr filter by default
 if (queryObj) {
-  searchData = await getResultsRecords({in_tpr: 'COUNTRY', ...queryObj})
+  searchData = await getResultsRecords({ in_tpr: "COUNTRY", ...queryObj });
 } else {
-  searchData = await getResultsRecords({in_tpr: 'COUNTRY'})
+  searchData = await getResultsRecords({ in_tpr: "COUNTRY" });
 }
 
-
+console.log(queryObj,'query server');
 ---
 
 <Layout title={titlePage}>
-  <article >
-    <h1 class="tracking-tighter text-5xl mb-10 text-gray-100 dark:text-gray-100">
+  <article>
+    <h1
+      class="tracking-tighter text-5xl mb-10 text-gray-100 dark:text-gray-100"
+    >
       Barrios cerrados y countries
-    </h1>
-    <SearchLayout  selects={selects} list={searchData} />
-    </article>
+    </h1> 
+    <FiltersLayout selects={selects} list={searchData} />
+  </article>
 </Layout>

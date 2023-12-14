@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import SearchLayout from "../../layouts/SearchLayout.astro";
+import FiltersLayout from "../../layouts/FiltersLayout.astro";
 import { getResultsRecords } from "../../services/get-results-records";
 import { getAllSelects } from "../../services/get-selects-form";
 import type { Result } from "../../types/results.records.types";
@@ -24,5 +24,5 @@ if (queryObj) {
 ---
 
 <Layout title="Busqueda">
-  <SearchLayout selects={selects} list={searchData as Result} />
+  <FiltersLayout selects={selects} list={searchData as Result} />
 </Layout>

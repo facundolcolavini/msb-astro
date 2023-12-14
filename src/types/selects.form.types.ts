@@ -21,10 +21,7 @@ export interface Results {
     codsuc:       Option[];
 }
 
-export interface Option {
-    value:       string;
-    descripcion: string;
-}
+export interface Option { description: string, value?: string, val?: string };
 
 export interface Neighborhood {
     value:       string;
