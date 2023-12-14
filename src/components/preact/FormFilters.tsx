@@ -10,17 +10,15 @@ interface Props {
   selects: Results
 
 }
-
 type SelectState = {
-  in_num?: string;
+  codigo_ficha?: string;
   // incluye otras propiedades del estado 'select' aquí
 };
-
 const FormFilters = ({ selects }: Props) => {
   const { localidades: sellocalidades, barrio: barrios1, operacion: tipo_operacion, tipo: tipo_inmueble, ambientes: Ambientes, calles, valor } = selects
   // Obtener los valores de los filtros de la URL 
   const [urlSearchParams, setUrlSearchParams] = useState({});
-  const [select, setSelect] = useState<SelectState>({ in_num: '' });
+  const [select, setSelect] = useState<SelectState>({});
   const { desde, hasta } = valor;
 
   const bar = formatOptions(barrios1)
@@ -36,15 +34,14 @@ const FormFilters = ({ selects }: Props) => {
   const min = formatOptions(desde)
   const max = formatOptions(hasta)
 
+  // Modifica la función handleSelect
   const handleSelect: JSX.GenericEventHandler<HTMLElement> = (e) => {
     const { id, value } = e.target as HTMLSelectElement;
-
-    if (id === 'in_num') {
-      setSelect({ ...select, [id]: value.startsWith('MS') ? value.slice(2) : value });
-    } else if (id === "valor_minimo" || id === "valor_maximo") {
+    if (id === "valor_minimo" || id === "valor_maximo") {
       if (value) {
         setSelect({ ...select, [id]: Number(value) });
 
+        // Update URL with minPrice and maxPrice
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set(id, value);
         window.history.pushState({}, '', '?' + searchParams.toString());
@@ -54,6 +51,7 @@ const FormFilters = ({ selects }: Props) => {
     }
   };
 
+  // Actualizar los filtros de la URL para que se reflejen en la tabla
   const hanldeSubmit = async (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -62,13 +60,20 @@ const FormFilters = ({ selects }: Props) => {
     const newParams = { ...urlSearchParams, ...select };
     Object.keys(newParams).forEach((key) => {
       const value = newParams[key as keyof typeof newParams];
-      params.set(key, value !== undefined ? value : '');
+      if (value !== undefined && value !== '') { // Asegúrate de que 'value' no esté vacío o undefined
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
     });
-
+    // Asegurar que no pase esto  => ///  debe ser asi https://msb-sh-dev.netlify.app/?sellocalidades=capital+federal
+    // Remove trailing slash from pathname if it exists
     const pathname = window.location.pathname.replace(/\/$/, "");
 
+    // Build the URL to navigate to
     const urlToNavigate = `${pathname}/?${params.toString()}`;
 
+    // Clean the URL and navigate to it
     const urlToNavigateClean = urlToNavigate.replace(/\/\//g, "/")
     navigate(urlToNavigateClean);
     setUrlSearchParams({
@@ -77,6 +82,7 @@ const FormFilters = ({ selects }: Props) => {
 
   }
 
+  // Boton para resetear los filtros de la URL y del formulario
   const handleReset = (e: Event) => {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -87,7 +93,7 @@ const FormFilters = ({ selects }: Props) => {
       window.location.reload();
     }, 600)
     const urlToNavigateClean = window.location.pathname.replace(/\/\//g, "/")
-  
+    // Ir a la pathname de la URL actual 
     navigate(urlToNavigateClean);
   }
 
@@ -143,9 +149,8 @@ const FormFilters = ({ selects }: Props) => {
 
 
       </div>
-      <span class="text-white flex items-center ">Valor:</span>
       <div class="grid grid-flow-col my-2">
-
+        <span class="text-white flex items-center ">Valor:</span>
         <FilterSelect
           id="valor_minimo"
           opts={min}
@@ -172,12 +177,11 @@ const FormFilters = ({ selects }: Props) => {
         <div className="relative m-1">
           <span className="absolute left-2 bottom-3 text-gray-500">MS</span>
           <input
-            id="in_num"
+            id="codigo_ficha"
             className="form-input block w-full py-2 items-center px-3 pl-10 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             type="text"
             placeholder={"Ingrese el código"}
-            value={`${select.in_num ||
-              ''}`}
+            value={`${select.codigo_ficha || ''}`}
             onChange={handleSelect}
           />
         </div>
