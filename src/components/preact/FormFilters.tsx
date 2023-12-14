@@ -143,11 +143,8 @@ const FormFilters = ({ selects }: Props) => {
           id="calles"
           opts={cal}
           onChange={handleSelect}
-          defaultOption={{ value: "All", label: "Seleccione los Ambientes" }}
+          defaultOption={{ value: "All", label: "Seleccione una calle" }}
         />
-
-
-
       </div>
       <div class="grid grid-flow-col my-2">
         <span class="text-white flex items-center ">Valor:</span>
