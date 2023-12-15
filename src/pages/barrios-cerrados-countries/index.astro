@@ -1,5 +1,4 @@
 ---
-
 import FormSearch from "../../components/preact/FormSearch";
 import FiltersLayout from "../../layouts/FiltersLayout.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -19,17 +18,14 @@ let zonesData;
 // sacar el ? del url.search y convertirlo en un objeto
 const queryObj = parseQueryToObjt(search.slice(1, search.length));
 
-
 // Asegurar que el filtro viene del search
 if (queryObj) {
-
   filterData = await getResultsRecords({ in_tpr: "COUNTRY", ...queryObj });
   zonesData = await getZones({ ...queryObj });
 } else {
   filterData = await getResultsRecords({ in_tpr: "COUNTRY" });
   zonesData = (await getZones()) as any;
 }
-
 ---
 
 <Layout title={titlePage}>
