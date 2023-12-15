@@ -1,7 +1,6 @@
 import { navigate } from 'astro/transitions/router';
-import { h } from 'preact';
 import type { ChangeEvent, JSX } from 'preact/compat';
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 interface Props {
   zones: APIResponseGeoUbitaion[];
@@ -64,7 +63,7 @@ const FormSearch = ({ zones }: Props) => {
   };
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
-   
+
     e.preventDefault();
 
     if (searchTerm.trim() === '') {
@@ -79,9 +78,9 @@ const FormSearch = ({ zones }: Props) => {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set('codigo_ficha', selectedZone?.id || '');
       // Debe quedar en la misma direccion pero agregar el parametro de busqueda 
-      window.history.pushState({}, '', `${ window.location.pathname.replace(/\/$/, "")}/?` + searchParams.toString());
-      navigate( window.location.pathname.replace(/\/$/, "") + '/?' + searchParams.toString());
-    
+      window.history.pushState({}, '', `${window.location.pathname.replace(/\/$/, "")}/?` + searchParams.toString());
+      navigate(window.location.pathname.replace(/\/$/, "") + '/?' + searchParams.toString());
+
     }
   };
 
@@ -92,9 +91,8 @@ const FormSearch = ({ zones }: Props) => {
           type="text"
           value={searchTerm}
           onInput={handleInputChange}
-          className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 ${
-            isSearchEmpty ? 'border-red-500' : ''
-          }`}
+          className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 ${isSearchEmpty ? 'border-red-500' : ''
+            }`}
           placeholder="Search zone..."
         />
         <button
