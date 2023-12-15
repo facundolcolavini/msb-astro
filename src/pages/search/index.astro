@@ -24,7 +24,7 @@ if (queryObj) {
   zonesData = await getZones(queryObj);
 } else {
   searchData = await getResultsRecords();
-  zonesData = (await getZones(queryObj)) as any;
+  zonesData = (await getZones()) as any;
 }
 ---
 
