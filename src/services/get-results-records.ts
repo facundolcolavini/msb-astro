@@ -8,7 +8,7 @@ export const getResultsRecords = async (queryParams?:Record<string, string>):Pro
         return res.resultado;
 
     } catch (error) {
-        console.error('Error fetching entrepreneurship data:', error);
+        console.error('Error fetching Records data:', error);
         throw error;
     }
 }

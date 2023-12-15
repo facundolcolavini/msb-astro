@@ -6,23 +6,31 @@ import { getAllSelects } from "../../services/get-selects-form";
 import type { Result } from "../../types/results.records.types";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
+import { getZones } from "../../services/get-zones";
+import FormSearch from "../../components/preact/FormSearch";
+import type { APIResponseGeoUbitaion } from "../../types/geoubication.type";
 
 const selects = (await getAllSelects()) as Results;
 const { search } = Astro.url;
 
 let searchData;
-
+let zonesData;
+console.log(search)
 // sacar el ? del url.search y convertirlo en un objeto
 const queryObj = parseQueryToObjt(search.slice(1, search.length));
 
 // Fetch search data
 if (queryObj) {
   searchData = await getResultsRecords(queryObj);
+  zonesData = await getZones(queryObj);
 } else {
   searchData = await getResultsRecords();
+  zonesData = await getZones(queryObj) as any;
 }
+
 ---
 
 <Layout title="Busqueda">
+      <FormSearch client:load zones={zonesData} />
   <FiltersLayout selects={selects} list={searchData as Result} />
 </Layout>

@@ -2,40 +2,50 @@
 import ListHomes from "../components/ListHomes.astro";
 import Pagination from "../components/Pagination.astro";
 import FormFilters from "../components/preact/FormFilters";
+import FormSearch from "../components/preact/FormSearch";
+
+import type { APIResponseGeoUbitaion } from "../types/geoubication.type";
 import type { Results } from "../types/selects.form.types";
 interface Props<T> {
   selects: Results;
   list: T;
+  zones?: T;
 }
-const { selects, list } = Astro.props as Props<any>;
+const { selects, list,zones } = Astro.props as Props<any>;
 
-  let notFound = false;
+let notFound = false;
 if (list?.fichas?.hasOwnProperty("error")) {
   notFound = true;
-}else{
-    notFound = false;
+} else {
+  notFound = false;
 }
 ---
 
-<div class="flex flex-col lg:flex-row ">
-  <aside class="lg:w-1/4  rounded lg:ml-4 m-4">
+<div class="flex flex-col lg:flex-row">
+  
+  <aside class="lg:w-1/4 rounded lg:ml-4 m-4">
     <div class="sticky top-0 bg-[#374151] rounded p-3">
       <h2 class="font-semibold text-white mb-2 lg:mb-0 py-2">FILTROS</h2>
-      <FormFilters transition:persist  selects={selects} client:load />
+      <FormFilters transition:persist selects={selects} client:load />
     </div>
   </aside>
   <main class="w-full lg:w-3/4 lg:pl-4 p-4 h-full">
-    {notFound ? (
-      <div class="bg-[#374151] p-2 rounded-lg">
-        <h2 class="font-semibold mb-4 text-white">No se encontraron resultados...</h2>
-      </div>
-    ) :  (
-      <div>
-      <ListHomes listItems={list?.fichas} />
-  
-       {!notFound &&  (  <Pagination datos={list.datos} />)}
-      </div>
-      
-      )}
+
+    {
+      notFound ? (
+        <div class="bg-[#374151] p-2 rounded-lg">
+          <h2 class="font-semibold mb-4 text-white">
+            No se encontraron resultados...
+          </h2>
+        </div>
+      ) : (
+        <div>
+
+          <ListHomes listItems={list?.fichas} />
+
+          {!notFound && <Pagination datos={list.datos} />}
+        </div>
+      )
+    }
   </main>
 </div>

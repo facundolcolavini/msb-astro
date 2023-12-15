@@ -1,28 +1,35 @@
 ---
+
+import FormSearch from "../../components/preact/FormSearch";
 import FiltersLayout from "../../layouts/FiltersLayout.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getResultsRecords } from "../../services/get-results-records";
 import { getAllSelects } from "../../services/get-selects-form";
+import { getZones } from "../../services/get-zones";
 import type { Results } from "../../types/selects.form.types";
-import { formatOptions } from "../../utils/formats";
 import { parseQueryToObjt } from "../../utils/querys-format";
 
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
-const { barrio: barrios1, localidades: sellocalidades } = selects;
-const bar = formatOptions(barrios1);
-const loc = formatOptions(sellocalidades);
+
 const { search } = Astro.url;
-let searchData;
+
+let filterData;
+let zonesData;
 // sacar el ? del url.search y convertirlo en un objeto
 const queryObj = parseQueryToObjt(search.slice(1, search.length));
 
-// Fetch search data load in_tpr filter by default
+
+// Asegurar que el filtro viene del search
 if (queryObj) {
-  searchData = await getResultsRecords({ in_tpr: "COUNTRY", ...queryObj });
+
+  filterData = await getResultsRecords({ in_tpr: "COUNTRY", ...queryObj });
+  zonesData = await getZones({ ...queryObj });
 } else {
-  searchData = await getResultsRecords({ in_tpr: "COUNTRY" });
+  filterData = await getResultsRecords({ in_tpr: "COUNTRY" });
+  zonesData = (await getZones()) as any;
 }
+
 ---
 
 <Layout title={titlePage}>
@@ -32,6 +39,7 @@ if (queryObj) {
     >
       Barrios cerrados y countries
     </h1>
-    <FiltersLayout selects={selects} list={searchData} />
+    <FormSearch client:load zones={zonesData} />
+    <FiltersLayout selects={selects} list={filterData} zones={zonesData} />
   </article>
 </Layout>
