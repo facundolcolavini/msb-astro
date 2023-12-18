@@ -70,8 +70,6 @@ const FormSearch = ({ zones }: Props) => {
       // Campo vacío, muestra un mensaje de error
       setIsSearchEmpty(true);
     } else {
-      // Use selectedZone for further processing or send it to the server
-      console.log('Selected Zone:', selectedZone);
       // Realiza otras acciones según sea necesario
 
       // Reflejar los cambios en la URL 
