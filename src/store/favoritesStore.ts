@@ -4,7 +4,7 @@ import { capitalize } from '../utils/formats';
 
 export const isModalFavOpen = atom(false);
 // Me dice si esta en la lista de favoritos devuelve un true o un false
-export const isInListOfFav = atom(false);
+export const isInFav = atom(false);
 
 // CartItem Extend File interface 
 export type FavItem = {
@@ -58,8 +58,4 @@ export function removeCartFavItem({ in_num }: FavItem) {
 }
 
 
-export const isItemInFavorites = (in_num: string) => {
-    const items = favItems.get();
-    console.log('isItemInFavorites', items)
-    return items[in_num] ? isInListOfFav.set(true) : isInListOfFav.set(false);
-}
+ 

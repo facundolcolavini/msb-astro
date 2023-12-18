@@ -1,5 +1,6 @@
-import { isModalFavOpen,addCartFavItem, type FavItem, isItemInFavorites, isInListOfFav, removeCartFavItem } from '../../../store/favoritesStore';
+import { useStore } from '@nanostores/preact';
 import type { ComponentChildren, JSX } from 'preact';
+import { addCartFavItem, isInFav, isModalFavOpen, type FavItem } from '../../../store/favoritesStore';
 
 type Props = {
 	item: FavItem;
@@ -7,11 +8,11 @@ type Props = {
 };
 
 export default function AddToCartFavForm({ item, children }: Props) {
+	const $isInFav = useStore(isInFav);
 	function addToCart(e: JSX.TargetedEvent<HTMLFormElement>) {
 		e.preventDefault();
-		isModalFavOpen.set(true);
+		isInFav.set(!$isInFav)
 		addCartFavItem(item);
-		
 	}
 
 
