@@ -85,12 +85,26 @@ const FormFilters = ({ selects }: Props) => {
   // Boton para resetear los filtros de la URL y del formulario
   const handleReset = (e: Event) => {
     e.preventDefault();
-    e.stopImmediatePropagation();
+
     // Reload form 
     setTimeout(() => {
-      setSelect({});
-      setUrlSearchParams({});
       window.location.reload();
+   setSelect(select);
+      //reset url 
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      params.delete('sellocalidades');
+      params.delete('barrios1');
+      params.delete('tipo_operacion');
+      params.delete('tipo_inmueble');
+      params.delete('Ambientes');
+      params.delete('calles');
+      params.delete('valor_minimo');
+      params.delete('valor_maximo');
+      params.delete('moneda');
+      params.delete('codigo_ficha');
+      window.history.pushState({}, '', `${window.location.pathname}` + params.toString());
+
     }, 600)
     const urlToNavigateClean = window.location.pathname.replace(/\/\//g, "/")
     // Ir a la pathname de la URL actual 
