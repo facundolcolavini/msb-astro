@@ -8,7 +8,7 @@ import { getZones } from "../../services/get-zones";
 import type { Result } from "../../types/results.records.types";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
-
+export const prerender = false;
 const selects = (await getAllSelects()) as Results;
 const { search } = Astro.url;
 

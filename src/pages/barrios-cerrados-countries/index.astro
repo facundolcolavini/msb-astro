@@ -9,6 +9,7 @@ import { getZones } from "../../services/get-zones";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
 
+export const prerender = false;
 
 const titlePage = "Barrios cerrados y countries";
 const selects = (await getAllSelects()) as Results;
