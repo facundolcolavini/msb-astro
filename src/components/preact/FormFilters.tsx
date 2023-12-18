@@ -87,15 +87,13 @@ const FormFilters = ({ selects }: Props) => {
     e.preventDefault();
     e.stopImmediatePropagation();
     // Reload form 
-/*     setTimeout(() => {
+    setTimeout(() => {
       setSelect({});
       setUrlSearchParams({});
       window.location.reload();
-    }, 600) */
+    }, 600)
     const urlToNavigateClean = window.location.pathname.replace(/\/\//g, "/")
     // Ir a la pathname de la URL actual 
-    setSelect({});
-    setUrlSearchParams({});
     navigate(urlToNavigateClean);
   }
 
