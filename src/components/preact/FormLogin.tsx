@@ -1,7 +1,6 @@
 import { navigate } from 'astro:transitions/client';
 import { useState } from 'preact/hooks';
 import type { JSX } from "preact/jsx-runtime";
-import { login, register } from '../../services/auth.services';
 import Toast from './Toasts/Toast';
 
 

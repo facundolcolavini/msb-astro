@@ -1,6 +1,7 @@
 ---
 import ListHomes from "../components/ListHomes.astro";
 import Pagination from "../components/Pagination.astro";
+import CartFav from "../components/preact/Favorites/CartFav";
 import FormFilters from "../components/preact/FormFilters";
 import FormSearch from "../components/preact/FormSearch";
 
@@ -40,9 +41,8 @@ if (list?.fichas?.hasOwnProperty("error")) {
         </div>
       ) : (
         <div>
-
+          <CartFav transition:animate="slide" client:load />
           <ListHomes listItems={list?.fichas} />
-
           {!notFound && <Pagination datos={list.datos} />}
         </div>
       )

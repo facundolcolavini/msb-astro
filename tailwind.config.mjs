@@ -15,6 +15,7 @@ export default {
 			growOut: 'growOut 300ms ease-in-out forwards ',
 			scaleDown: 'scaleDown 300ms ease-in-out forwards ',
 			dropDown: 'dropDown 300ms ease-in-out forwards ',
+			slide: 'slide 300ms ease-in-out forwards ',
 		},
 		keyframes: {
 			// Add keyframe for fade animation 
@@ -51,6 +52,15 @@ export default {
 			   '100%': {
 				   transform:" scale(1)"
 			   }
+		   },
+		   slide:{
+			/* DE DERECHA A IZQUIERDA PARA CART */
+			'0%':{
+				transform: "translateX(100%)"
+			},
+			'100%':{
+				transform: "translateX(0%)"
+			}
 		   },
 		   scaleDown : {
 			'0%':{
