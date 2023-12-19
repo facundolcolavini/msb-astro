@@ -29,14 +29,17 @@ document.addEventListener('astro:after-preparation', () => {
 });
 </script>
 
-
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('astro:before-preparation', () => {
-      const spinner = document.querySelector('#spinner');
+  window.addEventListener('DOMContentLoaded', () => {
+    const spinner = document.querySelector('#spinner');
       const content = document.querySelector('#content');
       if (spinner) spinner.classList.remove('hidden');
       if (content) content.classList.add('hidden');
-    });
+
+    setTimeout(() => {
+      document.querySelector('#spinner').classList.add('hidden');
+      document.querySelector('#content').classList.remove('hidden');
+    }, 220); // 400 ms = 0.4 seconds
   });
-  </script>
+</script>
+
