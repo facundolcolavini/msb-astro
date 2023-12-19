@@ -66,7 +66,7 @@ const FilterSelect = ({ opts, id, onChange, defaultOption }: FilterSelectProps):
         <div className="w-full block absolute z-10 bg-white rounded-lg shadow max-h-32 overflow-y-auto">
           {opts.map((option, index) => (
             <button
-              key={index}
+              id={String(index)}
               onClick={() => handleOptionClick(option)}
               className="w-full  text-left p-2 hover:bg-gray-100 animate-fadeIn"
             > 
