@@ -68,6 +68,7 @@ const FilterSelect = ({ opts, id, onChange, defaultOption }: FilterSelectProps):
               id={String(index)}
               onClick={(event: JSX.TargetedEvent<HTMLButtonElement, MouseEvent>) => handleOptionClick(option)}
               className="w-full  text-left p-2 hover:bg-gray-100 animate-fadeIn"
+
             >
               {option.label}
             </button>
