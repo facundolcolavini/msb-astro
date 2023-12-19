@@ -1,7 +1,5 @@
 ---
-import CartFav from "./preact/Favorites/CartFav";
 import FavModalToggle from "./preact/Favorites/FavModalToggle";
-
 ---
 
 <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
@@ -45,7 +43,9 @@ import FavModalToggle from "./preact/Favorites/FavModalToggle";
         aria-current="page">Iniciar Sesión</a
       >
     </li>
-    <li  class="block py-2 px-3 md:p-0 text-white  bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent">
+    <li
+      class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+    >
       <FavModalToggle client:load />
     </li>
   </ul>

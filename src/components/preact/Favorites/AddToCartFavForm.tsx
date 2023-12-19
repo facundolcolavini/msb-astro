@@ -9,12 +9,11 @@ type Props = {
 
 export default function AddToCartFavForm({ item, children }: Props) {
 	const $isInFav = useStore(isInFav);
-	function addToCart(e: JSX.TargetedEvent<HTMLFormElement>) {
+	function addToCart(e: JSX.TargetedMouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		isInFav.set(!$isInFav)
 		addCartFavItem(item);
 	}
 
-
-	return <form className={`text-xs  dark:bg-yellow-600 bg-transparent text-white px-2 py-1 rounded`} onSubmit={addToCart}>{children}</form>;
+	return <button className={"text-xs bg-yellow-600 text-white px-2 py-1 rounded"} onClick={addToCart}>{children}</button>;
 }
