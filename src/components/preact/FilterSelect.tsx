@@ -1,4 +1,4 @@
-import type { h, JSX } from 'preact';
+import type {  JSX } from 'preact';
 import { useState, useRef, useEffect } from 'preact/hooks';
 import { capitalize } from '../../utils/formats';
 
