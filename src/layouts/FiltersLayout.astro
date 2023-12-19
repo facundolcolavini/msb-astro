@@ -43,7 +43,7 @@ if (list?.fichas?.hasOwnProperty("error")) {
 
           {!notFound && (
             <SpinnerLayout>
-              <ListHomes client:load listItems={list?.fichas} />
+              <ListHomes listItems={list?.fichas} />
               <Pagination datos={list.datos} />
             </SpinnerLayout>
           )}
