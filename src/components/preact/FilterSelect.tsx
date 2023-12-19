@@ -1,6 +1,5 @@
-import type { h, JSX } from 'preact';
-import { useState, useRef, useEffect } from 'preact/hooks';
-import { capitalize } from '../../utils/formats';
+import type { JSX } from 'preact';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 interface Option {
   label: string;
@@ -63,14 +62,14 @@ const FilterSelect = ({ opts, id, onChange, defaultOption }: FilterSelectProps):
       </button>
 
       {isOpen && (
-        <div className="w-full block absolute z-10 bg-white rounded-lg shadow max-h-32 overflow-y-auto">
+        <div className="w-full block absolute z-10 bg-white rounded-lg shadow max-h-32 overflow-y-auto" >
           {opts.map((option, index) => (
             <button
               id={String(index)}
-              onClick={() => handleOptionClick(option)}
+              onClick={(event: JSX.TargetedEvent<HTMLButtonElement, MouseEvent>) => handleOptionClick(option)}
               className="w-full  text-left p-2 hover:bg-gray-100 animate-fadeIn"
-            > 
-              {option.label }
+            >
+              {option.label}
             </button>
           ))}
         </div>
