@@ -115,7 +115,7 @@ const FormFilters = ({ selects }: Props) => {
     <form id="form-filters" class="mb-4 w-100" onSubmit={hanldeSubmit}>
       <div class="grid grid-rows md:grid-cols-1 gap-2">
         {/* Agregar buscador que busque por localidad barrio calle */}
-        <label class="text-white" htmlFor="tipo_operacion" id={"tipo_operacion"}>Operación:</label>
+        <label class="text-white" id={"tipo_operacion"}>Operación:</label>
         <FilterSelect
           id="tipo_operacion"
           opts={ope}
@@ -123,14 +123,14 @@ const FormFilters = ({ selects }: Props) => {
           defaultOption={{ value: "All", label: "Seleccione una Operación" }}
         />
 
-        <label class="text-white" htmlFor="tipo_inmueble" id={"tipo_inmueble"}>Tipo de Inmueble:</label>
+        <label class="text-white" id={"tipo_inmueble"}>Tipo de Inmueble:</label>
         <FilterSelect
           id="tipo_inmueble"
           opts={tip}
           onChange={handleSelect}
           defaultOption={{ value: "All", label: "Seleccione un Inmueble" }}
         />
-        <label class="text-white" htmlFor="Ambientes" id={"Ambientes"}>Ambientes:</label>
+        <label class="text-white" id={"Ambientes"}>Ambientes:</label>
         <FilterSelect
           id="Ambientes"
           opts={amb}
@@ -145,14 +145,14 @@ const FormFilters = ({ selects }: Props) => {
           defaultOption={{ value: "All", label: "Seleccione una localidad" }}
         />
 
-        <label class="text-white" htmlFor="barrios1" id={"barrios1"}>Barrios:     </label>
+        <label class="text-white" id={"barrios1"}>Barrios:     </label>
         <FilterSelect
           id="barrios1"
           opts={bar}
           onChange={handleSelect}
           defaultOption={{ value: "All", label: "Seleccione un barrio" }}
         />
-        <label class="text-white" htmlFor="calles" id={"calles"}>Calle:</label>
+        <label class="text-white"  id={"calles"}>Calle:</label>
         <FilterSelect
           id="calles"
           opts={cal}
