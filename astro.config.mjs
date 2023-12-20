@@ -13,6 +13,6 @@ export default defineConfig({
 
   },
   integrations: [tailwind(), preact()],
-  output: 'hybrid',
+  output: 'server',
   adapter: netlify()
 });
