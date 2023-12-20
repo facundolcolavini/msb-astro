@@ -9,26 +9,35 @@ export const prerender = true;
 const titlePage = "Emprendimientos";
 const { emprendimiento: entrepreneurship } =
   (await getAllEntrepreneurships()) as Results;
+
+/* Loading */
+let isLoading = false;
+if (entrepreneurship.length > 0) {
+  isLoading = false;
+} else {
+  isLoading = true;
+}
 ---
 
 <Layout title={titlePage}>
   <article>
-    <SpinnerLayout>
-    <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
-      {
-        entrepreneurship.map(
-          ({ ed_nom, ed_est, ed_pos, img_princ, ed_idl }) => (
-            <CardEntrepreneurship
-              ed_nom={ed_nom}
-              ed_est={ed_est}
-              ed_pos={ed_pos}
-              img_princ={img_princ}
-              ed_idl={ed_idl}
-            />
-          )
-        )
-      }
-    </div>
+    {
+      !isLoading && (
+        <SpinnerLayout>  
+          <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
+          {entrepreneurship.map(
+            ({ ed_nom, ed_est, ed_pos, img_princ, ed_idl }) => (
+              <CardEntrepreneurship
+                ed_nom={ed_nom}
+                ed_est={ed_est}
+                ed_pos={ed_pos}
+                img_princ={img_princ}
+                ed_idl={ed_idl}
+              />
+            )
+          )}
+        </div> </SpinnerLayout>
+      )
+    }
   </article>
-</SpinnerLayout>
 </Layout>
