@@ -1,5 +1,6 @@
 ---
 import CardEntrepreneurship from "../../components/CardEntrepreneuShip.astro";
+import Spinner from "../../components/preact/Spinner";
 import Layout from "../../layouts/Layout.astro";
 import SpinnerLayout from "../../layouts/SpinnerLayout.astro";
 import { getAllEntrepreneurships } from "../../services/get-all-entrepreneurship";
@@ -23,7 +24,8 @@ if (entrepreneurship.length > 0) {
   <article>
     {
       !isLoading && (
-        <SpinnerLayout>  
+        <SpinnerLayout slot="loader">  
+          <Spinner slot="loading-indicator" />
           <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
           {entrepreneurship.map(
             ({ ed_nom, ed_est, ed_pos, img_princ, ed_idl }) => (

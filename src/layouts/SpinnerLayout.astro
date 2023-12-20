@@ -5,7 +5,7 @@ import Spinner from "../components/preact/Spinner";
 
 <div >
   <div id="spinner" class="animate-fadeIn flex justify-center items-center h-screen">
-    <Spinner />
+    <slot name="loading-indicator" />
   </div>
   <div id="content" class="hidden">
     <slot />

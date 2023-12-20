@@ -1,5 +1,7 @@
 ---
+import CardSkeletonSearch from "../components/CardSkeletonSearch.astro";
 import ListHomes from "../components/ListHomes.astro";
+import ListSkeleton from "../components/ListSkeleton.astro";
 import Pagination from "../components/Pagination.astro";
 import CartFav from "../components/preact/Favorites/CartFav";
 import FormFilters from "../components/preact/FormFilters";
@@ -43,6 +45,10 @@ if (list?.fichas?.hasOwnProperty("error")) {
 
           {!notFound && (
             <SpinnerLayout>
+              <main class=" h-full"  slot="loading-indicator">
+                <ListSkeleton listItems={list.fichas}/>
+                </main>
+              
               <ListHomes listItems={list?.fichas} />
               <Pagination datos={list.datos} />
             </SpinnerLayout>
