@@ -1,4 +1,5 @@
-import { navigate } from 'astro/transitions/router';
+
+import { navigate } from 'astro:transitions/client';
 import type { ChangeEvent, JSX } from 'preact/compat';
 import { useEffect, useState } from 'preact/hooks';
 

@@ -1,5 +1,4 @@
 ---
-import { useStore } from "@nanostores/preact";
 import type { File } from "../types/results.records.types";
 import { parseQueryString } from "../utils/querys-format";
 import AddToCartFavForm from "./preact/Favorites/AddToCartFavForm";
@@ -49,7 +48,7 @@ const { cardData } = Astro.props;
         {
           (
             <AddToCartFavForm item={cardData} client:visible>
-              <button>Fav</button>
+              Fav
             </AddToCartFavForm>
           )
         }

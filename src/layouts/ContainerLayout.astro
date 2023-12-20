@@ -1,11 +1,10 @@
 ---
 import BreadCrumb from "../components/BreadCrumb.astro";
 import CartFav from "../components/preact/Favorites/CartFav";
-import FavModalToggle from "../components/preact/Favorites/FavModalToggle";
 ---
 
-<article class="w-full max-w-screen-xl mx-auto  ">
-  <BreadCrumb transition:persist/>
+<article class="w-full max-w-screen-xl mx-auto">
+  <BreadCrumb transition:persist />
   <slot />
   <CartFav client:load />
 </article>

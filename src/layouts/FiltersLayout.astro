@@ -3,16 +3,16 @@ import ListHomes from "../components/ListHomes.astro";
 import Pagination from "../components/Pagination.astro";
 import CartFav from "../components/preact/Favorites/CartFav";
 import FormFilters from "../components/preact/FormFilters";
-import FormSearch from "../components/preact/FormSearch";
 
-import type { APIResponseGeoUbitaion } from "../types/geoubication.type";
 import type { Results } from "../types/selects.form.types";
+import SpinnerLayout from "./SpinnerLayout.astro";
+
 interface Props<T> {
   selects: Results;
   list: T;
   zones?: T;
 }
-const { selects, list,zones } = Astro.props as Props<any>;
+const { selects, list, zones } = Astro.props as Props<any>;
 
 let notFound = false;
 if (list?.fichas?.hasOwnProperty("error")) {
@@ -23,7 +23,6 @@ if (list?.fichas?.hasOwnProperty("error")) {
 ---
 
 <div class="flex flex-col lg:flex-row">
-  
   <aside class="lg:w-1/4 rounded lg:ml-4 m-4">
     <div class="sticky top-0 bg-[#374151] rounded p-3">
       <h2 class="font-semibold text-white mb-2 lg:mb-0 py-2">FILTROS</h2>
@@ -31,7 +30,6 @@ if (list?.fichas?.hasOwnProperty("error")) {
     </div>
   </aside>
   <main class="w-full lg:w-3/4 lg:pl-4 p-4 h-full">
-
     {
       notFound ? (
         <div class="bg-[#374151] p-2 rounded-lg">
@@ -42,8 +40,13 @@ if (list?.fichas?.hasOwnProperty("error")) {
       ) : (
         <div>
           <CartFav transition:animate="slide" client:load />
-          <ListHomes listItems={list?.fichas} />
-          {!notFound && <Pagination datos={list.datos} />}
+
+          {!notFound && (
+            <SpinnerLayout>
+              <ListHomes listItems={list?.fichas} />
+              <Pagination datos={list.datos} />
+            </SpinnerLayout>
+          )}
         </div>
       )
     }
