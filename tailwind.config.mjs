@@ -16,6 +16,7 @@ export default {
 			scaleDown: 'scaleDown 300ms ease-in-out forwards ',
 			dropDown: 'dropDown 300ms ease-in-out forwards ',
 			slide: 'slide 300ms ease-in-out forwards ',
+			spinSlow: 'spin 3s linear infinite',
 		},
 		keyframes: {
 			// Add keyframe for fade animation 
@@ -73,8 +74,17 @@ export default {
 				   transform:" scale(1)"
 			   }
 		   },
-		},
-		extend: {},
+		   spin: {
+			'0%': { transform: 'rotate(0deg)' },
+			
+			'100%': { transform: 'rotate(360deg)' },
+		  },
+		  spinSlow: {
+			'0%': { transform: 'rotate(0deg)' },
+			 
+			'100%': { transform: 'rotate(360deg)' },
+		  },
+		}
 	},
 	plugins: [],
 }
