@@ -15,7 +15,7 @@ interface Props<T> {
 }
 const { selects, list, zones } = Astro.props as Props<any>;
 
-let notFound = true;
+let notFound = false;
 if (list?.fichas?.hasOwnProperty("error")) {
   notFound = true;
 } else {
