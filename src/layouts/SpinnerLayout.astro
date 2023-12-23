@@ -1,10 +1,9 @@
 ---
-import Spinner from "../components/preact/Spinner";
 
 ---
 
-<div >
-  <div id="spinner" class="animate-fadeIn flex justify-center items-center h-screen">
+<div>
+  <div id="loader" class="animate-fadeIn flex justify-center items-center h-100">
     <slot name="loading-indicator" />
   </div>
   <div id="content" class="hidden">
@@ -12,34 +11,31 @@ import Spinner from "../components/preact/Spinner";
   </div>
 </div>
 
-
 <script is:inline>
-document.addEventListener('astro:before-preparation', () => {
-  document.querySelector('#spinner').classList.remove('hidden');
-  document.querySelector('#content').classList.add('hidden');
+  document.addEventListener("astro:before-preparation", () => {
+    document.querySelector("#loader").classList.remove("hidden");
+    document.querySelector("#content").classList.add("hidden");
+  });
 
-});
-
-document.addEventListener('astro:after-preparation', () => {
-  setTimeout(() => {
-    document.querySelector('#spinner').classList.add('hidden');
-    document.querySelector('#content').classList.remove('hidden');
-    document.querySelector('#content').classList.add('animate-fadeIn'); 
-  }, 220); // 2000 ms = 2 seconds
-});
-</script>
-
-<script is:inline>
-  window.addEventListener('DOMContentLoaded', () => {
-    const spinner = document.querySelector('#spinner');
-      const content = document.querySelector('#content');
-      if (spinner) spinner.classList.remove('hidden');
-      if (content) content.classList.add('hidden');
-
+  document.addEventListener("astro:after-preparation", () => {
     setTimeout(() => {
-      document.querySelector('#spinner').classList.add('hidden');
-      document.querySelector('#content').classList.remove('hidden');
-    }, 220); // 400 ms = 0.4 seconds
+      document.querySelector("#loader").classList.add("hidden");
+      document.querySelector("#content").classList.remove("hidden");
+      document.querySelector("#content").classList.add("animate-fadeIn");
+    }, 250); // 2000 ms = 2 seconds
   });
 </script>
 
+<script is:inline>
+  window.addEventListener("DOMContentLoaded", () => {
+    const loader = document.querySelector("#loader");
+    const content = document.querySelector("#content");
+    if (loader) loader.classList.remove("hidden");
+    if (content) content.classList.add("hidden");
+
+    setTimeout(() => {
+      document.querySelector("#loader").classList.add("hidden");
+      document.querySelector("#content").classList.remove("hidden");
+    }, 250); // 400 ms = 0.4 seconds
+  });
+</script>

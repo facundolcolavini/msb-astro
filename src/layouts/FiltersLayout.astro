@@ -1,5 +1,4 @@
 ---
-import CardSkeletonSearch from "../components/CardSkeletonSearch.astro";
 import ListHomes from "../components/ListHomes.astro";
 import ListSkeleton from "../components/ListSkeleton.astro";
 import Pagination from "../components/Pagination.astro";
@@ -45,10 +44,8 @@ if (list?.fichas?.hasOwnProperty("error")) {
 
           {!notFound && (
             <SpinnerLayout>
-              <main class=" h-full"  slot="loading-indicator">
-                <ListSkeleton listItems={list.fichas}/>
-                </main>
-              
+              <ListSkeleton listItems={list?.fichas} slot="loading-indicator" />
+
               <ListHomes listItems={list?.fichas} />
               <Pagination datos={list.datos} />
             </SpinnerLayout>
@@ -56,5 +53,5 @@ if (list?.fichas?.hasOwnProperty("error")) {
         </div>
       )
     }
-  </main>
-</div>
+  </>
+</>
