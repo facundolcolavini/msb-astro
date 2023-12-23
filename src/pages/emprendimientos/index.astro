@@ -12,7 +12,7 @@ const { emprendimiento: entrepreneurship } =
   (await getAllEntrepreneurships()) as Results;
 
 /* Loading */
-let isLoading = false;
+let isLoading = true;
 if (entrepreneurship.length > 0) {
   isLoading = false;
 } else {

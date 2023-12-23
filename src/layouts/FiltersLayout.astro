@@ -15,7 +15,7 @@ interface Props<T> {
 }
 const { selects, list, zones } = Astro.props as Props<any>;
 
-let notFound = false;
+let notFound = true;
 if (list?.fichas?.hasOwnProperty("error")) {
   notFound = true;
 } else {
@@ -47,9 +47,9 @@ if (list?.fichas?.hasOwnProperty("error")) {
               <ListSkeleton listItems={list?.fichas} slot="loading-indicator" />
 
               <ListHomes listItems={list?.fichas} />
+              </SpinnerLayout>
+              )}
               <Pagination datos={list.datos} />
-            </SpinnerLayout>
-          )}
         </div>
       )
     }
