@@ -44,8 +44,8 @@ if (list?.fichas?.hasOwnProperty("error")) {
           <CartFav transition:animate="slide" client:load />
 
           {!notFound && (
-            <LoadingContent loader="ListResultsSkeleton" client:load >
-              <ListHomes listItems={list?.fichas} />
+            <LoadingContent loader="ListResultsSkeleton" transition:animate="fade" client:load >
+              <ListHomes listItems={list?.fichas} transition:animate="fade" />
               </LoadingContent>
               )}
               <Pagination datos={list.datos} />

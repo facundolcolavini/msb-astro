@@ -8,7 +8,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getAllEntrepreneurships } from "../../services/get-all-entrepreneurship";
 import type { Results } from "../../types/entrepreneurship.types";
 
-export const prerender = true;
+
 const titlePage = "Emprendimientos";
 const { emprendimiento: entrepreneurship } =
   (await getAllEntrepreneurships()) as Results;
@@ -24,8 +24,8 @@ if (entrepreneurship.length > 0) {
 
 <Layout title={titlePage}>
   <article>
-    <LoadingContent loader="Spinner" client:load >
-      <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4">
+    <LoadingContent loader="Spinner" client:load transition:animate="fade">
+      <div class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4" transition:animate="fade">
         {entrepreneurship.map(
           ({ ed_nom, ed_est, ed_pos, img_princ, ed_idl }) => (
             <CardEntrepreneurship
