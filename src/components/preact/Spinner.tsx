@@ -7,7 +7,7 @@ const Spinner = (props: Props) => {
   return (
     <div className="flex  h-screen items-center">
 
-      <div id="loader" {...props} class="border-gray-300 h-20 w-20 rounded-full border-8 border-t-blue-600 animate-spinSlow h-100"  />
+      <div id="spinner" {...props} class="border-gray-300 h-20 w-20 rounded-full border-8 border-t-blue-600 animate-spinSlow h-100"  />
     </div>
   )
 }
