@@ -16,8 +16,9 @@ const { cardData } = Astro.props;
     class="w-full h-48 object-cover"
     src={cardData?.img_princ}
     style="aspect-ratio: 16/9; object-fit: cover;"
-    width={480}
-    height={270}
+    loading={"lazy"}
+    width={266}
+    height={192}
   />
   <div class="p-4 bg-gray-500 text-white">
     <div class="h-[170px] flex flex-col space-y-2">

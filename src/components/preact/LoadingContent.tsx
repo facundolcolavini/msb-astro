@@ -38,7 +38,7 @@ function LoadingContent({ children, loader }: Props) {
           {renderLoader()}
         </div>
       ) : (
-        <div id="content" className="animate-fade">
+        <div id="content" className="animate-fadeIn">
           {children}
         </div>
       )}
