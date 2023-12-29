@@ -6,13 +6,7 @@ import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
-  prefetch: {
-    // Example:
-   routes: ['/', '/emprendimientos', '/barrios-cerrados-countries']
-  
-
-  },
   integrations: [tailwind(), preact()],
-  output: 'server',
+  output: 'hybrid',
   adapter: netlify()
 });
