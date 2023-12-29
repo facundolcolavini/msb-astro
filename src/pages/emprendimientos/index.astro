@@ -26,12 +26,10 @@ if (entrepreneurship.length > 0) {
 <Layout title={titlePage}>
   <article>
     <SpinnerLayout>
-      <!-- uSA los slots  -->
-
       <div  slot="loading-indicator">
         <Spinner client:idle />
       </div>
-      <div slot="main-content" class="grid  p-5 grid-cols-2 md:grid-cols-3 gap-4 animate-fadeIn" >
+      <div slot="main-content" class="grid p-5 grid-cols-2 md:grid-cols-3 gap-4 animate-fadeIn" >
         {entrepreneurship.map(
           ({ ed_nom, ed_est, ed_pos, img_princ, ed_idl }) => (
             <CardEntrepreneurship
