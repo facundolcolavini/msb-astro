@@ -32,17 +32,15 @@ const { title } = Astro.props;
       </header>
       <main class="[grid-area:main] bg-gray-800">
         <ContainerLayout>
-          <SpinnerLayout>
-            <!-- uSA los slots  -->
-
+        <!--   <SpinnerLayout>
             <div  slot="loading-indicator">
               <Spinner client:idle />
             </div>
-            <div slot="main-content">
+            <div slot="main-content"> -->
               <slot />
-            </div>
+<!--             </div>
           
-          </SpinnerLayout>
+          </SpinnerLayout> -->
         </ContainerLayout>
       </main>
       <footer class="[grid-area:footer]">
