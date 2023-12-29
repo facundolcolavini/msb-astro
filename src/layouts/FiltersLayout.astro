@@ -44,15 +44,15 @@ if (list?.fichas?.hasOwnProperty("error")) {
         <div>
           <CartFav transition:animate="slide" client:load />
 
-          {!notFound && (
+         
             <SpinnerLayout >
               <ListResultsSkeleton slot="loading-indicator" transition:animate="fade" />
               <ListHomes slot="main-content" listItems={list?.fichas} transition:animate="fade" />
             </SpinnerLayout>
-          /*   <LoadingContent loader="ListResultsSkeleton" transition:animate="fade" client:load > */
+            // <LoadingContent loader="ListResultsSkeleton" transition:animate="fade" client:load >
            
-             /*  </LoadingContent> */
-              )}
+            //   </LoadingContent>
+    
               <Pagination datos={list.datos} />
         </div>
       )
