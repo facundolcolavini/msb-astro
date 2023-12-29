@@ -36,7 +36,7 @@ const { title } = Astro.props;
             <!-- uSA los slots  -->
 
             <div  slot="loading-indicator">
-              <Spinner />
+              <Spinner client:idle />
             </div>
             <div slot="main-content">
               <slot />
