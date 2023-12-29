@@ -47,7 +47,7 @@ if (list?.fichas?.hasOwnProperty("error")) {
          
             <SpinnerLayout >
               <ListResultsSkeleton slot="loading-indicator" transition:animate="fade" />
-              <ListHomes slot="main-content" listItems={list?.fichas} transition:animate="fade" />
+              <ListHomes slot="main-content" listItems={list?.fichas} />
             </SpinnerLayout>
             // <LoadingContent loader="ListResultsSkeleton" transition:animate="fade" client:load >
            
