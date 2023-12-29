@@ -8,7 +8,9 @@ import { getZones } from "../../services/get-zones";
 import type { Result } from "../../types/results.records.types";
 import type { Results } from "../../types/selects.form.types";
 import { parseQueryToObjt } from "../../utils/querys-format";
-export const prerender = false;
+
+export const prerender = true;
+
 const selects = (await getAllSelects()) as Results;
 const { search } = Astro.url;
 
@@ -29,6 +31,6 @@ if (queryObj) {
 ---
 
 <Layout title="Busqueda">
-  <FormSearch client:load zones={zonesData} />
+  <FormSearch client:idle zones={zonesData} />
   <FiltersLayout selects={selects} list={searchData as Result} />
 </Layout>
