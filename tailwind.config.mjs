@@ -7,7 +7,7 @@ export default {
 			none: 'none',
 			spin: 'spin 1s linear infinite',
 			ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-			pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			pulse: ' pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
 			bounce: 'bounce 1s infinite',
 			fadeIn: 'fadeIn 0.5s cubic-bezier(0, 0, 0.2, 1)',
 			wiggle: 'wiggle 1s ease-in-out infinite',
@@ -19,6 +19,10 @@ export default {
 			spinSlow: 'spin 3s linear infinite',
 		},
 		keyframes: {
+			pulse: {
+				'0%, 100%': { opacity: 1 },
+				'50%': { opacity: 0.5 },
+			},
 			// Add keyframe for fade animation 
 			fadeIn: {
 				'0%': { opacity: 0 },

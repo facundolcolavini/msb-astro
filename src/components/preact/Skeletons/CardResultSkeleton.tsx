@@ -2,7 +2,7 @@
 
 const CardResultSkeleton = () => {
     return (
-        <div class="shadow-lg rounded-lg overflow-hidden relative bottom-0">
+        <div class="shadow-lg rounded-lg overflow-hidden relative bottom-0 ">
 
             <div class="w-full h-48 bg-gray-300 animate-pulse" style="aspect-ratio: 16/9;"></div>
 
