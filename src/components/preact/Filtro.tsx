@@ -63,7 +63,12 @@ const Filtro = () => {
             console.error('Error al realizar la solicitud:', error);
         }
     };
-
+    /* Boton de limpiar */
+    const handleReset = () => {
+        setFilters({});
+        setResults(null);
+        window.history.pushState({}, '', window.location.pathname) 
+    };
     console.log(results)
     return (
         <div>
@@ -79,7 +84,8 @@ const Filtro = () => {
                         {/* Repite para los demás filtros... */}
                     </>
                 )}
-                <button type="submit">Filtrar</button>
+                <button type="submit">Filtrar</button>\
+                <button type="reset" onClick={handleReset}>Limpiar</button>
             </form>
             {/* Lista de resultados */}
             {results && (
