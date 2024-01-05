@@ -1,7 +1,18 @@
 ---
+// index.astro
+import ListHomes from "../../components/ListHomes.astro";
+import Filtro from "../../components/preact/Filtro";
 import Layout from "../../layouts/Layout.astro";
+import type { APIResponseResultsRecords, File, Result } from "../../types/results.records.types";
+import type { Results } from "../../types/selects.form.types";
 const titlePage = "Resultados de búsqueda";
----
-<Layout title={titlePage}>
+export const prerenrender = false;
 
+let resultados: Result[] = []; // Estado para almacenar los resultados
+
+---
+
+<Layout title={titlePage}>
+  <Filtro client:visible/>
 </Layout>
+
