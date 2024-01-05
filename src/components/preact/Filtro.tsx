@@ -63,7 +63,7 @@ const Filtro = () => {
         }
     };
 
-
+    console.log(results)
     return (
         <div>
             <form onSubmit={handleSubmit}>

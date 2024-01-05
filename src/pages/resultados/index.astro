@@ -6,7 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 import type { APIResponseResultsRecords, File, Result } from "../../types/results.records.types";
 import type { Results } from "../../types/selects.form.types";
 const titlePage = "Resultados de búsqueda";
-export const prerenrender = false;
+export const prerenrender = true;
 
 let resultados: Result[] = []; // Estado para almacenar los resultados
 
