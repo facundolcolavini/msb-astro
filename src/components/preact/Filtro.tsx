@@ -1,7 +1,8 @@
-import { h } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
-import type { APIResponseSelects } from '../../types/selects.form.types';
+import { useEffect, useState } from 'preact/hooks';
 import type { APIResponseResultsRecords, File } from '../../types/results.records.types';
+import type { APIResponseSelects } from '../../types/selects.form.types';
+import { parseQueryString } from '../../utils/querys-format';
+import AddToCartFavForm from './Favorites/AddToCartFavForm';
 
 const Filtro = () => {
     const [filters, setFilters] = useState({});
@@ -84,12 +85,53 @@ const Filtro = () => {
             {results && (
                 <>
                     {results.resultado.fichas.map((record: File) => (
-                        <div class="lg:grid grid-cols-3">
-                            <h2>{record.titulo}</h2>
-                            <p>{record.direccion_completa}</p>
-                            <img src={record.img_princ} alt={record.titulo} />
+                        <div class="p-4 bg-gray-500 text-white">
+                            <div class="h-[170px] flex flex-col space-y-2">
+                                <h3 class="h-100 text-lg font-semibold">
+                                    {record.direccion_completa} - {record?.in_bar}
+                                </h3>
+                                <p class="h-100 text-sm">{record.titulo}</p>
+                                <p class="h-100 text-sm">
+                                    {record?.ambientes_num} Ambientes | {record?.dormitorios}
+                                    Dormitorios
+                                </p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded"
+                                    >{record?.precio}</span>
+                                    <div>
+                                        <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded"
+                                        >{record?.in_suc}</span>
+                                        <span class="text-xs w-fit bg-slate-600 text-white px-2 py-1 rounded"
+                                        >{record?.in_num}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-end mt-3">
+                                <div class="flex gap-1">
+                                    <span class="text-xs bg-red-500 text-white px-2 py-1 rounded"
+                                    >{record.operacion}
+                                    </span>
+                                    {
+                                        (
+                                            <AddToCartFavForm item={record} >
+                                                Fav
+                                            </AddToCartFavForm>
+                                        )
+                                    }
+                                </div>
+                                <a
+                                    href={`/search/detail/${record.in_num}/${parseQueryString(
+                                        record?.direccion_completa
+                                    )}`}
+                                    data-astro-prefetch="hover"
+                                    class="text-xs text-white cursor-pointer border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white"
+                                >
+                                    Ver más
+                                </a>
+                            </div>
                         </div>
                     ))}
+
                 </>
             )}
         </div>
