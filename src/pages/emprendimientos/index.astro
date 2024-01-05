@@ -8,7 +8,7 @@ import SpinnerLayout from "../../layouts/SpinnerLayout.astro";
 
 import { getAllEntrepreneurships } from "../../services/get-all-entrepreneurship";
 import type { Results } from "../../types/entrepreneurship.types";
-
+export const prerender = false;
 
 const titlePage = "Emprendimientos";
 const { emprendimiento: entrepreneurship } =

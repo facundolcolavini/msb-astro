@@ -3,6 +3,7 @@ import type { APIResponseResultsRecords, File } from '../../types/results.record
 import type { APIResponseSelects } from '../../types/selects.form.types';
 import { parseQueryString } from '../../utils/querys-format';
 import AddToCartFavForm from './Favorites/AddToCartFavForm';
+import FilterSelect from './FilterSelect';
 
 const Filtro = () => {
     const [filters, setFilters] = useState({});
@@ -11,6 +12,7 @@ const Filtro = () => {
 
     const PARAM_MAPPING = {
         barrio: 'barrio1',
+        operacion: 'tipo_operacion',
         // Agrega aquí otros mapeos si es necesario
     };
 
@@ -30,6 +32,7 @@ const Filtro = () => {
 
     const handleSelectChange = (event: Event) => {
         const target = event.target as HTMLSelectElement;
+        console.log()
         setFilters({ ...filters, [target.name]: target.value });
     };
 
@@ -44,6 +47,7 @@ const Filtro = () => {
         Object.entries(filters).forEach(([key, value]) => {
             const PARAM_MAPPING: { [key: string]: string } = {
                 barrio: 'barrios1',
+                operacion: 'tipo_operacion',
                 // Add other mappings here if necessary
             };
             const paramKey = PARAM_MAPPING[key] || key;
@@ -69,19 +73,35 @@ const Filtro = () => {
         setResults(null);
         window.history.pushState({}, '', window.location.pathname) 
     };
-    console.log(results)
+    console.log(selectData)
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 {selectData && (
                     <>
                         {/* Ejemplo para 'barrio': */}
-                        <select name="barrio" onChange={handleSelectChange}>
-                            {selectData.resultado.barrio.map((option) => (
-                                <option value={option.value}>{option.descripcion}</option>
-                            ))}
-                        </select>
-                        {/* Repite para los demás filtros... */}
+                        <div class="grid grid-rows md:grid-cols-1 gap-2">
+        {/* Agregar buscador que busque por localidad barrio calle */}
+        <label class="text-white" id={"operacion"}>Operación:</label>
+        <FilterSelect
+          id="operacion"
+          opts={ 
+            selectData?.resultado.operacion.map((item: any) => ({
+              value: item,
+              label: item,
+            })) || []
+           }    
+          onChange={handleSelectChange}
+          defaultOption={ 
+            { value: "All", label: "Seleccione una Operación" }
+          }
+        />
+
+       
+      </div>
+                        {/* Agrega aquí otros selects si es necesario */}
+
+                        
                     </>
                 )}
                 <button type="submit">Filtrar</button>\
