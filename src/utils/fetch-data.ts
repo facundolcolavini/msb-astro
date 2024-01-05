@@ -20,10 +20,10 @@ export async function fetchData<T>(
     throw new Error('Se requieren las claves INM y APIK en el archivo .env');
   }
 
-  const cacheKey = `${endpoint}-${JSON.stringify(queryParams || {})}`;
-  if (cache[cacheKey]) {
+ /*  const cacheKey = `${endpoint}-${JSON.stringify(queryParams || {})}`; */
+/*   if (cache[cacheKey]) {
     return cache[cacheKey] as T;
-  }
+  } */
 
   const url = new URL(`${API_BASE_URL}?json=${endpoint}`);
   const authParams = { inm: INM, apiK: APIK };
@@ -44,7 +44,7 @@ export async function fetchData<T>(
       throw new Error('Error al obtener los datos');
     }
     const res = (await response.json()) as T;
-    cache[cacheKey] = res;
+/*     cache[cacheKey] = res; */
     return res;
   } catch (error) {
     console.error('Error de red:', error);
