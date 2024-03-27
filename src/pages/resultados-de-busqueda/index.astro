@@ -7,12 +7,12 @@ import type {
 } from "@/interfaces/selects.form.interfaces";
 import Layout from "@/layouts/Layout.astro";
 import { getAllSelects, getLocations } from "@/services/get-selects-form";
-/* import { eq } from "astro:db";
+import { eq } from "astro:db";
 import { db } from "astro:db";
 import { Session } from "astro:db";
 import type { User } from "lucia";
- */
-/* const userAuthCookie =  lucia.readSessionCookie( 
+
+ const userAuthCookie =  lucia.readSessionCookie( 
 Astro.request.headers.get("Cookie") ?? ""
 )  
 const userSession = await db.select().from(Session).where(eq(Session.id, userAuthCookie as string))
@@ -21,7 +21,7 @@ type UserWithoutID = Omit<{
   userId:string;
   expiresAt:number;
 }, '_id'>;
-const user: UserWithoutID = userSession[0]; */
+const user: UserWithoutID = userSession[0];
 
 /* Fetch selects */
 const selects = (await getAllSelects()) as Results;
