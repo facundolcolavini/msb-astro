@@ -1,20 +1,13 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 
+const user = Astro.locals.user;
 
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/layouts/Footer.astro";
 import "@fontsource/cormorant";
-import { lucia } from "@/auth";
-import { db } from "astro:db";
-import { Session } from "astro:db";
-import { eq } from "astro:db";
 
-const userAuthCookie =  lucia.readSessionCookie( 
-Astro.request.headers.get("Cookie") ?? ""
-)  
-const userSession = await db.select().from(Session).where(eq(Session.id, userAuthCookie as string))
-const user = userSession[0]
+
 
 interface Props {
   title: string;
