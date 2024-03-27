@@ -18,11 +18,15 @@ import SearchDebounce from "../Search/SearchDebounce"
 import SelectField from "../ui/Selects/SelectField"
 
 
-
+type UserWithoutID = Omit<{
+  id:string;
+  userId:string;
+  expiresAt:number;
+}, '_id'>;
 interface Props {
   selects: Results;
   locations: ResultLocation
-  session: Session | null;
+  session: UserWithoutID | null;
 }
 
 const ResultsPage = ({ selects, locations, session }: Props) => {
