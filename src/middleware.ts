@@ -1,7 +1,8 @@
 import { lucia } from "./auth";
 import { verifyRequestOrigin } from "lucia";
-import { defineMiddleware } from "astro:middleware";
+
 import type { APIContext, MiddlewareNext } from "astro";
+import { defineMiddleware } from "astro/middleware";
 
 export const onRequest = defineMiddleware(async (context:APIContext, next:MiddlewareNext) => {
   
