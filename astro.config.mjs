@@ -11,7 +11,9 @@ export default defineConfig({
   output: "server",
 
 
-  adapter: vercel(), 
+  adapter: vercel({
+    isr: true,
+  }), 
   integrations: [db(), tailwind(), icon(), preact(),
     {
       name: "middleware",
