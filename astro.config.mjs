@@ -1,12 +1,19 @@
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config';
+import vercel from "@astrojs/vercel/serverless";
+import db from "@astrojs/db";
 import tailwind from "@astrojs/tailwind";
-import preact from "@astrojs/preact";
+import icon from "astro-icon";
 
-import netlify from "@astrojs/netlify/functions";
+import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), preact()],
-  output: 'server',
-  adapter: netlify()
+  output: "server",
+  adapter: vercel(),
+  integrations: [db(), tailwind(), icon(), preact()],
+  vite: {
+    optimizeDeps: {
+      exclude: ["oslo"]
+    }
+  }
 });

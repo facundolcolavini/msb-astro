@@ -1,5 +1,5 @@
-import type { APIRoute } from "astro";
-import { fetchData } from "../../utils/fetch-data";
+import { fetchData } from "@/utils/fetch-data";
+import type { APIContext, APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ url }) => {
     // Extrae los parámetros de consulta de la URL
@@ -11,11 +11,15 @@ export const GET: APIRoute = async ({ url }) => {
 
     try {
         const data = await fetchData('datos.select.buscador', queryParams);
-        return new Response(JSON.stringify(data), {
-            headers: {
-                'Content-Type': 'application/json'
+        return new Response(JSON.stringify(data)
+            , {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json'
+                    
+                }
             }
-        });
+        );
     } catch (error) {
         return new Response(JSON.stringify({ error: error }), {
             status: 500,

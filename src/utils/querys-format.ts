@@ -1,5 +1,5 @@
 
-// Dame un ejemplo de la entrada y la salida de la función parseQueryToObjt
+// Ejemplo de la entrada y la salida de la función parseQueryToObjt
 // Ejemplo de entrada: 'q=prueba+de+query&limit=10'
 // Ejemplo de salida: {q: 'prueba de query', limit: '10'}
 export const parseQueryToObjt = (query : string = '') => {   
@@ -12,7 +12,7 @@ export const parseQueryToObjt = (query : string = '') => {
     return queryObj
 }
 // Funcion para parsear los valores de los query params 
-// Dame un ejemplo de la entrada y la salida de la función parseQueryString
+// Ejemplo de la entrada y la salida de la función parseQueryString
 // Ejemplo de entrada: 'prueba+de+query'
 // Ejemplo de salida: 'prueba de query'
 

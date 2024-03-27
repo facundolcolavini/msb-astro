@@ -1,9 +1,14 @@
-document.addEventListener('astro:page-load', () => {
-     // Toggle the side navigation
-     const navbarToggle = document.querySelector('[data-collapse-toggle="navbar-solid-bg"]');
-     const navbarCollapse = document.querySelector('#navbar-solid-bg');
-     navbarToggle.addEventListener('click', () => {
-         navbarCollapse.classList.toggle('hidden');
-         navbarCollapse.classList.toggle('block');
-     });
+document.addEventListener("astro:page-load", (event) => {
+  const toggleButton = document.getElementById("menu-toggle");
+  const closeButton = document.getElementById("menu-close");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  const toggleMenu = () => {
+    mobileMenu.classList.toggle("translate-x-0");
+    mobileMenu.classList.toggle("-translate-x-full");
+  };
+
+  toggleButton.addEventListener("click", toggleMenu);
+  closeButton.addEventListener("click", toggleMenu);
+
 });

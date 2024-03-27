@@ -1,16 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const pageTitle = "404 - Page not found"
 ---
 
-
-<Layout title={pageTitle}>
-    <section class=" w-full max-w-screen-xl mx-auto h-screen flex items-center justify-center text-center  place-content-center">
-    <div class="flex flex-col gap-1 w-full justify-center items-center ">
-        <h1 class=" text-3xl text-center"> Esta página no existe ... </h1>
-        <a href="/" class="text-2xl text-red-900 text-center"> Volver al inicio </a>
-        <img src="https://midu.dev/images/this-is-fine-404.gif"/>
-    </div>
-
-    </section>
-</Layout>
+<div>
+    <h1>404</h1>
+    <p>Page not found</p>
+    <p><a href="{{ site.baseurl }}">Go back to the home page</a></p>
+</div>

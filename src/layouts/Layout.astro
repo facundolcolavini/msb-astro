@@ -1,47 +1,89 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../layouts/Footer.astro";
-import ContainerLayout from "./ContainerLayout.astro";
+
+const user = Astro.locals.user;
+
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/layouts/Footer.astro";
+import "@fontsource/cormorant";
+
+
 
 interface Props {
   title: string;
+  description: string;
+  img?: string;
 }
 
-const { title } = Astro.props;
+const { title, description , img } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Img -->
+    <meta property="og:image" content={img ?? "/images/logo.png"} />
+    <meta property="og:image:url" content={img ?? "/images/logo.png"} />
     <meta name="generator" content={Astro.generator} />
     <meta name="view-transition" content="same-origin" />
+    <link rel="image_src" href={img ?? "/images/logo.png"}>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <ViewTransitions />
   </head>
   <body>
+
     <div id="app" class="relative h-screen">
       <header class="[grid-area:header]">
-        <Navbar />
+        <Navbar user={user} />
       </header>
-      <main class="[grid-area:main] bg-gray-800">
-        <ContainerLayout>
-          <slot />
-        </ContainerLayout>
+      <main class="[grid-area:main] font-gotham ">
+        <!-- <ContainerLayout> -->
+        <slot />
+        <!--   </ContainerLayout> -->
       </main>
       <footer class="[grid-area:footer]">
         <Footer />
       </footer>
     </div>
-    <script>
-      import "../scripts/menu.js";
-      /*   import "../scripts/spinner.js"; */
-    </script>
-    <style>
+    <style is:global>
+      @font-face {
+        font-family: "Gotham";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 26px */
+        src: url("/fonts/Gotham-Light.otf") format("otf");
+      }
+
+      * {
+        box-sizing: border-box;
+        min-width: 0;
+      }
+
+      body {
+        background-color: #f3f4f6;
+        font-family: "Gotham", sans-serif;
+        min-height: 100vh;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        text-wrap: balance;
+      }
+
+      p {
+        text-wrap: pretty;
+      }
+
       #app {
         display: grid;
         grid-template-areas:

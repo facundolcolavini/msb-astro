@@ -25,11 +25,12 @@ export async function fetchData<T>(
     return cache[cacheKey] as T;
   }
 
+  // Set url with INM and APIK   e.set("apikey", c + ".maps." + q);
   const url = new URL(`${API_BASE_URL}?json=${endpoint}`);
   const authParams = { inm: INM, apiK: APIK };
 
   Object.keys(authParams).forEach(key =>
-    url.searchParams.append(key, String(authParams[key as keyof typeof authParams]))
+    url.searchParams.set(key, String(authParams[key as keyof typeof authParams]))
   );
 
   if (queryParams) {
@@ -39,7 +40,9 @@ export async function fetchData<T>(
   }
 
   try {
-    const response = await fetch(url.toString());
+    const controller = new AbortController();
+    const signal = controller.signal; 
+    const response = await fetch(url.toString() , { signal });
     if (!response.ok) {
       throw new Error('Error al obtener los datos');
     }

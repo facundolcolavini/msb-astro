@@ -1,8 +1,11 @@
 ---
-import { parseQueryString } from "../utils/querys-format";
+import { capitalize, formatearString } from "@/utils/formats";
+import he from "he";
+import { Icon } from 'astro-icon/components'
+import Link from "./ui/Link.astro";
 
 interface BreadcrumbItem {
-  name: string;
+  name: string | any;
   url: string;
 }
 
@@ -30,64 +33,78 @@ const breadcrumbItems = pathParts.map((part, index) => {
 // Agregar el enlace "Home" al principio de breadcrumbItems
 const breadcrumbWithHome = [
   {
-    name: "Home", // Nombre del enlace "Home"
+    name: "Home",
+    // Nombre del enlace "Home"
     url: `${origin}`, // URL de la página principal
   },
   /* /pathname/id */
-  ...breadcrumbItems.map((item,index)=>{
-     // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta 
-    const name = item.name.includes('?') ? parseQueryString(item.name) : item.name;
+  ...breadcrumbItems?.map((item, index) => {
+    // Formatea el nombre del elemento del breadcrumb cuando son parámetros de consulta
+    const name = item.name.includes("?")
+      ? formatearString(he.decode(item.name))
+      : formatearString(he.decode(item.name));
     return {
       ...item,
-      name,
-    }
-  })
-,
-
-  /* Agregar los search params recorriendo el objeto searchParams al breadCrumb */
-  ...Array.from(searchParams).map(([key, value]) => {
-        return {
-      name: `${value}`,
-      url: `${origin}/${pathname.replace(/\/?$/, '/')}${parseQueryString(value)}`,
+      name: he.decode(name),
     };
   }),
- 
 ];
-
+// Eliminar el último elemento del breadcrumb
 ---
-<nav class="flex p-2" aria-label="Breadcrumb">
-  <ol
-    class="inline-flex items-center  "
-  >
+
+<nav class="flex p-5 px-0 lg:px-0 md:px-0" aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center">
     {
-      breadcrumbWithHome.map((item: BreadcrumbItem, index: number) => {
-        
+      breadcrumbWithHome?.map((item: BreadcrumbItem, index: number) => {
+        const lastItemName = item.name.split("?")[ 
+          item.name.split("?").length - 1
+        ]
+
         return (
           <li class="inline-flex items-center">
             <div class="flex items-center">
-              <a
-                href={item.url}
-                class="ms-1 text-sm font-medium text-gray-300 capitalize hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-              >
-                {item.name}
-              </a>
-              {index !== breadcrumbWithHome.length - 1 && (
-             
-                <svg
-                  class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
+              {index === 0 ||
+              item.name === "resultados de busqueda" ||
+              item.name === "emprendimientos" ? (
+                <Link
+                  href={item.url}
+                  class={` ${
+                    item.url === `${origin}${pathname}`
+                      ? "text-primary-msb font-semibold tracking-wide "
+                      : "ms-1 text-sm font-semibold text-primary-text-msb capitalize hover:text-tertiary-bg-msb tracking-wide underline"
+                  }`}
                 >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
+                  {item.name === "Home" ? (
+                    <p class="pr-1">
+                      <Icon name="home-2" size={20} />
+                    </p>
+                  ) : (
+                 
+                    <p class="px-1 capitalize">{he.decode(item.name)}</p>
+                  )}
+                </Link>
+              ) : (
+
+              /* IF THE LAST ITEM OF BREADCRUMB CHANGE TE TEXT COLOR TO GREEN */
+                <Link
+                  href={""}
+                  class={` ${
+                    item.url === `${origin}${pathname}`
+                      ? "text-primary-msb font-semibold tracking-wide pointer-events-none"
+                      : "ms-1 text-sm font-semibold text-primary-text-msb capitalize hover:text-tertiary-bg-msb tracking-wide  pointer-events-none"
+                  }`}
+                >
+                  {item.name === "Home" ? (
+                    <p class="pr-1">
+                      <Icon name="home-2" size={20} />
+                    </p>
+                  ) : (
+                    <p class="px-1 capitalize">{capitalize(he.decode(item.name))}</p>
+                  )}
+                </Link>
+              )}
+              {index !== breadcrumbWithHome.length - 1 && (
+                <span class="text-primary-text-msb font-light">/</span>
               )}
             </div>
           </li>
