@@ -44,7 +44,7 @@ const { resultado: resEmprendimientos } = (await fetchData(
 const { emprendimiento: entrepreneurship, img } = resEmprendimientos as ResultEntrepreureShip;
 const { fichas } = resultado;
 const user = Astro.locals.user;
-console.log(user)
+console.log(Astro.locals)
 const cardData: File[] = fichas as File[]; // Update the type of cardData
 const titlePage = "Inicio - Matías Szpira Bienes Raíces";
 const description =

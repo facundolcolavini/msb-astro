@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "baseUrl": ".",
     "paths": {
       "@/*":[
