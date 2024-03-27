@@ -1,4 +1,4 @@
-/* import { lucia } from "./auth";
+import { lucia } from "./auth";
 import { verifyRequestOrigin } from "lucia";
 
 import type { APIContext, MiddlewareNext } from "astro";
@@ -49,4 +49,3 @@ export const onRequest = defineMiddleware(async (context:APIContext, next:Middle
   context.locals.user = user;
   return next();
 });
- */
