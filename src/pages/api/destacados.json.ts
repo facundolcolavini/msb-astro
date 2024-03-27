@@ -1,5 +1,4 @@
 
-// src/routes/api/filters.ts
 
 import { fetchData } from '@/utils/fetch-data';
 import type { APIRoute } from 'astro';
