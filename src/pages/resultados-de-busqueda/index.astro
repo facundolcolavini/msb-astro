@@ -10,7 +10,6 @@ import { getAllSelects, getLocations } from "@/services/get-selects-form";
 import { eq } from "astro:db";
 import { db } from "astro:db";
 import { Session } from "astro:db";
-import type { User } from "lucia";
 
  const userAuthCookie =  lucia.readSessionCookie( 
 Astro.request.headers.get("Cookie") ?? ""
