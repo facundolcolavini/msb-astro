@@ -30,8 +30,7 @@ import Layout  from "@/layouts/Layout.astro";
           </h1>
           <form
             class="space-y-4 md:space-y-6"
-            method="POST"
-            action="/api/signin"
+            id="signin-form"
           >
             <div>
               <label
@@ -65,8 +64,9 @@ import Layout  from "@/layouts/Layout.astro";
 
             <button
               type="submit"
+              id="btnLogin"
               class="w-full text-white bg-pink-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >Sign Up</button
+              >Login</button
             >
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               Don't have an account? <a
@@ -81,3 +81,37 @@ import Layout  from "@/layouts/Layout.astro";
     </div>
   </section>
 </Layout >
+
+<script>
+import { navigate } from "astro:transitions/client";
+
+    document.addEventListener("astro:page-load", (event) => {
+    const form = document.getElementById("signin-form") as HTMLFormElement;
+    const btnSigin = document.getElementById("btnLogin") as HTMLButtonElement;
+
+    btnSigin.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const values = Object.fromEntries(formData);
+      console.log(values)
+      try {
+        // Call to endpoint POST user
+        const res = await fetch("/api/signin/", {
+          method: "POST",
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
+        /* Refresh */
+        if (!res.ok) {
+          throw new Error(data);
+        }
+        navigate("/usuarios");
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+      
+  })
+</script>
