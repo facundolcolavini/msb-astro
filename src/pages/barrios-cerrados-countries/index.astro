@@ -14,7 +14,7 @@ import { parseQueryToObjt } from "../../utils/querys-format";
 const titlePage = "Barrios cerrados y countries";
 const description = "Barrios cerrados y countries en venta y alquiler en Argentina. Encontrá tu próximo hogar en un barrio cerrado o country en Argentina.";
 const selects = (await getAllSelects()) as Results;
-export const prerender = false;
+
 const { search } = Astro.url;
 
 let filterData;

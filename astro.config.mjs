@@ -11,7 +11,9 @@ export default defineConfig({
   output: "server",
 
 
-  adapter: vercel(), 
+  adapter: vercel({
+    edgeMiddleware:true
+  }), 
   integrations: [db(), tailwind(), icon(), preact()],
   vite: {
     optimizeDeps: {
