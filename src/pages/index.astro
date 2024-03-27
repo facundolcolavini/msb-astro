@@ -47,18 +47,7 @@ const { resultado: resEmprendimientos } = (await fetchData(
 )) as APIResponseEntrepreneurship;
 const { emprendimiento: entrepreneurship, img } = resEmprendimientos as ResultEntrepreureShip;
 const { fichas } = resultado;
- // Obtenemos de las cookies auth_session value 
-let cookies = Astro.request.headers.get("Cookie")?.split(";").map((cookie) => {
-  const [name, value] = cookie.split("=");
-  return { name: name.trim(), value: value.trim() };
-})
 
-// get the user session from cookie
-const userAuthCookie =  lucia.readSessionCookie( 
-Astro.request.headers.get("Cookie") ?? ""
-)  
-const userSession = await db.select().from(Session).where(eq(Session.id, userAuthCookie as string))
-const user = userSession[0]
 const cardData: File[] = fichas as File[]; // Update the type of cardData
 const titlePage = "Inicio - Matías Szpira Bienes Raíces";
 const description =
