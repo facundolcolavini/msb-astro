@@ -6,17 +6,17 @@ import { Argon2id } from "oslo/password";
 export async function POST(context: APIContext): Promise<Response> {
   console.log(context.locals.session)
   //read the form data
-  const formData = await context.request.formData();
-  const username = formData.get("username");
-  const password = formData.get("password");
+  const formData = await context.request.json()
+  const username = formData.username 
+  const password = formData.password
   //validate the data
   if (typeof username !== "string") {
-    return new Response("Invalid username", {
+    return new Response("Nombre de usuario inválido", {
       status: 400,
     });
   }
   if (typeof password !== "string") {
-    return new Response("Invalid password", {
+    return new Response("Contraseña inválida", {
       status: 400,
     });
   }
@@ -28,7 +28,7 @@ export async function POST(context: APIContext): Promise<Response> {
 
   //if user not found
   if (!foundUser) {
-    return new Response("Incorrect username or password", { status: 400 });
+    return new Response("El nombre de usuario o password no son correctos", { status: 400 });
   }
 
   // verify if user has password
@@ -58,5 +58,6 @@ export async function POST(context: APIContext): Promise<Response> {
     sessionCookie.value,
     sessionCookie.attributes
   );
-  return context.redirect("/");
+
+  return context.redirect('/');
 }

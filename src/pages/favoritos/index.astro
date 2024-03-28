@@ -6,9 +6,13 @@ import { getEntrepreneurshipById } from "@/services/get-all-entrepreneurship";
 import { fetchData } from "@/utils/fetch-data";
 import { capitalize } from "@/utils/formats";
 import he from "he";
+const session = Astro.locals?.session
 
+if(!session){
+  return Astro.redirect('/');
+}
 // DB Astro
-const resFav = await fetch(`${Astro.url.origin}/api/favorites/1.json`); // Reemplazar el 1 por el id del usuario logeado
+const resFav = await fetch(`${Astro.url.origin}/api/favorites/${session?.userId}`); // Reemplazar el 1 por el id del usuario logeado
 const favoritesIds = await resFav.json();
 let favoritesUser: {
   id: string;
@@ -57,7 +61,7 @@ const description =
 
 <Layout title={title} description={description}>
   <article class="bg-secondary-bg-msb h-full font-gotham">
-    <section class="container mx-auto">
+    <section class="container mx-auto py-5 px-8 ">
       <div class="py-12">
         <h1 class="text-lg text-black font-bold text-center uppercase">
           Favoritos
@@ -65,7 +69,7 @@ const description =
         <p class="text-center">Administrá tus propiedades guardadas</p>
       </div>
     </section>
-    <section class="container mx-auto flex justify-between">
+    <section class="container mx-auto flex justify-between py-5 px-8 ">
       <!-- Checkbox Selecionar todos  -->
       <div class="flex items-center">
         <input
@@ -86,7 +90,7 @@ const description =
         Eliminar
       </button>
     </section>
-    <section>
+    <section class="py-5 px-8 ">
       {
         favoritesUser.length == 0 ? (
           <div class="container mx-auto flex justify-center items-center h-96">
@@ -102,10 +106,9 @@ const description =
     <section>
       <!-- List of map User card of properti with check and delete btn -->
       <div
-        class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  my-10"
       >
         <!-- Card -->
-
         {
           favoritesUser.map(
             (favProp: { id: string; title: string; image: string }) => (
@@ -155,17 +158,18 @@ const description =
 }
 </style>
   
-<script>
-  /* Delete all selection and fetch API /api/favorites/idselected */
-  document.addEventListener("astro:page-load", (event) => {
-  const btnDelete = document.getElementById("btn-delete") as HTMLButtonElement;
-  const selectAll = document.getElementById("select-all") as HTMLInputElement;
+<script is:inline define:vars={{session}}>
+/* Delete all selection and fetch API /api/favorites/idselected */
+document.addEventListener("astro:page-load", (event) => {
+
+  const btnDelete = document.getElementById("btn-delete") 
+  const selectAll = document.getElementById("select-all")  
   const checkboxes = document.querySelectorAll(
     "input[data-check-prop]"
-  ) as NodeListOf<HTMLInputElement>;
+  )  
     const deleteButtons = document.querySelectorAll(
     "button[id=btn-delete-prop]"
-  ) as NodeListOf<HTMLButtonElement>;
+  )  
 
 
   let ids = Array.from(checkboxes).map((checkbox) => checkbox.id);
@@ -190,11 +194,11 @@ const description =
       }
     })
   );
-
+  if (session && session.userId) {
   deleteButtons.forEach((button) =>
     button.addEventListener("click", async (e) => {
       const id = button.getAttribute("data-idProp");
-      const res = await fetch(`/api/favorites/1.json`, {
+      const res = await fetch(`/api/favorites/${session?.userId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -203,20 +207,20 @@ const description =
       });
 
       if (res.ok) {
-        location.reload();
+        window.location.reload();
       } else {
         alert("Error al eliminar la propiedad");
       }
     })
   );
-
+  
   btnDelete.addEventListener("click", async () => {
     if (ids.length === 0) {
       alert("No hay elementos seleccionados");
       return;
     }
 
-    const res = await fetch(`/api/favorites/1.json`, {
+    const res = await fetch(`/api/favorites/${session?.userId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -225,10 +229,13 @@ const description =
     });
 
     if (res.ok) {
-      location.reload();
+      window.location.href = '/favoritos';
     } else {
       alert("Error al eliminar los elementos seleccionados");
     }
   });
+  }else{
+    window.location.reload();
+  }
 });
 </script>

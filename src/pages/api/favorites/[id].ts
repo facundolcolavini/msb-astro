@@ -25,7 +25,7 @@ export const DELETE: APIRoute = async ({ params, request }: APIContext) => {
   if (!userId || !user) {
     return new Response(
       JSON.stringify({
-        message: "Por favor registrese para poder eliminar la propiedad de favoritos.",
+        message: "Por favor, inicia sesión o regístrate para eliminar la propiedad de favoritos.",
         success: false,
       }),
       {
@@ -45,7 +45,7 @@ export const DELETE: APIRoute = async ({ params, request }: APIContext) => {
           if (res) {
             return new Response(
               JSON.stringify({
-                message: "Eliminados todos de favoritos.",
+                message: "Lista de favoritos eliminada!",
                 success: true,
               })
             );

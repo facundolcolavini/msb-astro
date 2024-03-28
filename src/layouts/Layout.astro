@@ -41,9 +41,7 @@ const { title, description , img } = Astro.props;
         <Navbar user={user} />
       </header>
       <main class="[grid-area:main] font-gotham ">
-        <!-- <ContainerLayout> -->
-        <slot />
-        <!--   </ContainerLayout> -->
+          <slot />
       </main>
       <footer class="[grid-area:footer]">
         <Footer />

@@ -12,17 +12,19 @@ export interface formCheckedValues {
     contactEmailValid: null | string;
     contactPhoneValid: null | string;
     contactMessageValid: null | string;
+    loginUsernameValid: null | string;
+    loginPasswordValid: null | string;
 }
 
 
 export const formRegisterValidator = {
-    email: [(value: string): boolean => value.includes('@'), 'El correo debe de tener una @'],
-    displayName: [(value: string): boolean => value.length >= 1, 'El nombre es requerido'],
-    password: [(value: string): boolean => value.length >= 6, 'El password debe de tener mas de 6 letras'],
+  username: [(value: string): boolean => value.length >= 1, 'El correo es requerido'],
+  password: [(value: string): boolean => value.length >= 1, 'El password es requerido'],
+  confirmPassword: [(value: string): boolean => value.length >= 1, 'La confirmación de password es requerida'],
 } 
 
 export const formLoginValidator = {
-    email: [(value: string): boolean => value.length >= 1, 'El correo es requerido'],
+    username: [(value: string): boolean => value.length >= 1, 'El correo es requerido'],
     password: [(value: string): boolean => value.length >= 1, 'El password es requerido'],
 }
 

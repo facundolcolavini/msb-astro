@@ -143,7 +143,6 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
         fetchFavorites();
     }, [props.propertyCode]);
 
-    // Remove the favorite from the list  API SERVER
     const removeFavorite = async () => {
         try {
             const response = await fetch(`/api/favorites/${props?.session?.userId}`, {
@@ -155,9 +154,16 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
                     'Content-Type': 'application/json'
                 }
             });
-            if (response.ok) {
-                const data = await response.json();
+            const data = await response.json();
+            if (!response.ok) {
+                throw response;
+            } else {
+
                 if (data.success) {
+                    setToastMessage(data.message);
+                    setToastVisible(true);
+                    setTimeout(() => setToastVisible(false), 3000);
+                } else {
                     setToastMessage(data.message);
                     setToastVisible(true);
                     setTimeout(() => setToastVisible(false), 3000);
@@ -166,6 +172,9 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
             }
         } catch (error) {
             console.error(error);
+            setToastMessage((error as Error).message);
+            setToastVisible(true);
+            setTimeout(() => setToastVisible(false), 3000);
         }
     }
 
@@ -184,15 +193,24 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
                     'Content-Type': 'application/json'
                 }
             });
-            if (response.ok) {
-                const data = await response.json();
-                if (data.success) {
-                    setToastMessage(data.message);
-                    setToastVisible(true);
-                    setTimeout(() => setToastVisible(false), 3000);
-                }
-                await fetchFavorites();
+            const data = await response.json();
+
+            if (data.success) {
+                setToastMessage(data.message);
+                setToastVisible(true);
+                setTimeout(() => setToastVisible(false), 3000);
+            } else {
+                setToastMessage(data.message);
+                setToastVisible(true);
+                setIsFavorited(true);
+                setTimeout(() => {
+                    setToastVisible(false)
+                    setIsFavorited(false);
+                }, 3000);
+
             }
+            await fetchFavorites();
+
         } catch (error) {
             console.error(error);
         }
@@ -363,7 +381,7 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
                     <CardResultSkeleton />
                 </div>
             </section>
-            <Toast message={toastMessage} icon={<WarningAlertIcon />} isVisible={toastVisible} customStyles="flex gap-2 border  border-primary-msb  bg-[#EFF0F2]" />
+            <Toast message={toastMessage} icon={<WarningAlertIcon />} isVisible={toastVisible} customStyles="flex gap-2 border  border-primary-msb  bg-[#EFF0F2]" duration={3000} />
         </article>
     )
 }

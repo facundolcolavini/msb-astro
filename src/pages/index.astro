@@ -33,7 +33,8 @@ import type {
 import Layout from "@/layouts/Layout.astro";
 import { getAllSelects, getAllSelectsEntrepreneurship, getLocations } from "@/services/get-selects-form";
 import { fetchData } from "@/utils/fetch-data";
-const user = Astro.locals.user;
+const session = Astro.locals.session;
+
 
 const { resultado } = (await fetchData(
   "fichas.destacadas",
@@ -54,6 +55,7 @@ const bgUsaImage = "/images/panorama-noche-chicago.webp";
 const selects = (await getAllSelects()) as Results;
 let selectEntrepreneurship = (await getAllSelectsEntrepreneurship()) as Results;
 const locations = (await getLocations()) as ResultLocation;
+
 ---
 
 <Layout title={titlePage}  description={description}>
