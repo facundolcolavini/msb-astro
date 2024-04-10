@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 import type { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { twMerge } from 'tailwind-merge';
-import "./selectsField.css";
+
 
 interface Option {
   label: string;

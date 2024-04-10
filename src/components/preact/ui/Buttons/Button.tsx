@@ -29,7 +29,7 @@ const Button: FunctionComponent<Props> = ({
     'bg-primary-msb text-white border-primary-msb hover:bg-primary-hover-msb': variant === 'primary',
     'bg-secondary-msb text-primary-text-msb border-secondary-msb hover:bg-secondary-hover-msb': variant === 'secondary',
     'bg-tertiary-msb text-white border-tertiary-msb hover:bg-tertiary-hover-msb': variant === 'tertiary',
-    'bg-secondary-msb border-2 border-primary-msb text-primary-msb hover:border-primary-hover-msb': variant === 'outline',
+    'bg-secondary-msb border border-primary-msb text-primary-msb hover:border-primary-hover-msb': variant === 'outline',
     'bg-gray-400 text-gray-800 cursor-not-allowed': variant === 'disabled',
     // Agrega más clases condicionales según necesites.
   });

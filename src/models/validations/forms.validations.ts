@@ -7,25 +7,24 @@ export interface FormValidations {
 export interface formCheckedValues {
     displayNameValid: null | string;
     emailValid: null | string;
-    passwordValid: null | string;
     contactNameValid: null | string;
     contactEmailValid: null | string;
     contactPhoneValid: null | string;
     contactMessageValid: null | string;
-    loginUsernameValid: null | string;
-    loginPasswordValid: null | string;
+    usernameValid: null | string;
+    passwordValid: null | string;
 }
 
 
 export const formRegisterValidator = {
-  username: [(value: string): boolean => value.length >= 1, 'El correo es requerido'],
-  password: [(value: string): boolean => value.length >= 1, 'El password es requerido'],
+  username: [(value: string): boolean => value.length >= 1, 'El nombre de usuario es requerido'],
+  password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
   confirmPassword: [(value: string): boolean => value.length >= 1, 'La confirmación de password es requerida'],
 } 
 
 export const formLoginValidator = {
-    username: [(value: string): boolean => value.length >= 1, 'El correo es requerido'],
-    password: [(value: string): boolean => value.length >= 1, 'El password es requerido'],
+    username: [(value: string): boolean => value.length >= 1, 'El nombre de usuario es requerido'],
+    password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
 }
 
 export const formContactValidator = {
