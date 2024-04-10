@@ -56,7 +56,7 @@ const RegisterForm = ({fnToggleModalType,children }: Props) => {
         try {
             setFormSubmitted(true);
 
-            const response = await fetch(`/api/signin.json/`,
+            const response = await fetch(`/api/signup.json/`,
                 {
                     method: 'POST',
                     headers: {
