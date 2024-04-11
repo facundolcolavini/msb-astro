@@ -2,9 +2,11 @@ import { Lucia } from "lucia";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { db, Session, User } from "astro:db";
 import { GitHub } from "arctic";
+import { TimeSpan } from "oslo";
 const adapter = new DrizzleSQLiteAdapter(db as any, Session, User); // your adapter
 
 export const lucia = new Lucia(adapter, {
+  sessionExpiresIn: new TimeSpan(1, "d"),
   sessionCookie: {
     attributes: {
       // set to `true` when using HTTPS
