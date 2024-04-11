@@ -10,15 +10,17 @@ import Spinner from "../Spinner";
 import Button from "../ui/Buttons/Button";
 import InputField from "../ui/Inputs/InputField";
 import { Modal } from "../ui/Modals/Modal";
+import { modalAuthPropertyStore, setModalAuth } from "@/store/modalsAuthStore";
 
 interface Props {
     children: JSX.Element | JSX.Element[];
-    fnToggleModalType: () => void;
+    onSwitchToLogin : (event:Event) => void;
 }
 
-const RegisterForm = ({fnToggleModalType,children }: Props) => {
+const RegisterForm = ({children ,onSwitchToLogin}: Props) => {
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const [modalState, setModalState] = useState(false);
+    const modal = modalAuthPropertyStore.get()
+    const [modalState, setModalState] = useState(modal.changeToLogin || modal.changeToRegister);
     const [formError, setFormError] = useState(false);
     const [toastMsg, setToastMsg] = useState('');
     const {
@@ -38,15 +40,8 @@ const RegisterForm = ({fnToggleModalType,children }: Props) => {
         );
     };
 
-/*     useEffect(() => {
-        if (formError) {
-            setTimeout(() => {
-                setFormError(false);
-            }, 3000);
-        }
-    }, [toastMsg, setToastMsg]) */
 
-    const login = async (e: SubmitEvent) => {
+    const register = async (e: SubmitEvent) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
@@ -67,18 +62,20 @@ const RegisterForm = ({fnToggleModalType,children }: Props) => {
                 }
             )
             const data = await response.json()
-            console.log(data, 'data client')
+            
             if (!data.success) {
                 setFormSubmitted(false)
                 setFormError(true);
                 throw data
             } else {
-                console.log(data, 'data client')
+                 
                 setFormSubmitted(false);
                 setToastMsg(data.message);
                 toggleModal && toggleModal();
                 navigate(window.location.pathname);
                 onResetForm();
+                setModalAuth({ changeToLogin: false, changeToRegister: false });
+                setModalState(false)
             }
 
         } catch (e) {
@@ -98,7 +95,7 @@ const RegisterForm = ({fnToggleModalType,children }: Props) => {
                 >
                     <h1 className={'font-bold  text-center mx-auto px-6 pt-5'}>CREAR CUENTA</h1>
                     <div className={'p-4 md:px-6 lg:px-5 h-fit'}>
-                        <form className="grid grid-cols text-start gap-3 h-fit font-thin font-gotham" noValidate onSubmit={login}>
+                        <form className="grid grid-cols text-start gap-3 h-fit font-thin font-gotham" noValidate onSubmit={register}>
                             <InputField label="Nombre de usuario" value={username} onChange={onInputChange} icon={usernameValid === null
                                 ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
                                 : changeFields?.username === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={usernameValid === null} error={changeFields?.username} addStyles="h-12" name="username" id="username" type="text" />
@@ -112,12 +109,10 @@ const RegisterForm = ({fnToggleModalType,children }: Props) => {
                             <hr className={'divide-x-2 divide-slate-800 mx-2'} />
                             {formError && <div className="flex gap-2  py-3 px-3 text-sm z-10 border border-red-500 rounded bg-red-200 ">{toastMsg}</div>}
                             <div className={'flex justify-center items-center gap-2'}>
-                                <Button variant="outline" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" onClick={fnToggleModalType}> Iniciar Sesión</Button>
-                                <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="w-full py-1 px-5 text-white border border-gray-400" type="submit">Iniciar Sesión {formSubmitted && isFormValid && <Spinner />}</Button>
+                                <Button variant="outline" type="button" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" onClick={onSwitchToLogin}> Ya tengo cuenta</Button>
+                                <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="w-full py-1 px-5 text-white border border-gray-400" type="submit">Crear cuenta {formSubmitted && isFormValid && <Spinner />}</Button>
                             </div>
                         </form>
-
-
                     </div>
                 </Modal>
 

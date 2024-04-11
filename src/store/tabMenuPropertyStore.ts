@@ -14,7 +14,6 @@ export const tabMenuPropertyStore = map<TabMenuPropertyStore>({
     pdf: false,
     blueprint: false,
     unitList: false
-
 })
 
 

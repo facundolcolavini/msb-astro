@@ -7,7 +7,6 @@ export async function POST(context: APIContext): Promise<Response> {
 /*   console.log(context.locals.session) */
   //read the form data
   const formData = await context.request.json()
-  console.log(formData)
   const { password, username } = formData;
 
   //validate the data

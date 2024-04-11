@@ -1,6 +1,7 @@
 import { useForm } from "@/hooks/useForm";
 import { initLoginForm, type UserLogin } from "@/models/users/users";
 import { formLoginValidator } from "@/models/validations/forms.validations";
+import { modalAuthPropertyStore, setModalAuth } from "@/store/modalsAuthStore";
 import { navigate } from "astro:transitions/client";
 import type { JSX } from "preact";
 import { useEffect, useState } from "preact/hooks";
@@ -13,12 +14,13 @@ import { Modal } from "../ui/Modals/Modal";
 
 interface Props {
     children?: JSX.Element | JSX.Element[];
-    fnToggleModalType: () => void;
+    onSwitchToRegister : (event:Event)=> void
 }
 
-const LoginForm = ({ fnToggleModalType,children }: Props) => {
+const LoginForm = ({ children,onSwitchToRegister }: Props) => {
+    const modal = modalAuthPropertyStore.get()
+    const [modalState, setModalState] = useState(modal.changeToLogin || modal.changeToRegister );
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const [modalState, setModalState] = useState(false);
     const [formError, setFormError] = useState(false);
     const [toastMsg, setToastMsg] = useState('');
     const {
@@ -32,13 +34,16 @@ const LoginForm = ({ fnToggleModalType,children }: Props) => {
         onResetForm
     } = useForm<UserLogin>(initLoginForm, formLoginValidator);
 
+    useEffect(()=>{
+        onResetForm()
+    },[])
+
     const toggleModal = () => {
         setModalState((prev) =>
             !prev
         );
     };
-
-
+  
     const login = async (e: SubmitEvent) => {
         e.preventDefault();
 
@@ -59,18 +64,18 @@ const LoginForm = ({ fnToggleModalType,children }: Props) => {
                 }
             )
             const data = await response.json()
-            console.log(data, 'data client')
             if (!data.success) {
                 setFormSubmitted(false)
                 setFormError(true);
                 throw data
             } else {
-                console.log(data, 'data client')
+
                 setFormSubmitted(false);
                 setToastMsg(data.message);
-                toggleModal && toggleModal();
                 navigate(window.location.pathname);
                 onResetForm();
+                setModalAuth({ changeToLogin: false, changeToRegister: false });
+                setModalState(false)
             }
 
         } catch (e) {
@@ -104,12 +109,8 @@ const LoginForm = ({ fnToggleModalType,children }: Props) => {
                             <hr className={'divide-x-2 divide-slate-800 mx-2'} />
                             {formError && <div className="flex gap-2  py-3 px-3 text-sm z-10 border border-red-500 rounded bg-red-200 ">{toastMsg}</div>}
                             <div className={'flex justify-center items-center gap-2'}>
-                                <Button variant="outline" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" type="button" onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                  fnToggleModalType()
-                                    }}> Crear cuenta</Button>
-                                <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="w-full py-1 px-5 text-white border border-gray-400" type="submit">Iniciar Sesión {formSubmitted && isFormValid && <Spinner />}</Button>
+                                <Button variant="outline" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" type="button" onClick={onSwitchToRegister}> Crear cuenta</Button>
+                                <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="flex w-full py-1 px-5  gap-2 justify-center text-white border border-gray-400" type="submit"><span>Iniciar Sesión</span> {formSubmitted && isFormValid && <div className="size-1"><Spinner /></div>}</Button>
                             </div>
                         </form>
                     </div>
