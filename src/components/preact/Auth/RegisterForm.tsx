@@ -22,9 +22,9 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
     const {
         isFormValid,
         changeFields,
-        username,
+        email,
         password,
-        usernameValid,
+        emailValid,
         passwordValid,
         onInputChange,
         onResetForm
@@ -77,12 +77,12 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
             <h1 className={'font-bold  text-center mx-auto px-6 pt-5'}>CREAR CUENTA</h1>
             <div className={'p-4 md:px-6 lg:px-5 h-fit'}>
                 <form className="grid grid-cols text-start gap-3 h-fit font-thin font-gotham" noValidate onSubmit={register}>
-                    <InputField label="Nombre de usuario" value={username} onChange={onInputChange} icon={usernameValid === null
+                    <InputField label="Nombre de usuario" value={email} onChange={onInputChange} icon={emailValid === null
                         ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
-                        : changeFields?.username === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={usernameValid === null} error={changeFields?.username} addStyles="h-12" name="username" id="username" type="text" />
-                    {(changeFields?.username && usernameValid)
-                        ? <label htmlFor="username" className="text-xs px-2 mx-2 font-thin text-red-700">{usernameValid}</label>
-                        : <label htmlFor="username" className="text-xs px-2 mx-2 text-gray-400">Ingresá tu nombre de usuario</label>}
+                        : changeFields?.email === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={emailValid === null} error={changeFields?.email} addStyles="h-12" name="email" id="email" type="email" />
+                    {(changeFields?.email && emailValid)
+                        ? <label htmlFor="email" className="text-xs px-2 mx-2 font-thin text-red-700">{emailValid}</label>
+                        : <label htmlFor="email" className="text-xs px-2 mx-2 text-gray-400">Ingresá tu nombre de usuario</label>}
                     <InputField label="Contraseña" type="password" value={password} onChange={onInputChange} icon={passwordValid === null ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} /> : changeFields?.password === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={passwordValid === null} error={changeFields?.password} addStyles="h-12" name="password" id="password" />
                     {(changeFields?.password && passwordValid)
                         ? <label htmlFor="password" className="text-xs px-2  mx-2 font-thin text-red-700">{passwordValid}</label>

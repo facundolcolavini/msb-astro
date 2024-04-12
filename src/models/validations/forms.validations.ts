@@ -11,19 +11,24 @@ export interface formCheckedValues {
   contactEmailValid: null | string;
   contactPhoneValid: null | string;
   contactMessageValid: null | string;
-  usernameValid: null | string;
   passwordValid: null | string;
 }
 
 
 export const formRegisterValidator = {
-  username: [(value: string): boolean => value.length >= 1, 'El nombre de usuario es requerido'],
+  email: [
+    (value: string): boolean => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
+    'El correo debe tener un formato válido'
+  ],
   password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
   /*   confirmPassword: [(value: string): boolean => value.length >= 1, 'La confirmación de password es requerida'], */
 }
 
 export const formLoginValidator = {
-  username: [(value: string): boolean => value.length >= 1, 'El nombre de usuario es requerido'],
+  email: [
+    (value: string): boolean => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
+    'El correo debe tener un formato válido'
+  ],
   password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
 }
 

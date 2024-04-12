@@ -7,15 +7,15 @@ export async function POST(context: APIContext): Promise<Response> {
 /*   console.log(context.locals.session) */
   //read the form data
   const formData = await context.request.json()
-  const { password, username } = formData;
+  const { password, email } = formData;
 
   //validate the data
 
   // Handler de los campos requeridos para el registro 
-  if ( !password || !username) {
+  if ( !password || !email) {
       return new Response(
           JSON.stringify({
-              message: `${!username ? "username, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
+              message: `${!email ? "email, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
               success: false,
           }),
           {
@@ -23,9 +23,21 @@ export async function POST(context: APIContext): Promise<Response> {
           }
       );
   }
+  const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
+  
+  if (typeof email !== "string" || !emailPattern.test(email.trim()) ) {
+    return new Response(
+      JSON.stringify(
+        {
+          message: "El email debe de tener un formato válido",
+          success: false
+        }), {
+      status: 400,
+    });
+  }
   //search the user
   const foundUser = (
-    await db.select().from(User).where(eq(User.username, username))
+    await db.select().from(User).where(eq(User.username, email))
   ).at(0);
 
   //if user not found
@@ -33,7 +45,7 @@ export async function POST(context: APIContext): Promise<Response> {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "El Usuario no existe",
+        message: "El email registrado no existe",
       }),
       {
         status: 400,
@@ -45,7 +57,7 @@ export async function POST(context: APIContext): Promise<Response> {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "El Usuario no tiene contraseña",
+        message: "La contraseña no coincide con el email registrado",
       }),
       {
         status: 400,

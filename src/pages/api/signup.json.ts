@@ -8,11 +8,11 @@ import { lucia } from "../../auth";
 export async function POST(context: APIContext): Promise<Response> {
   //Parse the form data
   const formData = await context.request.json()
-  const { password, username } = formData;
+  const { password, email } = formData;
   //Validate the form data
   //search the user
   const foundUser = (
-    await db.select().from(User).where(eq(User.username, username))
+    await db.select().from(User).where(eq(User.username, email))
   ).at(0);
 
   //if user not found
@@ -20,17 +20,17 @@ export async function POST(context: APIContext): Promise<Response> {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "El nombre de usuario ya existe",
+        message: "El email utilizado ya existe, por favor intenta con otro email.",
       }),
       {
         status: 400,
       }
     );
   }
-  if (!password || !username) {
+  if (!password || !email) {
     return new Response(
       JSON.stringify({
-        message: `${!username ? "username, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
+        message: `${!email ? "email, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
         success: false,
       }),
       {
@@ -39,11 +39,15 @@ export async function POST(context: APIContext): Promise<Response> {
     );
   }
 
-  if (typeof username !== "string" || username.length < 4) {
+  // Validate email with regex pattern 
+    
+  const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
+  
+  if (typeof email !== "string" || !emailPattern.test(email.trim()) ) {
     return new Response(
       JSON.stringify(
         {
-          message: "El nombre de usuario debe contener 4 caracteres de largo",
+          message: "El email debe de tener un formato válido",
           success: false
         }), {
       status: 400,
@@ -68,7 +72,7 @@ export async function POST(context: APIContext): Promise<Response> {
   await db.insert(User).values([
     {
       id: userId,
-      username,
+      username:email,
       password: hashedPassword,
     },
   ]);
