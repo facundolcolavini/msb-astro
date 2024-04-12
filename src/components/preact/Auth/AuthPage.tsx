@@ -1,28 +1,37 @@
+import { modalAuthPropertyStore, setModalAuth } from "@/store/modalsAuthStore";
 import type { JSX } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { Modal } from "../ui/Modals/Modal";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import { modalAuthPropertyStore, setModalAuth } from "@/store/modalsAuthStore";
 
 interface AuthProps {
     children?: JSX.Element | JSX.Element[]
 }
 
 const AuthPage = ({ children }: AuthProps) => {
-    const [modal, setModal] = useState(modalAuthPropertyStore.get());
+    const [modalType, setModalType] = useState(modalAuthPropertyStore.get());
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     useEffect(() => {
-        const unsubscribe = modalAuthPropertyStore.subscribe(setModal);
+        const unsubscribe = modalAuthPropertyStore.subscribe(setModalType);
         return unsubscribe;
     }, []);
 
-    const handleSwitchToRegister = (event:Event) => {
+    const toggleModal = () => {
+        setModalAuth({ changeToLogin: false, changeToRegister: false });
+        setIsOpenModal((prev) =>
+            !prev
+        );
+    };
+
+    const handleSwitchToRegister = (event: Event) => {
         event.preventDefault();
         event.stopPropagation();
         setModalAuth({ changeToLogin: false, changeToRegister: true });
     };
-    
-    const handleSwitchToLogin = (event:Event) => {
+
+    const handleSwitchToLogin = (event: Event) => {
         event.preventDefault();
         event.stopPropagation();
         setModalAuth({ changeToLogin: true, changeToRegister: false });
@@ -31,17 +40,32 @@ const AuthPage = ({ children }: AuthProps) => {
     return (
         <>
             {
-                modal.changeToRegister ? (
-                    <RegisterForm onSwitchToLogin={handleSwitchToLogin}>
-                        <> {children}</>
-                    </RegisterForm>
-                ) : (
-                    <LoginForm onSwitchToRegister={handleSwitchToRegister}>
-                        <> {children}</>
-                    </LoginForm>
+                isOpenModal && (
+                    <Modal
+                        header={<div className={'flex justify-center  text-center items-center place-content-center p-3 relative'}><img src={`/images/logo.png`} className={'w-100 text-center self-center place-items-middle'} width={140} height={40} /></div>}
+                        footer=""
+                        addStyles="bg-secondary-bg-msb shadow-lg  rounded w-11/12 md:max-w-md mx-auto transform transition-transform duration-300"
+                        onHeaderCloseClick={toggleModal}
+                        onBackdropClick={toggleModal}
+                    >
+                        {
+                            modalType.changeToRegister ? (
+                                <RegisterForm onSwitchToLogin={handleSwitchToLogin} />
+
+                            ) : (
+                                <LoginForm  onSwitchToRegister={handleSwitchToRegister}/>
+
+                            )
+                        }
+                    </Modal>
                 )
             }
+            <button onClick={toggleModal}>
+                {children}
+            </button>
         </>
+
+
     )
 }
 
