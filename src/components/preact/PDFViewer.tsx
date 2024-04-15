@@ -1,12 +1,13 @@
 
 interface PDFViewerProps {
   file: string;
+addStyles?: string;
 }
 
-const PDFViewer: preact.FunctionComponent<PDFViewerProps> = ({ file }) => {
+const PDFViewer: preact.FunctionComponent<PDFViewerProps> = ({ file,addStyles }) => {
   return (
-    <div className={'animate-fade animate-duration-800  transition-all '}>
-      <iframe className={'rounded-lg'} src={`https://ficha.amaira.com.ar/view_pdf.php?file=emprendimientos/pdf/${file}`} width="100%" height="760px"></iframe>
+  <div className={`animate-fade animate-duration-800  transition-all ${addStyles}`}>
+      <iframe className={'rounded-lg'} src={`${file}`} width="100%" height="760px"></iframe>
     </div>
   );
 }

@@ -206,7 +206,7 @@ const PropertyPage: FunctionComponent<PropsWithChildren<Props>> = (props) => {
             console.error(error);
         }
     }
-
+    console.log(results)
     return (
         <article className=" px-3 md:px-0 lg:px-0 font-gotham">
             <section className="h-full md:px-5 lg:px-10">
@@ -242,7 +242,7 @@ const PropertyPage: FunctionComponent<PropsWithChildren<Props>> = (props) => {
                                 (<iframe className=" container mx-auto" width="100%" height="700" src={`https://www.youtube.com/embed/${videoUrl ?? ''}?autoplay=1&mute=1`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>) :
                                 tabMenuProperty.blueprint ? <GalleryProperty addStyles="container mx-auto grid grid-cols pb-16 lg:grid-cols-2 gap-5 animate-fade animate-duration-500  transition-all" galleryID={`gallery-blueprint-${results?.datos?.codemp}-${results?.datos?.codigo_ficha}`} images={results!?.plano !== "" && results!?.plano !== "null" ? [results!?.plano] : []} />
                                     : tabMenuProperty.pdf && (results?.emprendimiento?.ed_pdf !== "null" && results?.emprendimiento?.ed_pdf !== "") ? (
-                                        <PDFViewer file={`${results?.emprendimiento?.ed_pdf}`} />
+                                        <PDFViewer file={`https://ficha.amaira.com.ar/view_pdf.php?file=emprendimientos/pdf/${results?.emprendimiento?.ed_pdf}`} />
                                     ) : tabMenuProperty.unitList && results!?.emprendimiento ? (navigate(`/emprendimientos/${results?.emprendimiento?.ed_est}/${he.decode(results?.emprendimiento!?.ed_loc)}/${he.decode(results?.emprendimiento!?.ed_nom)}/${results?.emprendimiento?.codsuc}-${results?.emprendimiento?.ed_idl}`)) : (
                                         <div className="h-[700px] w-full bg-gray-300 rounded-xl aspect-square container mx-auto h-100"><span className="flex justify-center items-center h-full font-bold">No disponible</span></div>)
 

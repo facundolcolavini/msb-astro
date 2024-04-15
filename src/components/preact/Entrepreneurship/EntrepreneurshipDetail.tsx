@@ -246,7 +246,7 @@ const EntrepreneurshipDetail: FunctionComponent<PropsWithChildren<Props>> = (pro
 
                             tabMenuProperty.blueprint ? <GalleryProperty addStyles="container mx-auto grid grid-cols pb-16 lg:grid-cols-2 gap-5 animate-fade animate-duration-500  transition-all" galleryID={`gallery-blueprint-${results?.datos?.codemp}-${results?.datos?.codsuc}`} images={results?.imgP.flat() || []} />
                                 : tabMenuProperty.pdf && (results?.pdf?.length ?? 0) > 0 ? (
-                                    <PDFViewer file={`${results?.pdf[0]?.pdf_name}`} />
+                                    <PDFViewer file={`https://ficha.amaira.com.ar/view_pdf.php?file=emprendimientos/pdf/${results?.pdf[0]?.pdf_name}`} />
                                 ) : tabMenuProperty.unitList && resultsUnit?.unidadesDisponibles ? (<div className="h-fit w-full bg-gray-300 container"><span className="flex justify-start items-start overflow-hidden h-fit font-bold"><UnitAvailableTable unitAvailable={resultsUnit} /></span></div>) : (
                                     <div className="h-[700px] w-full bg-gray-300 rounded-xl aspect-square container mx-auto h-100"><span className="flex justify-center items-center h-full font-bold">No disponible</span></div>)
                         }
