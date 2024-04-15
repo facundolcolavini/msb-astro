@@ -128,7 +128,7 @@ const PropertyPage: FunctionComponent<PropsWithChildren<Props>> = (props) => {
             console.error(error);
         }
     }
-    console.log(props?.session?.userId)
+
     useEffect(() => {
         fetchFavorites();
     }, [props.propertyCode]);

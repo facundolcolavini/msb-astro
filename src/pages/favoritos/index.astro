@@ -247,28 +247,29 @@ const description =
       "button[id=btn-delete-prop]"
     );
 
-    let ids = Array.from(checkboxes).map((checkbox) => checkbox.id);
+    let ids = [];
 
     selectAll.addEventListener("change", (e) => {
       checkboxes.forEach((checkbox) => {
         checkbox.checked = selectAll.checked;
+        if (selectAll.checked) {
+          ids.push(checkbox.id);
+        } else {
+          ids = [];
+        }
       });
-      if (selectAll.checked) {
-        ids = Array.from(checkboxes).map((checkbox) => checkbox.id);
-      } else {
-        ids = [];
-      }
     });
 
     checkboxes.forEach((checkbox) =>
       checkbox.addEventListener("change", (e) => {
-        if (checkbox.checked) {
+        if (checkbox.checked && !ids.includes(checkbox.id)) {
           ids.push(checkbox.id);
         } else {
           ids = ids.filter((id) => id !== checkbox.id);
         }
       })
     );
+
     if (session && session.userId) {
       deleteButtons.forEach((button) =>
         button.addEventListener("click", async (e) => {

@@ -1,9 +1,10 @@
 import { modalAuthPropertyStore, setModalAuth } from "@/store/modalsAuthStore";
-import type { JSX } from "preact";
+
 import { useEffect, useState } from "preact/hooks";
 import { Modal } from "../ui/Modals/Modal";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import type { JSX } from "astro/jsx-runtime";
 
 interface AuthProps {
     children?: JSX.Element | JSX.Element[]
