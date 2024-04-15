@@ -9,7 +9,7 @@ import Link from "@/components/ui/Link.astro";
 import type { APIResponseResultsRecords } from "@/interfaces/results.records.interfaces";
 
 import Layout from "@/layouts/Layout.astro";
-import { prefetch } from "astro:prefetch";
+
 const response = await fetch(
   `${Astro.url.origin}/api/results.json?sellocalidades=miami`
 );
