@@ -1,5 +1,3 @@
-// entrepreneurships.service.ts
-
 import type { APIResponseEntrepreneurship, Results } from "@/interfaces/entrepreneurship.interfaces";
 import { fetchData } from "@/utils/fetch-data";
 

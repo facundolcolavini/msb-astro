@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 
-import EmailIcon from '../Icons/EmailIcon';
-import FacebookIcon from '../Icons/FacebookIcon';
-import LinkedInIcon from '../Icons/LinkedInIcon';
-import ShareIcon from '../Icons/SharaIcon';
-import { WhatsAppIcon } from '../Icons/WhatsAppIcon';
+import EmailIcon from '@/components/preact/Icons/EmailIcon';
+import LinkedInIcon from '@/components/preact/Icons/LinkedInIcon';
+import ShareIcon from '@/components/preact/Icons/SharaIcon';
+import WhatsAppIcon from '@/components/preact/Icons/WhatsAppIcon';
+import FacebookIcon from '@/components/preact/Icons/FacebookIcon';
 
 interface Props { }
 
@@ -37,7 +37,7 @@ const ShareButton = () => {
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block space-y-2">
       <div
         className="compartir-title cursor-pointer flex items-center  animate-duration-500 animate-fade-up transition-all"
         onClick={toggleIcons}
@@ -55,34 +55,34 @@ const ShareButton = () => {
         <a
           target="_blank"
           href={`https://api.whatsapp.com/send?phone=&text=Hola%2C%20te%20comparto%20esta%20ficha%3A%20${encodeURIComponent(window.location.href)}&source=&data=`}
-          className="block p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
+          className=" flex justify-center items-center p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
           title="Compartir en WhatsApp"
         >
-          <WhatsAppIcon  h="24" w="24"/>
+          <WhatsAppIcon className={'h-5 w-5'} />
         </a>
         <a
           target="_blank"
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
-          className="block p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
+          className=" p-1 rounded-full hover:bg-gray-200 transition-colors duration-300 flex justify-center items-center"
           title="Compartir en LinkedIn"
         >
-          <LinkedInIcon />
+          <LinkedInIcon className={'h-5 w-5'} />
         </a>
         <a
           target="_blank"
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&source=&data=&fbclid=`}
-          className="block p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
+          className=" flex justify-center items-center p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
           title="Compartir en Facebook"
         >
-          <FacebookIcon />
+          <FacebookIcon className={'h-5 w-5'} />
         </a>
         <a
           target="_blank"
           href={`mailto:?subject=Te comparto este articulo&body=Hola, te comparto este articulo que me parecio interesante ${encodeURIComponent(window.location.href)}`}
-          className="block p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
+          className=" flex justify-center items-center p-1 rounded-full hover:bg-gray-200 transition-colors duration-300"
           title="Compartir por Email"
         >
-          <EmailIcon />
+          <EmailIcon className={'h-5 w-5'} />
         </a>
       </nav>
 

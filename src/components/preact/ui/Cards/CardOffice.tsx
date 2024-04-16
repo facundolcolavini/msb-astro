@@ -7,17 +7,18 @@ import type { FunctionComponent } from "preact";
 import { twMerge } from "tailwind-merge";
 
 interface Props extends HTMLAttributes<"div"> {
+    id: string; // generarla con Argon2id
     suc_name: string;
     suc_loc: string;
     suc_img: string;
     suc_dir: string;
     suc_phone: string;
     addStyles?: string;
-    href: string;
+    href?: string;
     whatsAppPhone: string;
 }
 
-const CardBranch: FunctionComponent<Props> = ({ href, suc_name, suc_loc, suc_img, suc_dir, suc_phone, whatsAppPhone, addStyles }) => {
+const CardOffice: FunctionComponent<Props> = ({ href, suc_name, suc_loc, suc_img, suc_dir, suc_phone, whatsAppPhone, addStyles }) => {
     const styles = twMerge(clsx(" rounded-lg  mx-auto w-full overflow-hidden shadow-lg", addStyles));
     return (
         <div className={styles}>
@@ -37,9 +38,7 @@ const CardBranch: FunctionComponent<Props> = ({ href, suc_name, suc_loc, suc_img
                         <div class="flex items-center justify-center gap-1 ">
                             <a href={href} target="_blank"><PaperLocationIcon /></a>
                             <a href={`https://api.whatsapp.com/send?phone=${whatsAppPhone}`} className={' '} target="_blank">
-
                                 <WhatsAppIcon className={'h-6 w-6 fill-gray-700'} />
-
                             </a>
                         </div>
                     </div>
@@ -51,4 +50,4 @@ const CardBranch: FunctionComponent<Props> = ({ href, suc_name, suc_loc, suc_img
     )
 }
 
-export default CardBranch
+export default CardOffice

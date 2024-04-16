@@ -1,10 +1,9 @@
 
+import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
 import type { HTMLAttributes } from "astro/types";
 import clsx from 'clsx';
 import { useState, type FunctionComponent } from "preact/compat";
 import { twMerge } from 'tailwind-merge';
-import Button from "../Buttons/Button";
-import { WhatsAppIcon } from "@/components/preact/Icons/WhatsAppIcon";
 
 interface Props extends HTMLAttributes<"a"> {
     cardData: {
@@ -61,7 +60,7 @@ const CardEntrepreneurship: FunctionComponent<Props> = ({ cardData, addStyles, h
                         {cardData?.ed_est.replace("&oacute;", "ó")}
                     </button>
                     <div class="flex items-center justify-center gap-1 ">
-                        <a href={`https://api.whatsapp.com/send/?phone=5491144161700&text=Hola%2C+me+contactaba+desde+http%3A%2F%2Fmatiasszpira.com.ar%2F+para+consultarles&type=phone_number&app_absent=0`} target="_blank"><WhatsAppIcon /></a>
+                        <a href={`https://api.whatsapp.com/send/?phone=5491144161700&text=Hola%2C+me+contactaba+desde+http%3A%2F%2Fmatiasszpira.com.ar%2F+para+consultarles&type=phone_number&app_absent=0`} target="_blank"><WhatsAppIcon className={'h-6 w-6 fill-gray-700'}/></a>
                     </div>
                 </div>
             </div>

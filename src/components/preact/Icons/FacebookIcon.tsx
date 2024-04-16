@@ -1,18 +1,20 @@
-import clsx from "clsx";
-import { twMerge } from "tailwind-merge";
-
-interface Props {
-    addStyles?: string;
-    w ?: string;
-    h ?: string; 
-  }
-const FacebookIcon = ({addStyles, w = "24", h = "24"}:Props) => {
-    const styles = twMerge(clsx("h-100 w-100 object-contain", addStyles));
-  return (
-    <>
-      <img id="facebook-icon" className={styles} alt="facebook icon" src="/images/facebook.png" width={w} height={h} />
-    </>
-  )
+import type { JSX } from 'preact'
+interface Props extends JSX.SVGAttributes<SVGSVGElement> {
 }
 
-export default FacebookIcon
+
+function FacebookIcon(props:Props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      height="1em"
+      width="1em"
+      {...props}
+    >
+      <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0014.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z" />
+    </svg>
+  );
+}
+
+export default FacebookIcon;

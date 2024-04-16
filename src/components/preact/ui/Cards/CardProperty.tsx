@@ -8,8 +8,9 @@ import clsx from 'clsx';
 import he from "he";
 import { type FunctionComponent } from "preact/compat";
 import { twMerge } from 'tailwind-merge';
-import SquareMeterIcon from '../../Icons/SquareMeterIcon';
-import { WhatsAppIcon } from '../../Icons/WhatsAppIcon';
+import SquareMeterIcon from '@/components/preact/Icons/SquareMeterIcon';
+import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
+
 
 interface Props extends HTMLAttributes<"a"> {
     cardData: File
@@ -48,14 +49,7 @@ const CardProperty: FunctionComponent<Props> = ({ cardData, addStyles, href, key
                         {he.decode(cardData.operacion)}
                     </button>
                     <div class="flex items-center justify-center gap-1 ">
-                        {/*  <button onClick={!favorited ? addToFavorite : removeFromFavorite}  >
-                            <span className={!favorited ? " fill-black-400" : "fill-black-400"}>
-                                <HeartIcon addStyles={!favorited ? "fill-primary-white stroke-primary-text-msb  hover:fill-primary-text-msb " : "stroke-primary-text-msb transition-all hover:fill-primary-text-msb fill-primary-text-msb"} />
-                            </span>
-
-
-                        </button> */}
-                        <a href={`https://api.whatsapp.com/send/?phone=5491144161700&text=Hola%2C+me+contactaba+desde+http%3A%2F%2Fmatiasszpira.com.ar%2F+para+consultarles&type=phone_number&app_absent=0`} target="_blank"><WhatsAppIcon /></a>
+                        <a href={`https://api.whatsapp.com/send/?phone=5491144161700&text=Hola%2C+me+contactaba+desde+http%3A%2F%2Fmatiasszpira.com.ar%2F+para+consultarles&type=phone_number&app_absent=0`} target="_blank"><WhatsAppIcon className={'h-6 w-6 fill-gray-700'} /></a>
                     </div>
 
                 </div>
