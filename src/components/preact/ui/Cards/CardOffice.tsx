@@ -1,5 +1,5 @@
 
-import { PaperLocationIcon } from '@/components/preact/Icons/PaperLocationIcon';
+import  PaperLocationIcon  from '@/components/preact/Icons/PaperLocationIcon';
 import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
 import type { HTMLAttributes } from "astro/types";
 import clsx from "clsx";
@@ -36,9 +36,9 @@ const CardOffice: FunctionComponent<Props> = ({ href, suc_name, suc_loc, suc_img
                         </div>
 
                         <div class="flex items-center justify-center gap-1 ">
-                            <a href={href} target="_blank"><PaperLocationIcon /></a>
-                            <a href={`https://api.whatsapp.com/send?phone=${whatsAppPhone}`} className={' '} target="_blank">
-                                <WhatsAppIcon className={'h-6 w-6 fill-gray-700'} />
+                            <a href={href} target="_blank"><PaperLocationIcon className={'h-4 w-4 md:h-5 md:w-5 lg:h-5 lg:w-5 stroke-gray-700'} /></a>
+                            <a href={`https://api.whatsapp.com/send?phone=${whatsAppPhone}`} target="_blank">
+                                <WhatsAppIcon className={'h-4 w-4 md:h-5 md:w-5 lg:h-5 lg:w-5 fill-gray-700'} />
                             </a>
                         </div>
                     </div>

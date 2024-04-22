@@ -3,7 +3,7 @@ import SocialList from "@/components/SocialList.astro";
 import TitleSections from "@/components/TitleSections.astro";
 import ContactForm from "@/components/preact/Contact/ContactForm";
 import MapLocationIcon from "@/components/preact/Icons/MapLocationIcon";
-import { PaperLocationIcon } from "@/components/preact/Icons/PaperLocationIcon";
+import  PaperLocationIcon  from "@/components/preact/Icons/PaperLocationIcon";
 import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
 import { officesMock } from "@/data/offices";
 import Layout from "@/layouts/Layout.astro";
@@ -93,16 +93,16 @@ const description =
                       </span>
                     </div>
 
-                    <div class="flex items-center justify-center gap-1 ">
+                    <div class="flex items-end justify-end gap-1 ">
                       <a href={suc.href} target="_blank">
-                        <PaperLocationIcon />
+                        <PaperLocationIcon  class={' h-4 w-4 md:h-5 md:w-5 lg:h-5 lg:w-5 stroke-gray-700'}/>
                       </a>
                       <a
                         href={`https://api.whatsapp.com/send?phone=${suc.whatsAppPhone}`}
                         class={" "}
                         target="_blank"
                       >
-                        <WhatsAppIcon class={"h-6 w-6 fill-gray-700"} />
+                        <WhatsAppIcon class={'h-4 w-4 md:h-5 md:w-5 lg:h-5 lg:w-5  fill-gray-700'} />
                       </a>
                     </div>
                   </div>
