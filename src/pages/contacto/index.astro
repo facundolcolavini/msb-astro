@@ -4,8 +4,9 @@ import TitleSections from "@/components/TitleSections.astro";
 import ContactForm from "@/components/preact/Contact/ContactForm";
 import { PaperLocationIcon } from "@/components/preact/Icons/PaperLocationIcon";
 import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
-import { offices } from "@/data/offices";
+import { officesMock } from "@/data/offices";
 import Layout from "@/layouts/Layout.astro";
+
 const title = "Contacto - Matías Szpira Bienes Raíces";
 const description =
   "Contactanos para ayudarte a encontrar tu próximo hogar o inversión.";
@@ -58,25 +59,27 @@ const description =
         class="grid grid-cols justify-center md:grid-cols-2 gap-5 lg:gap-2 lg:grid-cols-4 container mx-auto"
       >
         {
-          offices.map((suc, index) => (
+          officesMock.map((suc, index) => (
             <button
-              class="rounded"
-              data-officeId={`card-${index}`}
+              class=""
+              data-officeId={`card-${index + 1}`}
               id={`cardOffice`}
             >
-              <div class="bg-secondary-msb">
+              <div class="bg-secondary-msb rounded">
                 <img
                   class="w-full object-cover"
                   src={suc.suc_img}
                   alt={suc.suc_name}
                 />
                 <div class="p-5 ">
-                  <div class="text-xl font-medium text-nowrap capitalize">
-                    <span class="font-extrabold capitalize">
+                  <div class="text-xl font-medium text-nowrap text-start capitalize">
+                    <span class="font-extrabold  capitalize">
                       {suc.suc_name}
                     </span>
                   </div>
-                  <p class="text-bg-2-msb  text-md font-bold">{suc.suc_loc}</p>
+                  <p class="text-bg-2-msb text-start text-md font-bold">
+                    {suc.suc_loc}
+                  </p>
                   <div class="flex justify-between">
                     <div>
                       <span class="flex items-center text-sm font-semibold text-gray-700 mr-2 mb-1 ">
@@ -106,25 +109,55 @@ const description =
           ))
         }
       </div>
+      <div class="mx-auto container my-10">
+        <!-- Current map iframe match for id buttonclicked -->
+        <iframe
+          id="currentMap"
+          data-map="map"
+          src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY}`}
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"></iframe>
+      </div>
     </section>
   </section>
 </Layout>
 
-<script define:vars={{ offices }}>
-  document.addEventListener("astro:page-load", (event) => {
-    // Listo of cardoffice online one get clicked and then the border style painted
+<script is:inline define:vars={{ officesMock }}>
+  document.addEventListener("astro:page-load", async (event) => {
+    // List of cardoffice online one get clicked and then the border style painted
     const cardOffice = document.querySelectorAll("#cardOffice");
+    const currentMap = document.querySelector("#currentMap");
     let currentCardClicked = "";
+
+    // Almacena la URL base del iframe en una variable separada
+    const baseIframeSrc = currentMap.getAttribute("src");
+    currentMap.classList.add("hidden");
+
     cardOffice.forEach((card) => {
       card.addEventListener("click", (e) => {
         currentCardClicked = card.getAttribute("data-officeId");
-        console.log(currentCardClicked, "currentCardClicked");
+
         cardOffice.forEach((card) => {
           card.classList.remove("border-4");
           card.classList.remove("border-primary-msb");
         });
         card.classList.add("border-4");
         card.classList.add("border-primary-msb");
+
+        // set to data-map div the iframe with the map
+
+        const officeMock = officesMock?.find(
+          (office) => office.id === currentCardClicked?.split("-")[1]
+        );
+
+        // Agrega el parámetro q a la URL base del iframe
+        const newIframeSrc = baseIframeSrc + "&q=" + officeMock?.suc_dir;
+        currentMap.setAttribute("src", newIframeSrc);
+
+        currentMap.classList.remove("hidden");
       });
     });
   });

@@ -10,9 +10,8 @@ import Layout from "@/layouts/Layout.astro";
 import { getEntrepreneurshipById } from "@/services/get-all-entrepreneurship";
 import { fetchData } from "@/utils/fetch-data";
 import { capitalize } from "@/utils/formats";
-import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 import he from "he";
+
 const session = Astro.locals?.session;
 
 if (!session) {

@@ -1,4 +1,4 @@
-export const offices = [
+export const officesMock = [
     {
         id: "1",
         href:"https://maps.app.goo.gl/PdCXedJ3XriKhkeD6",
