@@ -27,7 +27,7 @@ const description =
           Envianos tu consulta y te responderemos a la brevedad
         </p>
       </div>
-      <div class="grid lg:grid-cols-2 lg:gap-15 md:grid-cols-2 grid-cols p-8">
+      <div class="grid lg:grid-cols-2 lg:gap-15 md:grid-cols-2 md:px-0 grid-cols p-8">
         <div class="text-center lg:mx-6 py-8 bg-[#D9D9D9] px-4">
           <ContactForm client:load />
         </div>
@@ -58,22 +58,22 @@ const description =
     </section>
     <section class="bg-secondary-bg-msb py-10">
       <div
-        class="grid grid-cols justify-center md:grid-cols-2 gap-5 lg:gap-2 lg:grid-cols-4 container mx-auto"
+        class="grid grid-cols justify-center md:grid-cols-2 md:px-0 gap-5 lg:gap-2 lg:grid-cols-4 container mx-auto"
       >
         {
           officesMock.map((suc, index) => (
             <button
-              class=""
+              class="shadow rounded-lg transition-all"
               data-officeId={`card-${index + 1}`}
               id={`cardOffice`}
             >
               <div class="bg-secondary-msb rounded">
                 <img
-                  class="w-full object-cover"
+                  class="w-full object-cover rounded-t-lg"
                   src={suc.suc_img}
                   alt={suc.suc_name}
                 />
-                <div class="p-5 ">
+                <div class="p-5">
                   <div class="text-xl font-medium text-nowrap text-start capitalize">
                     <span class="font-extrabold  capitalize">
                       {suc.suc_name}
