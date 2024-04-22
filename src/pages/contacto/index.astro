@@ -2,10 +2,12 @@
 import SocialList from "@/components/SocialList.astro";
 import TitleSections from "@/components/TitleSections.astro";
 import ContactForm from "@/components/preact/Contact/ContactForm";
+import MapLocationIcon from "@/components/preact/Icons/MapLocationIcon";
 import { PaperLocationIcon } from "@/components/preact/Icons/PaperLocationIcon";
 import WhatsAppIcon from "@/components/preact/Icons/WhatsAppIcon";
 import { officesMock } from "@/data/offices";
 import Layout from "@/layouts/Layout.astro";
+import { capitalize } from "@/utils/formats";
 
 const title = "Contacto - Matías Szpira Bienes Raíces";
 const description =
@@ -110,6 +112,10 @@ const description =
         }
       </div>
       <div class="mx-auto container my-10">
+        <div id="location-label" class="hidden items-end gap-1 w-fit">
+            <MapLocationIcon />
+            <span class="text-sm md:text-md lg:text-lg text-primary-text-msb w-fit text-pretty font-semibold"></span>
+        </div>
         <!-- Current map iframe match for id buttonclicked -->
         <iframe
           id="currentMap"
@@ -126,10 +132,11 @@ const description =
 </Layout>
 
 <script is:inline define:vars={{ officesMock }}>
-  document.addEventListener("astro:page-load", async (event) => {
+
     // List of cardoffice online one get clicked and then the border style painted
     const cardOffice = document.querySelectorAll("#cardOffice");
     const currentMap = document.querySelector("#currentMap");
+    const locationLabel = document.querySelector("#location-label");
     let currentCardClicked = "";
 
     // Almacena la URL base del iframe en una variable separada
@@ -146,6 +153,7 @@ const description =
         });
         card.classList.add("border-4");
         card.classList.add("border-primary-msb");
+        card.classList.add("rounded-lg");
 
         // set to data-map div the iframe with the map
 
@@ -156,9 +164,12 @@ const description =
         // Agrega el parámetro q a la URL base del iframe
         const newIframeSrc = baseIframeSrc + "&q=" + officeMock?.suc_dir;
         currentMap.setAttribute("src", newIframeSrc);
-
+        // Agregar al label la dirección de la sucursal 
+        locationLabel.querySelector("span").textContent = officeMock?.suc_dir;
+        locationLabel.classList.remove("hidden");
+        locationLabel.classList.add("flex");
         currentMap.classList.remove("hidden");
       });
     });
-  });
+
 </script>
