@@ -126,7 +126,9 @@ const description =
         <h1 class="text-lg text-black font-bold text-center uppercase">
           Favoritos
         </h1>
-        <p class="text-center">Administrá tus propiedades guardadas</p>
+        <p
+        class="text-primary-text-msb text-center text-pretty font-gotham font-thin text-xl md:text-2xl lg:text-2xl w-full"
+      >Administrá tus propiedades guardadas</p>
       </div>
     </section>
     <section class="container mx-auto flex justify-between py-5 px-8">
@@ -153,8 +155,11 @@ const description =
     <section class="py-5 px-8">
       {
         favoritesUser.length == 0 ? (
-          <div class="container mx-auto flex justify-center items-center h-96">
-            <FavHomeIcon class={'size-36 fill-primary-msb'}/>
+          <div class="container mx-auto flex flex-col justify-center items-center h-96">
+            <p class="text-black text-center font-bold py-10 font-gotham text-2xl">
+            {favoritesUser.length} propiedades agregadas
+          </p>
+            <img src="/images/fav.png" alt=""/>
           </div>
         ) : (
           <p class="text-black text-center font-bold py-3 font-gotham text-2xl">
