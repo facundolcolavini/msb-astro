@@ -6,7 +6,7 @@ import IconEyeInvisible from '../../Icons/EyeInvisibleIcon';
 import IconEye from '../../Icons/EyeIcon';
 
 
-interface InputFieldProps extends Omit<JSX.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'onChange' | 'icon'> {
+interface InputFieldProps extends Omit<JSX.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>, 'onChange' | 'icon'> {
   id: string;
   label?: string;
   type?: string;
