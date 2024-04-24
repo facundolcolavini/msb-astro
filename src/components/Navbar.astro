@@ -57,10 +57,11 @@ let session = user ? true : false;
                               item.dropdown?.map((item: any) =>
                                 item.href ? (
                                   <Link
+                                    checkActive={item.href === pathname}
                                     href={item.href ?? ""}
-                                    class="block px-3 py-2  font-primary-font-msb text-sm border border-none "
+                                    class:list="block px-3 py-2  font-primary-font-msb text-xs border border-none uppercase"
                                   >
-                                    <span class="font-primary-font-msb text-gray-600 font-semibold text-xs  hover:text-primary-msb hover:border-b-primary-msb uppercase ">
+                                    <span class:list="font-primary-font-msb text-gray-600 font-semibold text-xs  hover:text-primary-msb hover:border-b-primary-msb uppercase ">
                                       {item.label}
                                     </span>
                                   </Link>
@@ -286,7 +287,7 @@ let session = user ? true : false;
                     <NavDropDown client:load>
                       <span
                         slot="label"
-                        class={`${
+                        class:list={`${
                           item?.dropdown?.some((h) => h.href === pathname)
                             ? "text-primary-msb font-primary-font-msb font-semibold text-xs border-b-4 border-b-primary-msb hover:text-primary-msb uppercase"
                             : "font-primary-font-msb font-semibold text-xs  hover:text-primary-msb uppercase text-gray-600"
@@ -302,10 +303,11 @@ let session = user ? true : false;
                             item.dropdown?.map((item) =>
                               item.href ? (
                                 <Link
+                                checkActive={item.href === pathname}
                                   href={item.href ?? ""}
-                                  class="block px-3 py-2  font-primary-font-msb text-sm border border-none "
+                                  class:list="block px-3 py-2  font-primary-font-msb text-sm border border-none "
                                 >
-                                  <span class="font-primary-font-msb  font-semibold text-xs  hover:text-primary-msb hover:border-b-primary-msb uppercase text-gray-600 ">
+                                  <span class:list="font-primary-font-msb  font-semibold text-xs  hover:text-primary-msb hover:border-b-primary-msb uppercase text-gray-600 ">
                                     {item.label}
                                   </span>
                                 </Link>
