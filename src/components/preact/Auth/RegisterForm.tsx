@@ -3,7 +3,6 @@ import { initLoginForm, type UserLogin } from "@/models/users/users";
 import { formLoginValidator } from "@/models/validations/forms.validations";
 import { setModalAuth } from "@/store/modalsAuthStore";
 import { navigate } from "astro:transitions/client";
-import type { JSX } from "preact";
 import { useState } from "preact/hooks";
 import IconCheckCircle from "../Icons/CheckIcon";
 import ErrorIcon from "../Icons/ErrorIcon";
@@ -59,7 +58,7 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
 
                 setFormSubmitted(false);
                 setToastMsg(data.message);
-              
+
                 navigate(window.location.pathname);
                 onResetForm();
                 setModalAuth({ changeToLogin: false, changeToRegister: false });

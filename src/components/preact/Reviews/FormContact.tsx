@@ -1,14 +1,16 @@
 import { useForm } from "@/hooks/useForm";
 import { initContactReviewForm, type ContactReviewForm } from "@/models/reviews/reviews";
 import { formContactReviewValidator } from "@/models/validations/forms.validations";
-import { setModalAuth } from "@/store/modalsAuthStore";
 import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { useState } from "preact/hooks";
 import IconCheckCircle from "../Icons/CheckIcon";
 import ErrorIcon from "../Icons/ErrorIcon";
+import UserIcon from "../Icons/UserIcon";
 import Spinner from "../Spinner";
 import Button from "../ui/Buttons/Button";
 import InputField from "../ui/Inputs/InputField";
+import PhonIcon from "../Icons/PhoneIcon";
+import EmailIcon from '@/components/preact/Icons/EmailIcon';
 
 const FormContact = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -39,7 +41,7 @@ const FormContact = () => {
 
     try {
       setFormSubmitted(true);
-      const response = await fetch(`/api/signin.json/`,
+      const response = true /* await fetch(`/api/signin.json/`,
         {
           method: 'POST',
           headers: {
@@ -48,18 +50,18 @@ const FormContact = () => {
 
           body: JSON.stringify(values)
         }
-      )
-      const data = await response.json()
+      ) */
+      const data = { success: true, message: 'Comentario enviado' } /* await response.json() */
       if (!data.success) {
         setFormSubmitted(false)
         setFormError(true);
         throw data
       } else {
-        setFormSubmitted(false);
-        setToastMsg(data.message);
-        navigate(window.location.pathname);
-        onResetForm();
-        setModalAuth({ changeToLogin: false, changeToRegister: false });
+        setTimeout(() => {  
+          navigate('/comentarios');
+          onResetForm();
+          setFormSubmitted(false);
+        }, 3000)
       }
 
     } catch (e) {
@@ -70,26 +72,75 @@ const FormContact = () => {
 
   return (
     <>
-      <h1 className={'font-bold  text-center mx-auto px-6 pt-5'}>INICIAR SESIÓN</h1>
       <div className={'p-4 md:px-6 lg:px-5 h-fit'}>
-        <form className="grid grid-cols text-start gap-3 h-fit font-thin font-gotham" noValidate onSubmit={login}>
-          <InputField label="contactEmail" value={contactEmail} onChange={onInputChange} icon={contactEmailValid === null
-            ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
-            : changeFields?.contactEmail === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={contactEmailValid === null} error={changeFields?.contactEmail} addStyles="h-12" name="contactEmailValid" id="contactEmailValid" type="email" />
-          {(changeFields?.contactEmail && contactEmailValid)
-            ? <label htmlFor="contactEmail" className="text-xs px-2 mx-2 font-thin text-red-700">{contactEmailValid}</label>
-            : <label htmlFor="contactEmail" className="text-xs px-2 mx-2 text-gray-400">Ingresá tu email</label>}
-          <InputField label="Contraseña" type="password" value={contactName} onChange={onInputChange} icon={contactNameValid === null ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} /> : changeFields?.contactName === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={contactNameValid === null} error={changeFields?.password} addStyles="h-12" name="contactName" id="contactName" />
-          {(changeFields?.password && contactNameValid)
-            ? <label htmlFor="password" className="text-xs px-2  mx-2 font-thin text-red-700">{contactNameValid}</label>
-            : <label htmlFor="password" className="text-xs px-2 mx-2 text-gray-400">Ingresá tu contraseña</label>}
-          <hr className={'divide-x-2 divide-slate-800 mx-2'} />
-          {formError && <div className="flex gap-2  py-3 px-3 text-sm z-10 border border-red-500 rounded bg-red-200 ">{toastMsg}</div>}
-          <div className={'flex justify-center items-center gap-2'}>
-{/*             <Button variant="outline" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" type="button" onClick={onSwitchToRegister}> Crear cuenta</Button> */}
-            <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="flex w-full py-1 px-5  gap-2 justify-center text-white border border-gray-400" type="submit"><span>Iniciar Sesión</span> {formSubmitted && isFormValid && <Spinner />}</Button>
-          </div>
-        </form>
+        {isFormValid && !formError && formSubmitted
+          ? (
+            <div className="flex flex-col text-center gap-2 py-3 px-3 my-20">
+              <h1 class={'font-bold text-center tracking-normal pb-5 md:text-md text-2xl md:text-xl lg:text-3xl'}>GRACIAS POR TU COMENTARIO</h1>
+              <p  class="text-primary-text-msb text-pretty font-gotham font-normal text-2xl md:text-2xl lg:text-2xl w-full">
+                ¡Comentario enviado con éxito!
+              </p>
+              <IconCheckCircle className={'size-12 my-5 self-center fill-primary-hover-msb'} />
+            </div>
+            )
+          : (
+            <div>
+              <h1 class={'font-bold text-center tracking-normal pb-5 md:text-md text-2xl md:text-xl lg:text-3xl'}>ENVIANOS TUS COMENTARIOS</h1>
+              <p
+                class="text-primary-text-msb text-center text-pretty font-gotham font-normal text-xl md:text-2xl lg:text-2xl w-full pb-6"
+              >
+                Contanos tu experiencia con nosotros
+              </p>
+              <form className="grid grid-cols md:grid-cols-2 gap-4  lg:grid-cols-2 font-gotham" noValidate onSubmit={login}>
+                <div className={'space-y-5 h-full'}>
+                  <InputField label="Nombre" value={contactName} onChange={onInputChange} icon={contactNameValid === null
+                    ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                    : changeFields?.contactName === true ? <ErrorIcon addStyles="stroke-red-500" /> : <UserIcon className={'flex size-5 mx-2 justify-center items-center h-100 fill-secondary-text-msb self-center place-content-center'} />} success={contactNameValid === null} error={changeFields?.contactName} addStyles="h-12" name="contactName" id="contactName" type="text" />
+                  {(changeFields?.contactName && contactNameValid)
+                    && <label htmlFor="contactName" className="text-xs px-2 mx-2 font-thin text-red-700">{contactNameValid}</label>}
+                </div>
+                <div>
+                  <InputField label="Apellido" type="text" value={contactLastName} onChange={onInputChange} icon={contactLastNameValid === null
+                    ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                    : changeFields?.contactLastName === true ? <ErrorIcon addStyles="stroke-red-500" /> : <UserIcon className={'flex size-5 mx-2 justify-center items-center fill-secondary-text-msb h-100 self-center place-content-center'} />} success={contactLastNameValid === null} error={changeFields?.password} addStyles="h-12" name="contactLastName" id="contactLastName" />
+                  {(changeFields?.contactLastName && contactLastNameValid)
+                    && <label htmlFor="contactLastName" className="text-xs px-2  mx-2 font-thin text-red-700">{contactLastNameValid}</label>}
+                </div>
+                <div className={'space-y-5'}>
+                  <InputField label="E-mail" type="email" value={contactEmail} onChange={onInputChange} icon={contactEmailValid === null
+                    ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                    : changeFields?.contactEmail === true ? <ErrorIcon addStyles="stroke-red-500" /> : <EmailIcon className={'flex size-5 mx-2 justify-center fill-secondary-text-msb items-center h-100 self-center place-content-center'}/>} success={contactEmailValid === null} error={changeFields?.password} addStyles="h-12" name="contactEmail" id="contactEmail" />
+                  {(changeFields?.contactEmail && contactEmailValid)
+                    && <label htmlFor="contactEmail" className="text-xs px-2  mx-2 font-thin text-red-700">{contactEmailValid}</label>}
+
+                </div>
+                <div>
+                  <InputField label="Teléfono" type="text" value={contactPhone} onChange={onInputChange} icon={contactPhoneValid === null
+                    ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                    : changeFields?.contactPhone === true ? <ErrorIcon addStyles="stroke-red-500" /> : <PhonIcon className={'flex size-5 mx-2 justify-center items-center fill-secondary-text-msb h-100 self-center place-content-center'}/>} success={contactPhoneValid === null} error={changeFields?.password} addStyles="h-12" name="contactPhone" id="contactPhone" />
+                  {(changeFields?.contactPhone && contactPhoneValid)
+                    && <label htmlFor="contactPhone" className="text-xs px-2  mx-2 font-thin text-red-700">{contactPhoneValid}</label>}
+                </div>
+
+                <div className={'md:col-span-2 lg:col-span-2'}>
+                  <InputField label="Dejanos tu comentario..." type="textarea" value={contactMessage} onChange={onInputChange} icon={contactMessageValid === null
+                    ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                    : changeFields?.contactMessage === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={contactMessageValid === null} error={changeFields?.password} addStyles="place-content-start h-full" name="contactMessage" id="contactMessage" />
+                  {(changeFields?.contactMessage && contactMessageValid)
+                    && <label htmlFor="contactMessage" className="text-xs px-2  mx-2 font-thin text-red-700">{contactMessageValid}</label>}
+                </div>
+                {formError && <div className="flex gap-2  py-3 px-3 text-sm z-10 h-fit border border-red-500 rounded bg-red-200 ">{toastMsg}</div>}
+                <div className={'md:col-start-2 lg:col-start-2'}>
+                  <div className={'flex justify-end items-center gap-2 '}>
+                    <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="flex w-full py-4 text-lg px-32 md:w-fit lg:w-fit gap-2 justify-center text-white border border-gray-400" type="submit"><span>Enviar</span> {formSubmitted && isFormValid && <Spinner />}</Button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          )
+        }
+
       </div>
     </>
   )

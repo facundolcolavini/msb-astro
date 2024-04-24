@@ -12,8 +12,8 @@ export const CardReview = ({
 }: Props
 ) => {
     return (
-        <div id={id} class="flex items-center gap-5 p-3 bg-[#ffff] shadow justify-start">
-            <div class="bg-[#D9D9D9] mx-5 flex justify-center items-center  rounded-full px-4 py-3 md:py-2 lg:py-2 md:px-4 lg:px-4 ">
+        <div id={id} class="flex items-center gap-5 p-3 bg-[#ffff] shadow-md justify-start rounded-md">
+            <div class="bg-[#D9D9D9] mx-5 flex justify-center items-center  rounded-full px-4 py-3 md:py-2 lg:py-2 md:px-4 lg:px-4">
                 <UserIcon
                     class="md:size-12 lg:size-12 size-10 fill-primary-msb mx-auto" />
             </div>
