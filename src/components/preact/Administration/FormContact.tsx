@@ -39,32 +39,25 @@ const FormContact = () => {
 
     const formData = new FormData(e.target as HTMLFormElement);
     const values = Object.fromEntries(formData);
-
+    formData.append('tipo', '');
+    formData.append('desde', 'pagweb');
+    formData.append('codsuc', 'MSB');
     try {
       setFormSubmitted(true);
-      const response = true /* await fetch(`/api/signin.json/`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-
-          body: JSON.stringify(values)
-        }
-      ) */
-      const data = { success: true, message: 'Comentario enviado' } /* await response.json() */
-      if (!data.success) {
-        setFormSubmitted(false)
-        setFormError(true);
-        throw data
+      const response = await fetch(`/api/webQuery.json?method=POST&telefono=${formData.get("contactPhone")}&comentario=${formData.get("contactMessage")}&nombre=${formData.get("contactName")}&email=${formData.get("contactEmail")}&tipo=${''}&codsuc=${'MSB'}&desde=${'pagweb'}}`,
+      )
+      const data = await response.json()
+      if (data.hasOwnProperty('error')) {
+          setFormSubmitted(false)
+          setFormError(true);
+          throw data
       } else {
         setTimeout(() => {
+          setFormSubmitted(false);
           navigate('/servicios/administracion');
           onResetForm();
-          setFormSubmitted(false);
         }, 3000)
       }
-
     } catch (e) {
       setToastMsg((e as Error).message);
       setFormSubmitted(false);

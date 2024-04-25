@@ -50,7 +50,7 @@ const ContactForm = ({ codsuc = 'MSB', tipo = '', desde = 'pagweb' }: ContactFor
         try {
             setFormSubmitted(true);
             const response = await fetch(`/api/webQuery.json?method=POST&telefono=${formData.get("contactPhone")}&comentario=${formData.get("contactMessage")}&nombre=${formData.get("contactName")}&email=${formData.get("contactEmail")}&tipo=${tipo}&codsuc=${codsuc}&desde=${desde}`)
-            console.log(response)
+
             const data = await response.json()
             if (data.hasOwnProperty('error')) {
                 setFormSubmitted(false)

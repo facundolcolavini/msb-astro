@@ -34,7 +34,7 @@ export const useForm = <T>(initialValues: T, formValidations: FormValidations = 
     // Actualiza la función onInputChange para marcar el campo como tocado
     const onInputChange = ({ target }: Event): void => {
         const { name, value }: inputF = target as HTMLInputElement;
-        console.log(name, value)
+       
         setChangeFields(prev => ({ ...prev, [name]: true }));
         setFormState(
             (prev: typeof initialValues) => ({

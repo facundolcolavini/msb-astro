@@ -1,0 +1,41 @@
+---
+import AccountForm from "@/components/preact/Account/AccountForm";
+import Layout from "@/layouts/Layout.astro";
+const title = "Mi Cuenta";
+const description = ""
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-secondary-bg-msb font-gotham">
+    <div class="container mx-auto">
+      <div class="pt-10 pb-5">
+        <h1
+          class="font-bold text-center tracking-normal pb-5 text-xl md:text-2xl lg:text-3xl uppercase"
+        >
+        MI CUENTA
+        </h1>
+        <p class="text-lg text-primary-text-msb text-center pb-10">
+          Administrá tus datos personales y de contacto
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="bg-secondary-bg-msb py-10 ">
+    <div class="mx-auto container my-10">
+      <AccountForm 
+        client:load
+        userData={
+          {
+            id: "1",
+            username: "Juan Perez",
+            email: "juan@example.com",
+            phone: "1234567890",
+            location: "CABA",
+            firstname: "Juan",
+            lastname: "Perez",
+        }
+        }
+      />
+    </div>
+  </section>
+</Layout>

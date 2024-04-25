@@ -1,3 +1,15 @@
+export type User = {
+    id: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    password?: string;
+    confirmpassword?: string;
+    phone: string;
+    location : string;
+ }
+
 export type UserPost= {
     id: number;
     name: string;

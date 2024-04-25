@@ -13,6 +13,7 @@ import Button from "../ui/Buttons/Button";
 import InputField from "../ui/Inputs/InputField";
 import AttachmentIcon from '../Icons/AttachmentIcon';
 
+
 const FormContact = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState(false);
@@ -32,13 +33,10 @@ const FormContact = () => {
     contactMessageValid,
     contactFile,
     contactFileValid,
-    formState,
     onInputChange,
     onUploadFile,
     onResetForm
   } = useForm<ContactJoinForm>(initContactJoinForm, formContactJoinValidator);
-
-  console.log(contactFile)
 
   const contact = async (e: SubmitEvent) => {
     e.preventDefault();
@@ -100,7 +98,7 @@ const FormContact = () => {
               >
                 Dejanos tu mensaje y nos contactamos a la brevedad
               </p>
-              <form className="grid grid-cols md:grid-cols-2 gap-4  lg:grid-cols-2 font-gotham md:w-fit lg:w-3/4 mx-auto" noValidate onSubmit={contact} enctype="multipart/form-data">
+              <form className="grid grid-cols md:grid-cols-2 gap-4 lg:grid-cols-2 font-gotham md:w-fit lg:w-3/4 mx-auto" noValidate onSubmit={contact} enctype="multipart/form-data">
                 <div className={'space-y-5 h-full'}>
                   <InputField label="Nombre" value={contactName} onChange={onInputChange} icon={contactNameValid === null
                     ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
@@ -141,7 +139,7 @@ const FormContact = () => {
                 <div>
                   <InputField label="Adjuntar CV (.doc,.docx, .pdf)" type="file"  accept={'.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf'} onChange={onUploadFile} icon={contactFileValid === null
                     ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
-                    : changeFields?.contactFile === true ? <ErrorIcon addStyles="stroke-red-500" /> :<AttachmentIcon/>} success={contactFileValid === null} error={changeFields?.password} addStyles="h-12" name="contactFile" id="contactFile" />
+                    : changeFields?.contactFile === true ? <ErrorIcon addStyles="stroke-red-500" /> :<AttachmentIcon className={'flex size-5 mx-2 justify-center items-center fill-secondary-text-msb h-100 self-center place-content-center'}/>} success={contactFileValid === null} error={changeFields?.password} addStyles="h-12" name="contactFile" id="contactFile" />
                   {(changeFields?.contactFile && contactFileValid)
                     && <label htmlFor="contactFile" className="text-xs px-2  mx-2 font-thin text-red-700">{contactFileValid}</label>}
                 </div>

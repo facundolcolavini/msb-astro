@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks';
 import { twMerge } from 'tailwind-merge';
 import IconEyeInvisible from '../../Icons/EyeInvisibleIcon';
 import IconEye from '../../Icons/EyeIcon';
-
+import './inputFile.css';
 
 interface InputFieldProps extends Omit<JSX.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement>, 'onChange' | 'icon'> {
   id: string;
@@ -62,6 +62,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
       'ring-0': true,
       'p-4': type !== 'textarea',
       'p-3': type === 'textarea',
+      'input-file-upload' : type === 'file',
     }
   );
 
@@ -74,15 +75,20 @@ const InputField: FunctionComponent<InputFieldProps> = ({
       )}
       {
         type === 'file' ? (
+          <div className='input-file-upload'>
+          <label className="input-file-icon" htmlFor={id}>
+            {icon}
+          </label>
           <input
-          id={id}
-          type={type}
-          className={inputClasses}
-          onChange={onChange as JSX.GenericEventHandler<HTMLInputElement>}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          {...inputProps}
-        />
+            id={id}
+            type={type}
+            className={inputClasses}
+            onChange={onChange as JSX.GenericEventHandler<HTMLInputElement>}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            {...inputProps}
+          />
+        </div>
         ):
       
       type === 'textarea' ? (
@@ -122,7 +128,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
        {isPasswordVisible ? <IconEyeInvisible className={'size-5'} /> : <IconEye  className={'size-5'}/>}
      </button>
         )}
-        {icon && <span className="text-primary-border-msb flex justify-center transition-all  ease-in-out animate-duration-200">{icon}</span>}
+        {icon  && type !== 'file' && <span className="text-primary-border-msb flex justify-center transition-all  ease-in-out animate-duration-200">{icon}</span>}
       </div>
     </div>
   );
