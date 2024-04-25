@@ -158,14 +158,14 @@ export const formContactJoinValidator = {
 
 export const formUserValidator = {
   username: [ (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
-  'El nombre de usuario es requerido y solo puede contener letras y espacios'],
+  'El nombre de usuario es requerido'],
   firstname:[
     (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
-    'El nombre es requerido y solo puede contener letras y espacios'
+    'El nombre es requerido '
   ],
   lastname:[
     (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
-    'El apellido es requerido y solo puede contener letras y espacios'
+    'El apellido es requerido '
   ],
   email: [
     (value: string): boolean => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
@@ -191,5 +191,5 @@ export const formUserValidator = {
     'El teléfono es requerido y debe contener entre 7 y 15 dígitos'
   ],
   location:[ (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
-  'La localidad es requerida y solo puede contener letras y espacios'],
+  'La localidad es requerida '],
 } 
