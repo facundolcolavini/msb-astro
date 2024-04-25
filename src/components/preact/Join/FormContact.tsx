@@ -139,7 +139,7 @@ const FormContact = () => {
                     && <label htmlFor="contactMessage" className="text-xs px-2  mx-2 font-thin text-red-700">{contactMessageValid}</label>}
                 </div>
                 <div>
-                  <InputField label="Adjuntar CV (.doc, .pdf)" type="file"  accept={'.doc,.pdf'} onChange={onUploadFile} icon={contactFileValid === null
+                  <InputField label="Adjuntar CV (.doc,.docx, .pdf)" type="file"  accept={'.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf'} onChange={onUploadFile} icon={contactFileValid === null
                     ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
                     : changeFields?.contactFile === true ? <ErrorIcon addStyles="stroke-red-500" /> :<AttachmentIcon/>} success={contactFileValid === null} error={changeFields?.password} addStyles="h-12" name="contactFile" id="contactFile" />
                   {(changeFields?.contactFile && contactFileValid)

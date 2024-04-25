@@ -72,7 +72,20 @@ const InputField: FunctionComponent<InputFieldProps> = ({
           {label}
         </label>
       )}
-      {type === 'textarea' ? (
+      {
+        type === 'file' ? (
+          <input
+          id={id}
+          type={type}
+          className={inputClasses}
+          onChange={onChange as JSX.GenericEventHandler<HTMLInputElement>}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...inputProps}
+        />
+        ):
+      
+      type === 'textarea' ? (
         <textarea
           id={id}
           placeholder={placeholder}

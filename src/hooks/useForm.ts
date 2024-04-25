@@ -5,7 +5,7 @@ import type { FormValidations, formCheckedValues } from '@/models/validations/fo
 
 interface inputF {
     name: string,
-    value: string
+    value: string | File
 }
 
 export const useForm = <T>(initialValues: T, formValidations: FormValidations = <FormValidations>{}) => {
@@ -46,14 +46,13 @@ export const useForm = <T>(initialValues: T, formValidations: FormValidations = 
 
     // OnUploadFile maneja el cambio de archivos en el input file y actualiza el estado
     const onUploadFile = (event: Event): void => {
-        const [file] =  (event.target as HTMLInputElement).files ?? [];
-        if(file){
-            setFormState((prev: typeof initialValues) => ({...prev,  contactFile: file}));
-            setChangeFields(prev => ({ ...prev, file: true }));
-        }
-            
-            
+        const { files, name }: { files: FileList | null, name: string } = event.target as HTMLInputElement;
+        if(files && files[0]){
+            setFormState((prev: T) => ({...prev, [name]: files[0]}));
+            setChangeFields(prev => ({ ...prev, [name]: true }));
+        }       
     };
+
 
     const onResetForm = (): void => {
             setChangeFields({})

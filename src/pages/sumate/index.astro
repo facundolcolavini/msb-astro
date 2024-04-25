@@ -3,9 +3,10 @@ import HeroContainer from "@/components/HeroContainer.astro";
 import FormContact from "@/components/preact/Join/FormContact";
 import Layout from "@/layouts/Layout.astro";
 const title = "Sumate";
+const description = "Sumate a nuestro equipo";
 ---
 
-<Layout title={title} description="">
+<Layout title={title} description={description}>
   <article>
     <HeroContainer transition:animate={"fade"} img="/images/people-meet.webp">
       <div

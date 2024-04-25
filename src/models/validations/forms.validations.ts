@@ -140,10 +140,14 @@ export const formContactJoinValidator = {
   contactMessage: [
     (value: string): boolean => value.trim().length >= 1,
   ],
-  constactFile: // solo admite archivos pdf. o .doc
-    [
-      (value: File): boolean => value.type === 'application/pdf' ||  value.type === 'application/msword',
-      'El archivo debe ser un PDF o un documento de Word (.doc)'
-    ] 
+  contactFile: [
+    (value: File | undefined): boolean => {
+      if (!value) {
+        return false; // o true, dependiendo de si quieres que el campo sea opcional o no
+      }
+      return value.type === 'application/pdf' || value.type === 'application/msword' || value.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    },
+    'El archivo debe ser un PDF o un documento de Word (.doc o .docx)'
+  ]
 
 };
