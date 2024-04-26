@@ -1,13 +1,22 @@
-export type User = {
+export type UserAccount = {
     id: string;
-    username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    password?: string;
-    confirmpassword?: string;
-    phone: string;
-    location : string;
+    firstName: string;
+    lastName: string;
+    email?: string;
+    phone?: string;
+    phoneAlternative?: string;
+    address?: string;
+    street?:string;
+    addressNumber?:string;
+    location?: string;
+    creationDate: number;
+    lastUpdate: number;
+ }
+
+ export type UserChangePassword = {
+    currentPassword: string;
+    password: string;
+    confirmPassword: string;
  }
 
 export type UserPost= {
@@ -53,4 +62,11 @@ export const initLoginForm:UserLogin  = {
 export const initRegisterForm:UserRegister = {
     email: '',
     password: '',
+}
+
+
+export const initUserChangePassword:UserChangePassword = {
+    currentPassword: '',
+    password: '',
+    confirmPassword: '',
 }

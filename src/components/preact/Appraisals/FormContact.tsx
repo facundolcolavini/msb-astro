@@ -6,7 +6,7 @@ import { navigate } from "astro/virtual-modules/transitions-router.js";
 import { useState } from "preact/hooks";
 import IconCheckCircle from "../Icons/CheckIcon";
 import ErrorIcon from "../Icons/ErrorIcon";
-import PhonIcon from "../Icons/PhoneIcon";
+import PhoneIcon from "../Icons/PhoneIcon";
 import UserIcon from "../Icons/UserIcon";
 import Spinner from "../Spinner";
 import Button from "../ui/Buttons/Button";
@@ -117,7 +117,7 @@ const FormContact = () => {
                 <div>
                   <InputField label="Teléfono" type="text" value={contactPhone} onChange={onInputChange} icon={contactPhoneValid === null
                     ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
-                    : changeFields?.contactPhone === true ? <ErrorIcon addStyles="stroke-red-500" /> : <PhonIcon className={'flex size-5 mx-2 justify-center items-center fill-secondary-text-msb h-100 self-center place-content-center'} />} success={contactPhoneValid === null} error={changeFields?.password} addStyles="h-12" name="contactPhone" id="contactPhone" />
+                    : changeFields?.contactPhone === true ? <ErrorIcon addStyles="stroke-red-500" /> : <PhoneIcon className={'flex size-5 mx-2 justify-center items-center fill-secondary-text-msb h-100 self-center place-content-center'} />} success={contactPhoneValid === null} error={changeFields?.password} addStyles="h-12" name="contactPhone" id="contactPhone" />
                   {(changeFields?.contactPhone && contactPhoneValid)
                     && <label htmlFor="contactPhone" className="text-xs px-2  mx-2 font-thin text-red-700">{contactPhoneValid}</label>}
                 </div>

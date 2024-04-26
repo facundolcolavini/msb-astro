@@ -1,11 +1,13 @@
 ---
 import AccountForm from "@/components/preact/Account/AccountForm";
+import ChangePasswordForm from "@/components/preact/Account/ChangePasswordForm";
 import Layout from "@/layouts/Layout.astro";
 const title = "Mi Cuenta";
 const description = ""
 ---
 
 <Layout title={title} description={description}>
+  <article class="bg-secondary-bg-msb h-full">
   <section class="bg-secondary-bg-msb font-gotham">
     <div class="container mx-auto">
       <div class="pt-10 pb-5">
@@ -20,22 +22,28 @@ const description = ""
       </div>
     </div>
   </section>
-  <section class="bg-secondary-bg-msb py-10 ">
-    <div class="mx-auto container my-10">
+  <section class="bg-secondary-bg-msb">
+    <div class="mx-auto container mt-16 mb-5">
       <AccountForm 
         client:load
         userData={
           {
             id: "1",
-            username: "Juan Perez",
             email: "juan@example.com",
             phone: "1234567890",
             location: "CABA",
-            firstname: "Juan",
-            lastname: "Perez",
+            firstName: "Juan",
+            lastName: "Perez",
+            address: "Calle Falsa 123",
+            street: "Calle Falsa",
+            addressNumber : "123",
+            creationDate: 123345345,
+            lastUpdate: 123345345
         }
         }
       />
+      <ChangePasswordForm client:load/>
     </div>
   </section>
+</article>
 </Layout>

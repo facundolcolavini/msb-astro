@@ -1,6 +1,6 @@
 
 
-function PhonIcon(props: React.SVGProps<SVGSVGElement>) {
+function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       fill="currentColor"
@@ -14,4 +14,4 @@ function PhonIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default PhonIcon;
+export default PhoneIcon;

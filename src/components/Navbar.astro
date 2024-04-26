@@ -3,12 +3,11 @@
 import { navItems } from "@/data/navItems";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import AuthPage from "./preact/Auth/AuthPage";
 import HeartIcon from "./preact/Icons/HeartIcon";
 import LogOutIcon from "./preact/Icons/LogOutIcon";
 import NavDropDown from "./preact/NavDropDown";
 import Link from "./ui/Link.astro";
-import LoginForm from "./preact/Auth/LoginForm";
-import AuthPage from "./preact/Auth/AuthPage";
 
 const { user } = Astro.props;
 const { pathname } = Astro.url;
@@ -265,12 +264,9 @@ let session = user ? true : false;
         ) : (
           <div class="flex justify-start gap-5 items-end px-6 py-3 border-b">
             <AuthPage client:load>
-            <div
-              
-              class="flex items-center  px-6   w-fit justify-end h-10 border rounded bg-primary-msb text-tertiary-text-msb hover:bg-primary-bg-hover-msb cursor-pointer font-medium font-primary-font-msb border-text-primary-msb transition "
-            >
-              Iniciar sesión
-            </div>
+              <div class="flex items-center  px-6   w-fit justify-end h-10 border rounded bg-primary-msb text-tertiary-text-msb hover:bg-primary-bg-hover-msb cursor-pointer font-medium font-primary-font-msb border-text-primary-msb transition ">
+                Iniciar sesión
+              </div>
             </AuthPage>
           </div>
         )
@@ -284,7 +280,7 @@ let session = user ? true : false;
                 <div class="relative flex justify-between place-items-start gap-2  z-0  hover:border-primary-msb">
                   {item.icon && <Icon size={28} scale={1} name={item?.icon} />}
                   <Link class="flex  justify-start">
-                    <NavDropDown client:load>
+                    <NavDropDown client:only>
                       <span
                         slot="label"
                         class:list={`${
@@ -303,7 +299,7 @@ let session = user ? true : false;
                             item.dropdown?.map((item) =>
                               item.href ? (
                                 <Link
-                                checkActive={item.href === pathname}
+                                  checkActive={item.href === pathname}
                                   href={item.href ?? ""}
                                   class:list="block px-3 py-2  font-primary-font-msb text-sm border border-none "
                                 >

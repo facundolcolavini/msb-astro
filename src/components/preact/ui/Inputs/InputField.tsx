@@ -53,7 +53,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
   );
 
   const inputClasses = clsx(
-    'w-full h-full rounded-md transition-all duration-200 focus:outline-none focus:ring-0',
+    `w-full h-full rounded-md transition-all duration-200 focus:outline-none focus:ring-0 ${icon ? 'pr-10' : ''}`,
     {
       'border ': isFocused || hasValue,
       'border-gray-300': !error && !success && !isFocused,
