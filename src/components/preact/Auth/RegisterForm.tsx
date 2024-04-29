@@ -1,6 +1,6 @@
 import { useForm } from "@/hooks/useForm";
-import { initLoginForm, type UserLogin } from "@/models/users/users";
-import { formLoginValidator } from "@/models/validations/forms.validations";
+import { initRegisterForm, type UserRegister, type UserChangePassword } from '@/models/users/users';
+import { formLoginValidator, formRegisterValidator } from "@/models/validations/forms.validations";
 import { setModalAuth } from "@/store/modalsAuthStore";
 import { navigate } from "astro:transitions/client";
 import { useState } from "preact/hooks";
@@ -22,23 +22,30 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
         isFormValid,
         changeFields,
         email,
+        firstName,
+        firstNameValid,
+        lastName,
+        lastNameValid,
         password,
         emailValid,
         passwordValid,
         onInputChange,
         onResetForm
-    } = useForm<UserLogin>(initLoginForm, formLoginValidator);
+    } = useForm<UserRegister>(initRegisterForm, formRegisterValidator);
 
     const register = async (e: SubmitEvent) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
+        // Add create and update date user to the form 
+        formData.append('creationDate', Date.now().toString());
+        formData.append('lastUpdate', Date.now().toString());
         const values = Object.fromEntries(formData);
 
         try {
             setFormSubmitted(true);
 
-            const response = await fetch(`/api/signup.json/`,
+            const response = await fetch(`/api/auth/register.json/`,
                 {
                     method: 'POST',
                     headers: {
@@ -76,6 +83,22 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
             <h1 className={'font-bold  text-center mx-auto px-6 pt-5'}>CREAR CUENTA</h1>
             <div className={'p-4 md:px-6 lg:px-5 h-fit'}>
                 <form className="grid grid-cols text-start gap-3 h-fit font-thin font-gotham" noValidate onSubmit={register}>
+                    <div className="flex gap-2">
+                        <InputField label="Nombre" value={firstName} onChange={onInputChange} icon={firstNameValid === null
+                            ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                            : changeFields?.firstName === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={firstNameValid === null} error={changeFields?.firstName} addStyles="h-12" name="firstName" id="firstName" type="text" />
+
+                              <InputField label="Apellido" value={lastName} onChange={onInputChange} icon={lastNameValid === null
+                            ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
+                            : changeFields?.lastName === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={lastNameValid === null} error={changeFields?.lastName} addStyles="h-12" name="lastName" id="lastName" type="text" />
+                    </div>
+                 
+                    {(changeFields?.firstName && firstNameValid ) 
+                        ? <label htmlFor="firstName" className="text-xs px-2 mx-2 font-thin text-red-700">{firstNameValid}</label>
+                        :   lastNameValid && changeFields?.lastName 
+                        ? <label htmlFor="lastName" className="text-xs px-2 mx-2 font-thin text-red-700">{lastNameValid}</label> 
+                        :  null}
+
                     <InputField label="Email" value={email} onChange={onInputChange} icon={emailValid === null
                         ? <IconCheckCircle className={'size-5 flex items-center justify-center fill-primary-msb'} />
                         : changeFields?.email === true ? <ErrorIcon addStyles="stroke-red-500" /> : <></>} success={emailValid === null} error={changeFields?.email} addStyles="h-12" name="email" id="email" type="email" />

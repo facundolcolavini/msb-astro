@@ -1,7 +1,7 @@
-import { Lucia } from "lucia";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
-import { db, Session, User } from "astro:db";
 import { GitHub } from "arctic";
+import { db, Session, User } from "astro:db";
+import { Lucia } from "lucia";
 import { TimeSpan } from "oslo";
 const adapter = new DrizzleSQLiteAdapter(db as any, Session, User); // your adapter
 
@@ -17,7 +17,14 @@ export const lucia = new Lucia(adapter, {
     return {
       // attributes has the type of DatabaseUserAttributes
       githubId: attributes.github_id,
-      username: attributes.username,
+      email: attributes.email,
+      firstName: attributes.firstName,
+      lastName: attributes.lastName,
+      phone: attributes.phone,
+      phoneAlternative: attributes.phoneAlternative,
+      street: attributes.street,
+      addressNumber: attributes.addressNumber,
+      location: attributes.location,
     };
   },
 });
@@ -35,5 +42,12 @@ declare module "lucia" {
 }
 interface DatabaseUserAttributes {
   github_id: number;
-  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  phoneAlternative: string;
+  street: string;
+  addressNumber: string;
+  location: string;
 }

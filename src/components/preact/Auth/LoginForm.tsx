@@ -33,11 +33,13 @@ const LoginForm = ({ onSwitchToRegister }: Props) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
+        // update lastUpdate user to the form 
+        formData.append('lastUpdate', Date.now().toString());
         const values = Object.fromEntries(formData);
 
         try {
             setFormSubmitted(true);
-            const response = await fetch(`/api/signin.json/`,
+            const response = await fetch(`/api/auth/login.json/`,
                 {
                     method: 'POST',
                     headers: {

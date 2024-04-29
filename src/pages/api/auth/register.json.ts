@@ -3,16 +3,16 @@ import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 
 import { db, eq, User } from "astro:db";
-import { lucia } from "../../auth";
+import { lucia } from "../../../auth";
 
 export async function POST(context: APIContext): Promise<Response> {
   //Parse the form data
   const formData = await context.request.json()
-  const { password, email } = formData;
+  const { password, email, firstName ,lastName } = formData;
   //Validate the form data
   //search the user
   const foundUser = (
-    await db.select().from(User).where(eq(User.username, email))
+    await db.select().from(User).where(eq(User.email, email))
   ).at(0);
 
   //if user not found
@@ -27,6 +27,7 @@ export async function POST(context: APIContext): Promise<Response> {
       }
     );
   }
+
   if (!password || !email) {
     return new Response(
       JSON.stringify({
@@ -72,8 +73,12 @@ export async function POST(context: APIContext): Promise<Response> {
   await db.insert(User).values([
     {
       id: userId,
-      username:email,
+      email:email,
+      firstName: firstName,
+      lastName: lastName,
       password: hashedPassword,
+      creationDate: Date.now(),
+      lastUpdate: Date.now(),
     },
   ]);
 

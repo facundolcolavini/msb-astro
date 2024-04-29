@@ -37,7 +37,7 @@ export async function POST(context: APIContext): Promise<Response> {
   }
   //search the user
   const foundUser = (
-    await db.select().from(User).where(eq(User.username, email))
+    await db.select().from(User).where(eq(User.email, email))
   ).at(0);
 
   //if user not found

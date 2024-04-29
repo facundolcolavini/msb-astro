@@ -18,6 +18,7 @@
     "@fontsource/cormorant": "^5.0.8",
     "@lucia-auth/adapter-drizzle": "^1.0.5",
     "@nanostores/preact": "^0.5.0",
+    "@node-rs/argon2": "^1.8.3",
     "arctic": "^1.2.1",
     "astro": "^4.7.0",
     "astro-icon": "^1.1.0",

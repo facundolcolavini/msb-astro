@@ -3,8 +3,17 @@ import AccountForm from "@/components/preact/Account/AccountForm";
 import ChangePasswordForm from "@/components/preact/Account/ChangePasswordForm";
 import DangeForm from "@/components/preact/Account/DangeForm";
 import Layout from "@/layouts/Layout.astro";
+import type { Session } from "lucia";
 const title = "Mi Cuenta";
-const description = ""
+const description = "Administrá tus datos personales y de contacto";
+
+const user = Astro?.locals?.user 
+const session = Astro.locals.session 
+  console.log(session)
+if (!session) {
+ return  Astro.redirect("/");
+}
+
 ---
 
 <Layout title={title} description={description}>
@@ -28,22 +37,12 @@ const description = ""
       <AccountForm 
         client:load
         userData={
-          {
-            id: "1",
-            email: "juan@example.com",
-            phone: "1234567890",
-            location: "CABA",
-            firstName: "Juan",
-            lastName: "Perez",
-            address: "Calle Falsa 123",
-            street: "Calle Falsa",
-            addressNumber : "123",
-            creationDate: 123345345,
-            lastUpdate: 123345345
-        }
-        }
+        user ?? null
+        } 
       />
-      <ChangePasswordForm client:load/>
+      <ChangePasswordForm  userData={
+        user ?? null
+        }    client:load/>
       <DangeForm client:load/>
     </div>
   </section>

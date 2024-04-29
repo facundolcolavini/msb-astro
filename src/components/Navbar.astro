@@ -10,6 +10,7 @@ import NavDropDown from "./preact/NavDropDown";
 import Link from "./ui/Link.astro";
 
 const { user } = Astro.props;
+
 const { pathname } = Astro.url;
 let session = user ? true : false;
 ---
@@ -130,7 +131,7 @@ let session = user ? true : false;
                 class="flex items-center py-2 justify-end h-10 gap-1 border-bg-2-msb px-2 bg-white text-bg-2-msb font-bold cursor-pointer rounded-md transition tracking-wide border "
               >
                 <Icon size={20} class="fill  fill-black" name="userDefault" />
-                {user?.username}
+                {user?.firstName} {user?.lastName}
                 <Icon size={20} class="fill fill-black" name="chevron-down" />
               </div>
               <div slot="childrenDrop" class="flex w-full">
@@ -149,7 +150,7 @@ let session = user ? true : false;
                     Mi cuenta
                   </Link>
                   <hr class="divide divide-x-2" />
-                  <form method="POST" action="/api/signout">
+                  <form method="POST" action="/api/auth/signout">
                     <Link
                       checkActive={false}
                       class="p-3 text-base gap-2 hover:bg-gray-200 cursor-pointer transition-all transition-duration-400 "
@@ -221,7 +222,7 @@ let session = user ? true : false;
               <Icon size={40} scale={20} name="userDefault" />
               <div>
                 <h2 class="text-lg">Usuario</h2>
-                <p class="text-gray-600">{user?.username}</p>
+                <p class="text-gray-600">{user?.firstName} {user?.lastName}</p>
               </div>
               <Icon size={20} class="fill fill-black" name="chevron-down" />
             </div>
@@ -248,7 +249,7 @@ let session = user ? true : false;
                   Mi cuenta
                 </Link>
                 <hr class="divide divide-x-2" />
-                <form method="POST" action="/api/signout">
+                <form method="POST" action="/api/auth/signout">
                   <Link
                     class="py-3 relative px-6 text-base gap-2 hover:bg-gray-200  cursor-pointer transition-all transition-duration-400"
                     checkActive={false}

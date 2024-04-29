@@ -13,7 +13,6 @@ export interface formCheckedValues {
   passwordValid: null | string;
   phoneValid: null | string;
   phoneAlternativeValid: null | string;
-  addressValid: null | string;
   streetValid: null | string;
   addressNumberValid: null | string;
   locationValid: null | string;
@@ -33,7 +32,15 @@ export const formRegisterValidator = {
     (value: string): boolean => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
     'El correo debe tener un formato válido'
   ],
-  password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
+  firstName: [
+    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
+    'El nombre es requerido y solo puede contener letras y espacios'
+  ],
+  lastName: [
+    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value.trim()),
+    'El apellido es requerido y solo puede contener letras y espacios'
+  ],
+  password: [(value: string): boolean =>  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#$%^&*()_+<>?])[A-Za-z\d@$!%*?&]{8,}$/ .test(value), 'La contraseña es requerida y debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial']
   /*   confirmPassword: [(value: string): boolean => value.length >= 1, 'La confirmación de password es requerida'], */
 }
 
@@ -172,69 +179,47 @@ export const formUserValidator = {
     'El apellido es requerido '
   ],
   phone: [
-    (value: string): boolean => /^\d{7,15}$/.test(value!.trim()),
+    (value: string): boolean => /^\d{7,15}$/.test(value?.trim()),
     'El teléfono es requerido y debe contener entre 7 y 15 dígitos'
   ],
   phoneAlternative: [
     (value: string): boolean => /^\d{7,15}$/.test(value?.trim()),
     'El teléfono es requerido y debe contener entre 7 y 15 dígitos'
   ],
-  address: [
-    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value!.trim()),
-    'La dirección es requerida'
-  ],
   street: [
-    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value!.trim()),
+    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value?.trim()),
     'La calle es requerida '
   ],
   addressNumber: [
-    (value: string): boolean => /^\d{1,5}$/.test(value!.trim()),
+    (value: string): boolean => /^\d{1,5}$/.test(value?.trim()),
     'El número de dirección es requerido '
   ],
   location: [
-    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value!.trim()),
+    (value: string): boolean => /^[a-zA-Z\s]+$/.test(value?.trim()),
     'La localidad es requerida '
   ],
 } 
 
 export const formChangePasswordValidator = {
   currentPassword: [
-    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#$%^&*()_+<>?])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
     'Contraseña actual inválida'
   ],
   password: [
-    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#$%^&*()_+<>?])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
     'Contraseña inválida'
   ],
   confirmPassword: [
     (confirmPassword: string, formState: any): boolean => {
-      const passwordMatch = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(confirmPassword);
-      const passwordEqual = formState.password === confirmPassword;
+      const passwordMatch = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#$%^&*()_+<>?])[A-Za-z\d@$!%*?&]{8,}$/.test(confirmPassword);
+      const passwordEqual = formState.password === confirmPassword && formState.password.length > 0;
       return passwordMatch && passwordEqual;
     },
     'Confirmación de contraseña inválida o no coincide con la contraseña'
   ]
 }
 
-// Asumiendo que formChangePasswordValidator se ve algo así:
-export const formPasswordEqual = (values: UserChangePassword) => {
-  const errors: Partial<UserChangePassword> = {};
 
-  // Validaciones individuales
-  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.currentPassword)) {
-    errors.currentPassword = 'Contraseña actual inválida';
-  }
-  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
-    errors.password = 'Contraseña inválida';
-  }
-  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.confirmPassword)) {
-    errors.confirmPassword = 'Confirmación de contraseña inválida';
-  }
-
-  // Verificación adicional para asegurarse de que password y confirmPassword son iguales
-  if (values.password !== values.confirmPassword) {
-    errors.confirmPassword = 'La contraseña y la confirmación de la contraseña deben coincidir';
-  }
-
-  return errors;
-};
+export function isValidEmail(email: string): boolean {
+	return /.+@.+/.test(email);
+}
