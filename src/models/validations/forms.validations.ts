@@ -1,3 +1,4 @@
+import type { UserChangePassword } from "../users/users";
 
 
 export interface FormValidations {
@@ -180,7 +181,7 @@ export const formUserValidator = {
   ],
   address: [
     (value: string): boolean => /^[a-zA-Z\s]+$/.test(value!.trim()),
-    'La dirección es requerida '
+    'La dirección es requerida'
   ],
   street: [
     (value: string): boolean => /^[a-zA-Z\s]+$/.test(value!.trim()),
@@ -198,15 +199,42 @@ export const formUserValidator = {
 
 export const formChangePasswordValidator = {
   currentPassword: [
-    (value: string): boolean => value.length >= 1,
-    'La contraseña actual es requerida'
+    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+    'Contraseña actual inválida'
   ],
   password: [
-    (value: string): boolean => value.length >= 1,
-    'La contraseña es requerida'
+    (value: string): boolean => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+    'Contraseña inválida'
   ],
   confirmPassword: [
-    (value: string): boolean => value.length >= 1,
-    'La confirmación de contraseña es requerida'
+    (confirmPassword: string, formState: any): boolean => {
+      const passwordMatch = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(confirmPassword);
+      const passwordEqual = formState.password === confirmPassword;
+      return passwordMatch && passwordEqual;
+    },
+    'Confirmación de contraseña inválida o no coincide con la contraseña'
   ]
 }
+
+// Asumiendo que formChangePasswordValidator se ve algo así:
+export const formPasswordEqual = (values: UserChangePassword) => {
+  const errors: Partial<UserChangePassword> = {};
+
+  // Validaciones individuales
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.currentPassword)) {
+    errors.currentPassword = 'Contraseña actual inválida';
+  }
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+    errors.password = 'Contraseña inválida';
+  }
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.confirmPassword)) {
+    errors.confirmPassword = 'Confirmación de contraseña inválida';
+  }
+
+  // Verificación adicional para asegurarse de que password y confirmPassword son iguales
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'La contraseña y la confirmación de la contraseña deben coincidir';
+  }
+
+  return errors;
+};

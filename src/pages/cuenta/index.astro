@@ -1,6 +1,7 @@
 ---
 import AccountForm from "@/components/preact/Account/AccountForm";
 import ChangePasswordForm from "@/components/preact/Account/ChangePasswordForm";
+import DangeForm from "@/components/preact/Account/DangeForm";
 import Layout from "@/layouts/Layout.astro";
 const title = "Mi Cuenta";
 const description = ""
@@ -43,6 +44,7 @@ const description = ""
         }
       />
       <ChangePasswordForm client:load/>
+      <DangeForm client:load/>
     </div>
   </section>
 </article>

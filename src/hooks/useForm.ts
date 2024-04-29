@@ -64,13 +64,12 @@ export const useForm = <T>(initialValues: T, formValidations: FormValidations = 
         const formCheckedValues = {} as formCheckedValues // {emailValid: null | 'Error Mensaje']}
         // Recorro mi objeto formValidations 
         for (let formField in formValidations) { // email , password , displayName , contactFile
-
-            const [fn, errorMessage] = formValidations[formField]; // Obtengo el Array de esa Key [fn,error]
-
-            formCheckedValues[`${formField}Valid` as keyof formCheckedValues] = fn(formState[formField as keyof typeof initialValues]) ? null : errorMessage;
-            setValidations(formCheckedValues)
+          const [fn, errorMessage] = formValidations[formField]; // Obtengo el Array de esa Key [fn,error]
+          const fieldValue = formState[formField as keyof typeof initialValues];
+          formCheckedValues[`${formField}Valid` as keyof formCheckedValues] = fn(fieldValue, formState) ? null : errorMessage;
+          setValidations(formCheckedValues)
         }
-    }
+      }
 
     return {
         initialValues,

@@ -7,13 +7,11 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
-
-
 }
 
 .input-file-icon {
   display: flex;
-  justify-content: end;
+  justify-content:  flex-end;
   padding-right: 1rem;
   align-items: center;
   width: 100%;

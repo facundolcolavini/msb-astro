@@ -185,10 +185,8 @@ const AccountForm = ({ userData }: Props) => {
                   
                 </div>
                 <div className={' lg:col-span-3  flex justify-center md:justify-end lg:justify-end h-full'}>
-                <Button variant={`${fieldsChangedAndValid ? "primary" : "disabled"}`} addStyles="mt-5 w-full flex  place-content-end text-center justify-end w-full lg:text-center md:w-fit lg:w-fit py-2 px-8 h-full gap-2 items-center  text-base  text-white border border-gray-400" type="submit"><span>Guardar Cambios</span> {formSubmitted && isFormValid && <Spinner />}</Button>
-                </div>
-     
-                        
+                <Button variant={`${fieldsChangedAndValid ? "primary" : "disabled"}`} addStyles="mt-5 w-full flex text-center  text-center justify-center w-full lg:text-center md:w-fit lg:w-fit py-2 px-8 h-full gap-2 items-center  text-base  text-white border border-gray-400" type="submit"><span>Guardar Cambios</span> {formSubmitted && isFormValid && <Spinner />}</Button>
+                </div>    
                 <hr className={' divide-y-2 divide-gray-800 my-5'} />
               
             </form>

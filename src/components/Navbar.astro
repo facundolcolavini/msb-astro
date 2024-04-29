@@ -280,7 +280,7 @@ let session = user ? true : false;
                 <div class="relative flex justify-between place-items-start gap-2  z-0  hover:border-primary-msb">
                   {item.icon && <Icon size={28} scale={1} name={item?.icon} />}
                   <Link class="flex  justify-start">
-                    <NavDropDown client:only>
+                    <NavDropDown client:load>
                       <span
                         slot="label"
                         class:list={`${
