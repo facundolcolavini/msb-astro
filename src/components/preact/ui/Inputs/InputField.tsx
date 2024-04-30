@@ -115,7 +115,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
           {...inputProps}
         />
       )}
-      <div className="absolute right-3 bottom-3 flex items-center  text-sm">
+      <div className="absolute right-3 bottom-3 flex items-center z-1 text-sm">
         {type === 'password' && (
        <button
        type="button"

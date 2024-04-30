@@ -71,11 +71,12 @@ const AccountForm = ({ userData }: Props) => {
                 setFormError(true);
                 throw data
             } else {    
-                setFormSubmitted(false);
-                navigate('/cuenta');
-                setToastMsg(
-                    'Cuenta actualizada correctamente.'
-                );
+                setToastMsg(data.message);
+                setTimeout(() => {
+                    setFormSubmitted(false); // Add this line
+                    navigate('/cuenta');
+                }, 3000)
+                
                 onResetForm();
                 /*  setModalAuth({ changeToLogin: false, changeToRegister: false }); */
             }
@@ -187,7 +188,8 @@ const AccountForm = ({ userData }: Props) => {
             </form>
 
 
-            {!formError && <Toast message={'Cuenta actualizada correctamente'} isVisible={formSubmitted} icon={<WarningAlertIcon />} customStyles="flex gap-2 border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
+            {!formError && <Toast message={toastMsg} isVisible={formSubmitted} icon={<WarningAlertIcon />} customStyles="flex   z-10 gap-2 border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
+            {formError && <Toast message={toastMsg} isVisible={formError} icon={<WarningAlertIcon />} customStyles="flex gap-2  z-10  border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
         </div>
     )
 }

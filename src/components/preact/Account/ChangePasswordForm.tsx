@@ -10,6 +10,7 @@ import Spinner from "../Spinner";
 import Button from "../ui/Buttons/Button";
 import InputField from "../ui/Inputs/InputField";
 import { Toast } from "../ui/Toast/Toast";
+import { navigate } from "astro:transitions/client";
 interface Props {
     userData: User | null;
 }
@@ -38,7 +39,7 @@ const ChangePasswordForm = ({ userData }: Props) => {
         const values = Object.fromEntries(formData);
         try {
             setFormSubmitted(true);
-            const response = await fetch(`/api/auth/change-password.json/`,
+            const response = await fetch(`/api/account/change-password.json/`,
                 {
                     method: 'PATCH',
                     headers: {
@@ -60,15 +61,13 @@ const ChangePasswordForm = ({ userData }: Props) => {
                 setFormError(true);
                 throw data
             } else {
-
+                setToastMsg(data.message);
                 setTimeout(() => {
-                    setToastMsg(data.message);
                     setFormSubmitted(false); // Add this line
+                    navigate('/cuenta');
                 }, 3000)
-
-                /*  navigate('/cuenta'); */
-
-                 onResetForm();
+                
+                onResetForm();
             }
 
         } catch (e) {
@@ -146,8 +145,8 @@ const ChangePasswordForm = ({ userData }: Props) => {
                 </div>
                 <hr className={' divide-y-2 divide-gray-800 my-5'} />
             </form>
-            {!formError && <Toast message={toastMsg} isVisible={formSubmitted} icon={<WarningAlertIcon />} customStyles="flex gap-2 border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
-            {formError && <Toast message={toastMsg} isVisible={formError} icon={<WarningAlertIcon />} customStyles="flex gap-2 border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
+            {!formError && <Toast message={toastMsg} isVisible={formSubmitted} icon={<WarningAlertIcon />} customStyles="flex   z-10 gap-2 border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
+            {formError && <Toast message={toastMsg} isVisible={formError} icon={<WarningAlertIcon />} customStyles="flex gap-2  z-10  border-2 border-primary-border-msb bg-[#EFF0F2]" duration={3000} />}
         </>
 
     )
