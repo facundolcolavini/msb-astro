@@ -49,7 +49,7 @@ export const formLoginValidator = {
     (value: string): boolean => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value.trim()),
     'El correo debe tener un formato válido'
   ],
-  password: [(value: string): boolean => value.length >= 1, 'La contraseña es requerida'],
+  password: [(value: string): boolean =>  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#$%^&*()_+<>?])[A-Za-z\d@$!%*?&]{8,}$/ .test(value), 'La contraseña es requerida y debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial']
 }
 
 export const formContactValidator = {

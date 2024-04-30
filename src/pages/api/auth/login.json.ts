@@ -4,7 +4,7 @@ import { db, eq, User } from "astro:db";
 import { Argon2id } from "oslo/password";
 
 export async function POST(context: APIContext): Promise<Response> {
-/*   console.log(context.locals.session) */
+  /*   console.log(context.locals.session) */
   //read the form data
   const formData = await context.request.json()
   const { password, email } = formData;
@@ -12,20 +12,34 @@ export async function POST(context: APIContext): Promise<Response> {
   //validate the data
 
   // Handler de los campos requeridos para el registro 
-  if ( !password || !email) {
-      return new Response(
-          JSON.stringify({
-              message: `${!email ? "email, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
-              success: false,
-          }),
-          {
-              status: 400,
-          }
-      );
+  if (!password || !email) {
+    return new Response(
+      JSON.stringify({
+        message: `${!email ? "email, " : ""}${!password ? "password, " : ""} son campos requeridos.`,
+        success: false,
+      }),
+      {
+        status: 400,
+      }
+    );
   }
-  const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
-  
-  if (typeof email !== "string" || !emailPattern.test(email.trim()) ) {
+  const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //If password is not valid
+  const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\!@#\$%\^&*()_+<>?-])[A-Za-z\d@\$!%*?-]{8,}$/;
+
+  if (!regexPassword.test(password.trim())) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un caracter especial.",
+      }),
+      {
+        status: 400,
+      }
+    );
+  }
+
+  if (typeof email !== "string" || !emailPattern.test(email.trim())) {
     return new Response(
       JSON.stringify(
         {
@@ -72,7 +86,7 @@ export async function POST(context: APIContext): Promise<Response> {
 
   //If password is not valid
   if (!validPassword) {
-    return new Response( 
+    return new Response(
       JSON.stringify({
         success: false,
         message: "Contraseña incorrecta",
