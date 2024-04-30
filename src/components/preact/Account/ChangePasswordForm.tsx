@@ -135,10 +135,10 @@ const ChangePasswordForm = ({ userData }: Props) => {
                 </div>
                 <div className={' lg:col-span-2  flex justify-center md:justify-end lg:justify-end h-full'}>
                     <Button
-                        variant={`${fieldsChangedAndValid && !formError && !formSubmitted ? "primary" : "disabled"}`}
+                        variant={`${fieldsChangedAndValid && !formError && !formSubmitted  && password !== '' && currentPassword !=='' && confirmPassword !== '' ? "primary" : "disabled"}`}
                         addStyles="mt-5 w-full flex text-center  text-center justify-center w-full lg:text-center md:w-fit lg:w-fit py-2 px-8 h-full gap-2 items-center  text-base  text-white border border-gray-400"
                         type="submit"
-                        disabled={formSubmitted || formError || !fieldsChangedAndValid}
+                        disabled={formSubmitted || formError || !fieldsChangedAndValid }
                     >
                         {formSubmitted && !formError ? <>{"Guardando"} <Spinner /></> : "Cambiar contraseña"}
                     </Button>
