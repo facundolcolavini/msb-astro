@@ -121,7 +121,7 @@ const SearchDebounce = ({ filterOptsLocations, propIdRef }: Props) => {
                 id={propIdRef}
                 type='search'
                 value={searchTerm?.label} // Usar el valor del estado como valor del input
-                className='border-2 border-primary-msb focus:border-b-1 rounded-md px-4 flex w-full h-full py-2 focus:outline-none focus:ring-0 sticky z-0'
+                className='border border-primary-msb focus:border-b-1 rounded-md px-4 flex w-full h-full py-2 focus:outline-none focus:ring-0 sticky z-0'
                 onChange={handleInputChange}
                 autoComplete="off"
                 placeholder="Buscar por barrio o localidad"
