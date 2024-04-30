@@ -113,7 +113,7 @@ const RegisterForm = ({ onSwitchToLogin }: Props) => {
                     {formError && <div className="flex gap-2  py-3 px-3 text-sm z-10 border border-red-500 rounded bg-red-200 ">{toastMsg}</div>}
                     <div className={'flex justify-center items-center gap-2'}>
                         <Button variant="outline" type="button" addStyles="w-full py-1 px-5  hover:bg-bg-2-msb hover:text-white" onClick={onSwitchToLogin}> Ya tengo cuenta</Button>
-                        <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="w-full py-1 px-5 text-white border border-gray-400" type="submit">Crear cuenta {formSubmitted && isFormValid && <Spinner />}</Button>
+                        <Button variant={`${isFormValid ? "primary" : "disabled"}`} addStyles="flex w-full py-1 px-5  gap-2 justify-center text-white border border-gray-400" type="submit"><span>Crear cuenta</span> {formSubmitted && isFormValid && <Spinner />}</Button>
                     </div>
                 </form>
             </div>
